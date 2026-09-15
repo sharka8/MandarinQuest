@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mandarin Quest — Ages 5–8 Second Semester</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+</style>
+</head>
+<body class="bg-slate-100 text-slate-900">
+<header class="bg-indigo-700 text-white px-4 py-3 shadow flex justify-between items-center gap-3">
+  <div class="min-w-0">
+    <h1 class="font-bold text-xl truncate">Mandarin Quest Teacher Companion</h1>
+    <p id="subtitle" class="text-sm text-indigo-100 truncate"></p>
+  </div>
+  <button id="compactTop" class="bg-white text-indigo-700 px-3 py-2 rounded-xl font-semibold text-sm shrink-0">Compact Mode</button>
+</header>
+
+<main class="p-4 space-y-4">
+<section class="max-w-6xl mx-auto bg-white rounded-2xl shadow p-4">
+  <div class="grid md:grid-cols-4 gap-2 text-sm">
+    <label><span class="font-semibold text-slate-600">Age Group</span>
+      <select class="mt-1 w-full border rounded-xl px-3 py-2 bg-white" disabled><option>Ages 5–8</option></select>
+    </label>
+    <label><span class="font-semibold text-slate-600">Semester</span>
+      <select class="mt-1 w-full border rounded-xl px-3 py-2 bg-white" disabled><option>Second Semester — Expanding Conversation</option></select>
+    </label>
+    <label><span class="font-semibold text-slate-600">Unit</span>
+      <select class="mt-1 w-full border rounded-xl px-3 py-2 bg-white" disabled><option>Unit 1 — Describing Faces</option></select>
+    </label>
+    <label><span class="font-semibold text-slate-600">Lesson</span>
+      <select id="lessonSelect" class="mt-1 w-full border rounded-xl px-3 py-2 bg-white"></select>
+    </label>
+  </div>
+  <div class="mt-3 flex flex-col lg:flex-row gap-3 lg:items-center lg:justify-between">
+    <div class="min-w-0">
+      <span class="text-xs uppercase tracking-wide font-bold text-indigo-700">Lesson Goal</span>
+      <p id="lessonGoal" class="font-semibold"></p>
+    </div>
+    <div class="flex gap-2 shrink-0">
+      <button class="bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl">Launch Zoom</button>
+      <button class="bg-slate-200 font-semibold px-4 py-2 rounded-xl">Attendance</button>
+    </div>
+  </div>
+</section>
+
+<section id="panel" class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl border overflow-hidden">
+  <div class="bg-amber-400 px-4 py-2 flex items-center justify-between gap-3 flex-wrap">
+    <div class="min-w-0">
+      <div class="flex gap-2 mb-1 flex-wrap">
+        <span id="lessonBadge" class="bg-white/70 px-2 py-1 rounded-full text-xs font-bold"></span>
+        <span id="activityBadge" class="bg-white/70 px-2 py-1 rounded-full text-xs font-bold"></span>
+        <span id="targetBadge" class="bg-white/70 px-2 py-1 rounded-full text-xs font-bold"></span>
+      </div>
+      <h2 id="activityTitle" class="font-bold text-lg truncate"></h2>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <div class="bg-amber-100 border border-amber-200 rounded-xl px-3 py-1 flex gap-3">
+        <div class="text-center"><div class="text-[10px] font-bold uppercase">Class</div><div id="classTimer" class="font-black text-lg">25:00</div></div>
+        <div class="border-l border-amber-300"></div>
+        <div class="text-center"><div class="text-[10px] font-bold uppercase">Activity</div><div id="activityTimer" class="font-black text-lg">3:00</div></div>
+      </div>
+      <button id="compactBtn" class="bg-amber-100 px-3 py-2 rounded-xl font-bold text-sm">Minimize</button>
+    </div>
+  </div>
+
+  <div id="fullView" class="p-3">
+    <div class="flex flex-wrap gap-2 mb-3 text-xs">
+      <span id="typeChip" class="bg-green-100 text-green-800 font-bold px-2 py-1 rounded-full"></span>
+      <span id="timeChip" class="bg-indigo-100 text-indigo-800 font-bold px-2 py-1 rounded-full"></span>
+      <span id="purposeChip" class="bg-slate-100 text-slate-700 px-2 py-1 rounded-full"></span>
+    </div>
+    <div class="grid md:grid-cols-[1fr_1.25fr] gap-3">
+      <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
+        <div class="text-[10px] uppercase tracking-wide font-black text-indigo-800 mb-1">Say This</div>
+        <div id="sayText" class="text-lg font-semibold leading-snug"></div>
+      </div>
+      <div class="bg-green-50 border border-green-100 rounded-xl p-4">
+        <div class="text-[10px] uppercase tracking-wide font-black text-green-800 mb-1">Do This</div>
+        <div id="doText" class="leading-snug"></div>
+      </div>
+    </div>
+    <div id="noteText" class="mt-3 bg-amber-50 border border-amber-100 rounded-xl p-3 text-sm"></div>
+  </div>
+
+  <!-- Wide, short compact strip -->
+  <div id="compactView" class="hidden px-3 py-2">
+    <div class="grid md:grid-cols-[1fr_1.35fr] gap-2">
+      <div class="bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2 min-w-0">
+        <div class="text-[10px] uppercase font-black text-indigo-800">Say</div>
+        <div id="compactSay" class="font-semibold text-sm leading-snug"></div>
+      </div>
+      <div class="bg-green-50 border border-green-100 rounded-xl px-3 py-2 min-w-0">
+        <div class="text-[10px] uppercase font-black text-green-800">Do</div>
+        <div id="compactDo" class="text-sm leading-snug"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t bg-slate-50 px-3 py-2">
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+      <div class="flex gap-2">
+        <button id="startBtn" class="bg-green-600 text-white font-bold px-3 py-2 rounded-xl text-sm">▶ Start Class</button>
+        <button id="pauseBtn" class="bg-amber-500 text-white font-bold px-3 py-2 rounded-xl text-sm">⏸ Pause</button>
+        <button id="restartBtn" class="bg-slate-200 font-bold px-3 py-2 rounded-xl text-sm">↺ Activity</button>
+      </div>
+      <span id="pace" class="text-xs text-slate-500">Timer is guidance; move on when students are ready.</span>
+    </div>
+    <div class="flex items-center justify-between gap-3">
+      <button id="prevBtn" class="bg-slate-200 px-4 py-2 rounded-xl font-semibold">← Previous</button>
+      <div class="text-center min-w-0"><div id="bottomTitle" class="font-bold truncate"></div></div>
+      <button id="nextBtn" class="bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold">Next Activity →</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+const lessons = [
+{
+n:1,title:"Review",goal:"Review prior-semester language and re-establish the class routine through introductions in Chinese.",
+activities:[
+["Hello Circle","Warm-up",3,"你好 • 再见","reconnect","“大家好！你好！好久不见！ Let’s say hello to everyone.”","Wave to each child. Prompt each student to answer 你好 and greet one classmate.","Keep correction light; this lesson is diagnostic review."],
+["Name Review","Conversation",4,"你叫什么名字？ • 我叫…","introductions","“你叫什么名字？我叫___。你呢？”","Model once, then ask each child. Have students ask the next person when ready.","Listen for what students remember independently."],
+["Age & Numbers","Review Game",4,"一–十 • 你几岁？","numbers + age","“我们来数一数！一、二、三… 你几岁？”","Count on fingers, then ask ages. Mix in quick ‘show me ___ fingers’ prompts.","Supply numbers rather than stopping the conversation."],
+["Likes Quick Choice","Review Game",4,"喜欢 • 不喜欢","preferences","“你喜欢猫吗？你喜欢冰淇淋吗？”","Give funny either/or choices. Students answer with 喜欢/不喜欢 or a fuller phrase.","Use familiar nouns students already know."],
+["Mini Introductions","Student Output",6,"你好 • 我叫 • 我…岁 • 我喜欢","connected speech","“Now tell us three things: your name, your age, and something you like.”","Model a 3-line introduction. Each student gives a short introduction with teacher support.","This is the main output task."],
+["Goodbye Challenge","Closing",4,"再见 • review","positive close","“Before you go, tell me one Chinese thing you remember today.”","Each child says one word/phrase, then 再见.","End with success, not correction."]
+]},
+{
+n:2,title:"Survival Phrases",goal:"Use essential classroom survival phrases and review asking and answering how many.",
+activities:[
+["Hello + Count","Warm-up",3,"你好 • 几个","activate prior language","“你好！我有几个？ How many?”","Hold up fingers/objects; students answer with a number.","Fast review only."],
+["Survival Phrase 1","Input",4,"听不懂","communicate confusion","“If you don’t understand, say 听不懂 — tīng bu dǒng.”","Cup hand to ear/confused face. Students copy phrase and gesture.","Normalize using the phrase during class."],
+["Survival Phrase 2","Input",4,"再说一遍","request repetition","“Want me to say it again? 再说一遍 — zài shuō yí biàn.”","Say something too quietly/quickly; cue students to request repetition.","Immediately honor the request by repeating."],
+["Survival Phrase 3","Input",4,"怎么说？ • 不知道","ask for language","“How do you say it? 怎么说？ If you don’t know: 不知道.”","Hold up familiar objects and deliberately ‘forget’ a word. Students use the survival phrases.","Keep it playful."],
+["How Many Mystery","Game",6,"几个？ • numbers","question practice","“有几个？ How many are there?”","Hide/show small groups of objects or fingers. Students ask/answer 几个 questions.","Encourage students to ask the question too."],
+["Exit Password","Closing",4,"听不懂 • 再说一遍 • 怎么说 • 不知道","retrieval","“Choose one survival phrase as your exit password.”","Each child uses one phrase appropriately before saying 再见.","Praise functional communication."]
+]},
+{
+n:3,title:"Face Parts: Eyes, Ears, Mouth, Nose",goal:"Identify and say 眼睛、耳朵、嘴巴、鼻子 and recognize the parts on people and animals.",
+activities:[
+["Face Warm-up","Warm-up",3,"脸 • review","attention","“Touch your face! 脸!”","Students touch face; quick hello and expression game.","脸 can be previewed without mastery."],
+["Teach Four Parts","Input",5,"眼睛 • 耳朵 • 嘴巴 • 鼻子","new vocabulary","“眼睛—eyes. 耳朵—ears. 嘴巴—mouth. 鼻子—nose.”","Point to each feature; students point and repeat. Cycle several times.","Use singular Chinese forms naturally."],
+["Teacher Says","Movement",4,"face parts","listening","“老师说：摸鼻子！摸耳朵！”","Play Simon-Says style pointing/touching game.","Speed up only if comprehension is solid."],
+["Face Charades","Game",4,"眼睛 • 耳朵 • 嘴巴 • 鼻子","retrieval","“我在说什么？ What face part am I showing?”","Exaggerate blinking, listening, talking/eating, smelling. Students name the part.","Let students take a turn acting."],
+["Animal Face Detective","Application",6,"动物 + face parts","identify features","“猫的眼睛在哪里？猫有几个耳朵？”","Use animal pictures/toys. Students point to and name parts; ask simple how-many questions.","Recycle 几个 from Lesson 2."],
+["Face Check Goodbye","Closing",3,"4 face parts","quick review","“Show me 鼻子! Show me 嘴巴!”","Rapid point-and-say review, then 再见.","Finish while energy is still high."]
+]},
+{
+n:4,title:"Hair & Face",goal:"Add 头发 and 脸 and use all learned face vocabulary in a create-a-face activity.",
+activities:[
+["Pointing Review","Warm-up",3,"眼睛 • 耳朵 • 嘴巴 • 鼻子","retrieval","“摸眼睛！摸鼻子！摸嘴巴！”","Fast teacher-says review.","Do not reteach unless needed."],
+["New Words","Input",4,"头发 • 脸","new vocabulary","“This is 脸. This is 头发.”","Trace around face, then touch hair. Students copy and repeat.","Contrast 脸 with individual parts."],
+["What’s Missing?","Game",4,"face vocabulary","visual recall","“少了什么？ What is missing?”","Show/draw a face missing one feature. Students name the missing part.","Use all six target nouns."],
+["Build a Face","Creative",7,"face parts","comprehension + production","“画两个眼睛。画一个鼻子。加头发！”","Students draw/create a face following Chinese instructions. Pause for them to show work.","Numbers can be recycled naturally."],
+["Show Your Face","Student Output",4,"这是… • face parts","describe creation","“给我看！这是什么？”","Students show drawings and point/name at least 3 parts.","Accept word-level output, extend when possible."],
+["Goodbye Face","Closing",3,"头发 • 脸","review","“Touch 脸, touch 头发, 再见!”","Quick physical review and goodbye.","Keep predictable."]
+]},
+{
+n:5,title:"Big/Small, Long/Short",goal:"Understand and use 大、小、长、短 to describe familiar objects and body/face features.",
+activities:[
+["Opposite Bodies","Warm-up",3,"大 • 小","physical contrast","“Make yourself 大！Now 小！”","Students stretch big/curl small.","Meaning before explanation."],
+["Teach Opposites","Input",5,"大 • 小 • 长 • 短","new adjectives","“大、小。长、短。”","Use arms/props to exaggerate each contrast. Students copy gestures and words.","Keep paired opposites together."],
+["Opposite Charades","Movement/Game",4,"大/小 • 长/短","recognition","“我是哪一个？大还是小？”","Act an adjective; students choose/name it. Let children act too.","Use forced choices if needed."],
+["House Hunt","Application",5,"adjectives + objects","personal connection","“Find something 长! Find something 小!”","Students quickly find/show household objects matching a description.","Set safe boundaries: stay near device."],
+["Describe What You See","Student Output",5,"很大 • 很小 • 很长 • 很短","production","“这个大不大？长不长？”","Show objects/images. Students describe them or answer adjective questions.","Preview 大不大/长不长 lightly for Lesson 6."],
+["Opposite Goodbye","Closing",3,"大 • 小 • 长 • 短","retrieval","“Show me 大, 小, 长, 短!”","Gesture review then 再见.","Fast success check."]
+]},
+{
+n:6,title:"Describe Face Parts",goal:"Combine face vocabulary with 的, descriptive adjectives, and 大不大/长不长 to talk about people and animals.",
+activities:[
+["Face + Opposites","Warm-up",3,"face parts • 大小长短","combine review","“大眼睛！小嘴巴！长头发！”","Students point/gesture as teacher calls combinations.","Build phrases without grammar lecture."],
+["的 Pattern","Input",4,"大大的眼睛 / 长长的头发","description pattern","“Listen: 大大的眼睛。长长的头发。”","Model adjective + 的 + noun with pictures/gestures. Students echo useful chunks.","Keep 的 functional and oral."],
+["Big or Not?","Guided Practice",4,"大不大？ • 长不长？","A-not-A questions","“他的眼睛大不大？头发长不长？”","Show faces; students answer 大/不大, 长/不长 or fuller phrases.","Prioritize comprehension."],
+["Family Descriptions","Conversation",5,"我的妈妈/爸爸…","personal description","“妈妈的头发长不长？爸爸的眼睛大不大？”","Students describe family members using safe, neutral features.","Avoid value judgments about appearance."],
+["Animal Face Challenge","Game",5,"动物的…","description","“大象的耳朵大不大？”","Show/name animals and ask about features. Students answer and make one question.","Use obvious exaggerated examples."],
+["Preference Close","Closing",4,"你喜欢…吗？","recycle preferences","“你喜欢大眼睛的猫还是小眼睛的猫？”","Give silly face/animal choices; students state preferences then goodbye.","Keep it playful."]
+]},
+{
+n:7,title:"Practice Describing Faces",goal:"Give understandable face descriptions so another person can draw the face.",
+activities:[
+["Description Review","Warm-up",3,"face + adjectives","activate language","“大眼睛、小鼻子、长头发…”","Students gesture/point for each phrase.","Rapid retrieval."],
+["Listen and Choose","Comprehension",4,"descriptions","listen for detail","“Which face? 大眼睛、短头发…”","Show 2–3 simple face options; students identify the described one.","Start with one contrast, then add details."],
+["Teacher Draws","Core Game",8,"descriptive phrases","communicative purpose","“Tell me what to draw. 眼睛大不大？头发长不长？”","Teacher draws ONLY from student descriptions. Ask clarification questions in Chinese.","The imperfect/funny drawing is the payoff."],
+["Fix My Face","Game",4,"不对 • description","repair communication","“对不对？哪里不对？”","Deliberately draw one feature incorrectly; students correct the teacher.","Encourage survival phrases when useful."],
+["Student Describer","Student Output",3,"connected description","independent production","“Choose a face and describe it. Don’t show me!”","One student describes; teacher/class guesses.","Word-level clues are acceptable."],
+["Reveal + Goodbye","Closing",3,"review","confidence","“看看！一样不一样？”","Compare drawing to target, celebrate communication, say 再见.","Emphasize successful communication."]
+]},
+{
+n:8,title:"Hat, Facial Hair & Glasses",goal:"Add 帽子、眼镜、胡子 and use 有/没有 and 戴 to prepare for Guess Who.",
+activities:[
+["Face Review","Warm-up",3,"face descriptions","retrieval","“大眼睛？长头发？小鼻子？”","Show/describe quick faces; students respond.","Keep to 3 minutes."],
+["New Accessories","Input",5,"帽子 • 眼镜 • 胡子","new vocabulary","“帽子。眼镜。胡子。”","Use pictures/props/gestures. Students repeat and identify each item.","Use 胡子 broadly for child-friendly facial hair vocabulary."],
+["Has or Doesn’t Have","Guided Practice",4,"有 • 没有","presence/absence","“他有眼镜吗？有还是没有？”","Show faces with/without items. Students answer 有/没有.","Keep sentences short."],
+["Wearing","Input/Practice",4,"戴帽子 • 戴眼镜","wearing accessories","“他戴眼镜。她戴帽子。”","Model 戴 with hat/glasses. Students identify who is wearing what.","Do not force 戴 with 胡子."],
+["Mini Guess Who","Game",6,"有/没有 • 戴 • descriptions","questioning","“他有胡子吗？她戴眼镜吗？”","Use a small set of 4–6 faces. Students ask yes/no questions to eliminate choices.","Model questions on screen verbally."],
+["Guess Who Password","Closing",3,"帽子 • 眼镜 • 胡子","retrieval","“Say one new word before 再见.”","Each student says one new item or phrase.","Prepare them for Lesson 9."]
+]},
+{
+n:9,title:"Guess Who",goal:"Use face parts, descriptive words, accessories, 有/没有, and questions to identify mystery people.",
+activities:[
+["Vocabulary Sprint","Warm-up",3,"Unit 1 vocabulary","activate language","“Ready? 眼睛！头发！眼镜！胡子！帽子！”","Students point/gesture or repeat rapidly.","No lengthy correction."],
+["Question Builder","Review",4,"有…吗？ • 戴…吗？ • 大不大？","question forms","“What can we ask? 他有眼镜吗？他的眼睛大不大？”","Teacher models 3 useful question types; students supply a noun/adjective to complete them.","Keep question stems visible verbally/visually if possible."],
+["Teacher Mystery Person","Guided Game",5,"yes/no questions","supported play","“我选了一个人。问我问题！”","Teacher secretly selects a face. Students ask questions and eliminate people.","Prompt with choices when students stall."],
+["Student Mystery Person","Game",7,"descriptions + questions","independent conversation","“Now you choose. We will ask you questions.”","Students take turns choosing a person; classmates/teacher ask until identified.","Main communicative task of Unit 1."],
+["Describe & Guess","Challenge",3,"connected description","fluency","“No questions this time—describe the person.”","One child describes 2–3 features; others guess.","Accept partial sentences."],
+["Unit Celebration","Closing",3,"Unit 1 review","confidence","“You can describe faces in Chinese now!”","Each student says their favorite Unit 1 word/phrase, then 再见.","Celebrate communication, not memorization."]
+]}
+];
+
+const lessonSelect=document.getElementById("lessonSelect");
+lessons.forEach((l,i)=>{const o=document.createElement("option");o.value=i;o.textContent=`Lesson ${l.n}: ${l.title}`;lessonSelect.appendChild(o)});
+
+let li=0, ai=0, compact=false, classSec=1500, actSec=180, interval=null, running=false;
+const $=id=>document.getElementById(id);
+function fmt(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`}
+function activity(){return lessons[li].activities[ai]}
+function render(reset=true){
+ const l=lessons[li], a=activity();
+ $("subtitle").textContent=`Ages 5–8 • Second Semester — Expanding Conversation • Unit 1: Describing Faces • Lesson ${l.n}`;
+ $("lessonGoal").textContent=l.goal;
+ $("lessonBadge").textContent=`Lesson ${l.n}`;
+ $("activityBadge").textContent=`Activity ${ai+1}/${l.activities.length}`;
+ $("targetBadge").textContent=a[3];
+ $("activityTitle").textContent=a[0]; $("bottomTitle").textContent=a[0];
+ $("typeChip").textContent=a[1]; $("timeChip").textContent=`${a[2]} min`; $("purposeChip").textContent=`Purpose: ${a[5] ? a[5].replace(/[“”]/g,"").slice(0,0) : ""}${a[4]}`;
+ $("sayText").innerHTML=a[5]; $("doText").innerHTML=a[6]; $("noteText").innerHTML=`<strong>Teacher note:</strong> ${a[7]}`;
+ $("compactSay").innerHTML=a[5]; $("compactDo").innerHTML=a[6];
+ if(reset) actSec=a[2]*60;
+ $("prevBtn").disabled=ai===0; $("prevBtn").classList.toggle("opacity-50",ai===0);
+ $("nextBtn").textContent=ai===l.activities.length-1?"Finish Class ✓":"Next Activity →";
+ timers();
+}
+function timers(){$("classTimer").textContent=fmt(classSec);$("activityTimer").textContent=fmt(actSec);$("activityTimer").classList.toggle("text-red-600",actSec===0)}
+function pause(){clearInterval(interval);interval=null;running=false;$("startBtn").textContent="▶ Start Class"}
+function start(){if(running)return;running=true;$("startBtn").textContent="▶ Running";interval=setInterval(()=>{if(classSec>0)classSec--;if(actSec>0)actSec--;if(actSec===0)$("pace").textContent="Time to transition when ready.";timers();if(classSec===0)pause()},1000)}
+function setCompact(v){compact=v;$("fullView").classList.toggle("hidden",v);$("compactView").classList.toggle("hidden",!v);$("compactBtn").textContent=v?"Expand":"Minimize";$("compactTop").textContent=v?"Expanded Mode":"Compact Mode"}
+$("startBtn").onclick=start;$("pauseBtn").onclick=pause;
+$("restartBtn").onclick=()=>{actSec=activity()[2]*60;timers();$("pace").textContent="Activity timer restarted."};
+$("nextBtn").onclick=()=>{if(ai<lessons[li].activities.length-1){ai++;render(true)}else $("pace").textContent="Class complete! Great job."};
+$("prevBtn").onclick=()=>{if(ai>0){ai--;render(true)}};
+lessonSelect.onchange=e=>{li=Number(e.target.value);ai=0;pause();classSec=1500;render(true)};
+$("compactBtn").onclick=()=>setCompact(!compact);$("compactTop").onclick=()=>setCompact(!compact);
+render(true);
+</script>
+</body>
+</html>
