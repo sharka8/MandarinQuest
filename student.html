@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Course | Mandarin Quest</title>
+<style>
+:root{
+  --navy:#18324a; --orange:#e89a3d; --cream:#fffaf0; --paper:#ffffff;
+  --muted:#68788a; --line:#e8e2d7; --green:#dff2e4; --blue:#e4f0fa;
+  --yellow:#fff1c9; --purple:#eee7f8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f1e9;color:var(--navy);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif}
+a{text-decoration:none;color:inherit}
+.topbar{background:var(--paper);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1100px;margin:auto;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.brand{font-weight:900;letter-spacing:.04em}.brand span{color:var(--orange)}
+.student{font-size:.92rem;color:var(--muted)}
+main{max-width:1100px;margin:auto;padding:30px 22px 60px}
+.hero{background:var(--navy);color:white;border-radius:28px;padding:30px;display:flex;justify-content:space-between;gap:30px;align-items:center}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:800;color:#f6c67d}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:6px 0 8px}.hero p{margin:0;color:#dbe4eb;line-height:1.5}
+.moon{font-size:clamp(4rem,12vw,7rem);filter:drop-shadow(0 8px 18px rgba(0,0,0,.15))}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:34px 2px 14px}
+.section-head h2{margin:0;font-size:1.45rem}.section-head p{margin:0;color:var(--muted);font-size:.9rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;min-height:165px;display:flex;flex-direction:column;transition:.18s}
+.step:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(40,50,60,.07)}
+.step-number{font-size:.72rem;font-weight:900;letter-spacing:.08em;color:var(--muted)}
+.icon{font-size:2rem;margin:10px 0}.step h3{margin:0 0 5px;font-size:1.08rem}.step p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.4}
+.action{margin-top:auto;padding-top:15px;font-weight:800;color:var(--orange);font-size:.9rem}
+.disabled{opacity:.55;cursor:default}.disabled:hover{transform:none;box-shadow:none}
+.week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.week{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;min-height:128px;position:relative}
+.week.current{border:2px solid var(--orange);background:#fffaf2}
+.week-num{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
+.week h3{font-size:1rem;margin:7px 0 5px}.week p{font-size:.84rem;color:var(--muted);margin:0;line-height:1.35}
+.badge{display:inline-block;margin-top:11px;padding:5px 9px;border-radius:999px;background:var(--yellow);font-size:.72rem;font-weight:800}
+.locked{opacity:.55}.lock{position:absolute;right:14px;top:13px}
+.practice{margin-top:34px;background:var(--cream);border:1px solid #eadcc3;border-radius:22px;padding:22px;display:flex;align-items:center;gap:18px}
+.practice-icon{font-size:2.5rem}.practice h3{margin:0 0 4px}.practice p{margin:0;color:var(--muted);font-size:.9rem}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34px}
+@media(max-width:800px){.steps{grid-template-columns:repeat(2,1fr)}.week-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){main{padding:20px 14px 45px}.topbar-inner{padding:14px}.hero{padding:23px}.moon{display:none}.steps{grid-template-columns:1fr}.week-grid{grid-template-columns:1fr 1fr}.practice{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">MANDARIN <span>QUEST</span></div>
+    <div class="student">My Course · Course 1</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Course 1 · Getting to Know You</div>
+      <h1>你好！Ready for Week 1?</h1>
+      <p>This week you'll learn to say hello, ask someone's name, and tell them your name.</p>
+    </div>
+    <div class="moon">🐼</div>
+  </section>
+
+  <div class="section-head">
+    <div><h2>This week's quest</h2><p>Work through these activities during the week.</p></div>
+  </div>
+
+  <section class="steps">
+    <div class="step disabled">
+      <div class="step-number">STEP 1</div><div class="icon">🎬</div>
+      <h3>Watch & Learn</h3><p>Meet this week's new Mandarin words and sentences.</p>
+      <div class="action">Video coming soon</div>
+    </div>
+
+    <a class="step" href="mandarin-quest-flashcards-autoplay.html">
+      <div class="step-number">STEP 2</div><div class="icon">🃏</div>
+      <h3>Flashcards</h3><p>Listen, repeat, and learn this week's Mandarin.</p>
+      <div class="action">Start flashcards →</div>
+    </a>
+
+    <div class="step disabled">
+      <div class="step-number">STEP 3</div><div class="icon">✏️</div>
+      <h3>Chinese Writing</h3><p>Practice this week's character and reading sentence.</p>
+      <div class="action">Worksheet coming soon</div>
+    </div>
+
+    <div class="step disabled">
+      <div class="step-number">STEP 4</div><div class="icon">🎮</div>
+      <h3>Practice Video</h3><p>Answer aloud and practice what you learned.</p>
+      <div class="action">Video coming soon</div>
+    </div>
+
+    <a class="step" href="mandarin-quest-flashcards-autoplay.html">
+      <div class="step-number">STEP 5</div><div class="icon">⭐</div>
+      <h3>Quick Review</h3><p>Try the cards again. How many can you say before flipping?</p>
+      <div class="action">Review cards →</div>
+    </a>
+
+    <div class="step disabled">
+      <div class="step-number">STEP 6</div><div class="icon">💬</div>
+      <h3>Live Mandarin</h3><p>Use what you learned in your live Mandarin Quest classes.</p>
+      <div class="action">Class information</div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div><h2>Your 8-week adventure</h2><p>New language builds on what you already know.</p></div>
+  </div>
+
+  <section class="week-grid">
+    <div class="week current"><div class="week-num">Week 1</div><h3>Names</h3><p>你好 · 我 · 你 · 叫</p><span class="badge">Current quest</span></div>
+    <div class="week"><div class="week-num">Week 2</div><h3>Numbers 1–10</h3><p>Count and ask “how many?”</p></div>
+    <div class="week"><div class="week-num">Week 3</div><h3>Animals</h3><p>Identify animals with 是 / 不是.</p></div>
+    <div class="week"><div class="week-num">Week 4</div><h3>How Old?</h3><p>Ask and tell your age.</p></div>
+    <div class="week"><div class="week-num">Week 5</div><h3>Colors</h3><p>Red, yellow, blue and descriptions.</p></div>
+    <div class="week"><div class="week-num">Week 6</div><h3>More Colors</h3><p>Green, purple, orange and more.</p></div>
+    <div class="week"><div class="week-num">Week 7</div><h3>How Are You?</h3><p>Talk about how you are and what you like.</p></div>
+    <div class="week"><div class="week-num">Week 8</div><h3>All About Me</h3><p>Put it all together in Mandarin.</p></div>
+  </section>
+
+  <section class="practice">
+    <div class="practice-icon">💡</div>
+    <div><h3>Grown-up tip</h3><p>Five minutes of listening and speaking several times during the week is more useful than one long study session. Encourage your learner to answer aloud.</p></div>
+  </section>
+</main>
+<footer>Mandarin Quest · Learn it. Say it. Use it.</footer>
+</body>
+</html>
