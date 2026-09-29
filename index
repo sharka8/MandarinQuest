@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mandarin Quest | Mandarin for Kids</title>
+<meta name="description" content="Mandarin Quest helps children learn Mandarin through live classes, speaking practice, stories, flashcards, and Chinese writing.">
+<link rel="icon" type="image/png" href="assets/Favicon.png">
+<style>
+:root{
+  --navy:#18324a; --orange:#e89a3d; --cream:#fffaf0; --paper:#fff;
+  --muted:#68788a; --line:#e8e2d7; --green:#dff2e4; --blue:#e4f0fa;
+  --yellow:#fff1c9; --purple:#eee7f8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--navy);background:var(--cream);line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,calc(100% - 36px));margin:auto}
+header{background:rgba(255,250,240,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-size:1.2rem;font-weight:900;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--orange);display:grid;place-items:center;font-size:1.25rem}
+.navlinks{display:flex;align-items:center;gap:24px;font-size:.93rem;font-weight:700}
+.nav-button{background:var(--navy);color:#fff;padding:10px 16px;border-radius:12px}
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center}
+.eyebrow{font-size:.78rem;font-weight:900;letter-spacing:.13em;color:var(--orange);text-transform:uppercase}
+h1{font-size:clamp(2.8rem,6vw,5.25rem);line-height:.98;letter-spacing:-.055em;margin:14px 0 22px}
+.hero p{font-size:1.14rem;color:#53687a;max-width:650px;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 19px;border-radius:13px;font-weight:850;border:1px solid var(--navy)}
+.btn.primary{background:var(--navy);color:white}.btn.secondary{background:white}
+.hero-card{background:white;border:1px solid var(--line);border-radius:30px;padding:25px;box-shadow:0 20px 50px rgba(24,50,74,.08);transform:rotate(1deg)}
+.mock{background:var(--navy);border-radius:22px;padding:25px;color:white;min-height:350px;display:flex;flex-direction:column;justify-content:space-between}
+.mock-top{display:flex;justify-content:space-between;align-items:flex-start}
+.mock-week{font-size:.73rem;font-weight:900;letter-spacing:.12em;color:#ffc77e}
+.mock h2{font-size:2rem;margin:7px 0}.bubble{font-size:4.6rem}
+.quest{background:white;color:var(--navy);padding:16px;border-radius:16px;margin-top:10px;font-weight:800}
+.quest span{color:var(--orange);font-size:.78rem;display:block;margin-bottom:3px}
+section{padding:72px 0}
+.section-head{max-width:680px;margin-bottom:34px}
+.section-head h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-.04em;margin:7px 0 10px}
+.section-head p{color:var(--muted);margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.step{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;min-height:180px}
+.step-icon{font-size:2rem}.step h3{margin:12px 0 5px}.step p{margin:0;color:var(--muted);font-size:.93rem}
+.course{background:var(--navy);color:white}
+.course .section-head p{color:#cbd7df}
+.week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.week{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:17px;padding:18px}
+.week strong{display:block;color:#ffc77e;font-size:.75rem;letter-spacing:.08em;margin-bottom:6px}
+.week h3{font-size:1rem;margin:0}
+.for-parents{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}
+.parent-box{background:white;border:1px solid var(--line);border-radius:24px;padding:28px}
+.parent-box h3{margin-top:0}
+.check{display:flex;gap:10px;margin:13px 0;color:#526679}.check b{color:var(--orange)}
+.cta{text-align:center;padding:78px 0}
+.cta-box{background:#f4e9d9;border-radius:30px;padding:50px 25px}
+.cta h2{font-size:clamp(2rem,4vw,3rem);margin:0 0 10px;letter-spacing:-.04em}
+.cta p{color:var(--muted);max-width:600px;margin:0 auto 24px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.88rem}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:800px){.hero-grid,.for-parents{grid-template-columns:1fr}.hero{padding-top:50px}.hero-card{transform:none}.steps{grid-template-columns:1fr 1fr}.week-grid{grid-template-columns:1fr 1fr}.navlinks a:not(.nav-button){display:none}}
+@media(max-width:520px){.steps,.week-grid{grid-template-columns:1fr}h1{font-size:3rem}.hero-card{padding:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="index.html"><span class="brand-mark">探</span> Mandarin Quest</a>
+      <div class="navlinks">
+        <a href="#how">How It Works</a>
+        <a href="#course">Course</a>
+        <a href="teacher/">Teachers</a>
+        <a class="nav-button" href="student.html">Student Area →</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Mandarin for young learners</div>
+      <h1>Chinese is an adventure.</h1>
+      <p>Mandarin Quest helps children build real communication skills through short at-home activities and live Mandarin classes—with speaking, listening, reading, and writing woven together.</p>
+      <div class="actions">
+        <a class="btn primary" href="student.html">Enter Student Area →</a>
+        <a class="btn secondary" href="#how">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="mock">
+        <div class="mock-top">
+          <div><div class="mock-week">WEEK 1</div><h2>你好！</h2><div>Meet new friends in Mandarin.</div></div>
+          <div class="bubble">🐼</div>
+        </div>
+        <div>
+          <div class="quest"><span>WATCH & LEARN</span>Listen and imitate Chinese sounds.</div>
+          <div class="quest"><span>SPEAKING QUEST</span>你叫什么名字？</div>
+          <div class="quest"><span>STORY TIME</span>Read your first Mandarin story.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">A little Mandarin throughout the week</div>
+      <h2>More than a once-a-week class.</h2>
+      <p>Each week's quest gives children several short ways to hear, use, and revisit the Mandarin they're learning.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-icon">🎥</div><h3>Watch & Learn</h3><p>Short lessons introduce sounds, vocabulary, and useful expressions.</p></div>
+      <div class="step"><div class="step-icon">🃏</div><h3>Flashcards</h3><p>Listen, repeat, and build recognition without relying on pinyin.</p></div>
+      <div class="step"><div class="step-icon">✍️</div><h3>Chinese Writing</h3><p>Learn basic strokes and gradually build confidence with characters.</p></div>
+      <div class="step"><div class="step-icon">🎤</div><h3>Speaking Challenge</h3><p>Answer questions aloud and practice producing Mandarin independently.</p></div>
+      <div class="step"><div class="step-icon">📖</div><h3>Story Time</h3><p>Read and listen to cumulative stories using familiar language.</p></div>
+      <div class="step"><div class="step-icon">💬</div><h3>Live Mandarin</h3><p>Use the week's language with a teacher and other young learners.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="course" id="course">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Course 1 · Getting to Know You</div>
+      <h2>Eight weeks of useful beginner Mandarin.</h2>
+      <p>Children build from greetings and numbers to describing themselves and understanding simple questions.</p>
+    </div>
+    <div class="week-grid">
+      <div class="week"><strong>WEEK 1</strong><h3>Names & Greetings</h3></div>
+      <div class="week"><strong>WEEK 2</strong><h3>Numbers & How Many?</h3></div>
+      <div class="week"><strong>WEEK 3</strong><h3>Animals · 是 / 不是</h3></div>
+      <div class="week"><strong>WEEK 4</strong><h3>Age & Self-Introduction</h3></div>
+      <div class="week"><strong>WEEK 5</strong><h3>Basic Colors</h3></div>
+      <div class="week"><strong>WEEK 6</strong><h3>More Colors</h3></div>
+      <div class="week"><strong>WEEK 7</strong><h3>How Are You? & Likes</h3></div>
+      <div class="week"><strong>WEEK 8</strong><h3>All About Me</h3></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap for-parents">
+    <div>
+      <div class="eyebrow">Designed for children</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);letter-spacing:-.04em;margin:8px 0 14px">Practice that feels manageable.</h2>
+      <p style="color:var(--muted)">Young learners don't need long study sessions. Mandarin Quest breaks practice into clear, approachable activities that can be revisited throughout the week.</p>
+    </div>
+    <div class="parent-box">
+      <h3>What we're building toward</h3>
+      <div class="check"><b>✓</b><span>Comfort hearing and responding to Mandarin</span></div>
+      <div class="check"><b>✓</b><span>Useful conversational phrases instead of isolated word lists</span></div>
+      <div class="check"><b>✓</b><span>Gradual character recognition and handwriting</span></div>
+      <div class="check"><b>✓</b><span>Cumulative reading through illustrated Chinese stories</span></div>
+      <div class="check"><b>✓</b><span>Repeated opportunities to actually speak</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Ready for your Mandarin quest?</h2>
+      <p>We're building a playful path from first words to real communication in Chinese.</p>
+      <a class="btn primary" href="student.html">Go to the Student Area →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div><strong>Mandarin Quest</strong> · Mandarin learning for kids</div>
+    <div>© 2026 Mandarin Quest</div>
+  </div>
+</footer>
+</body>
+</html>
