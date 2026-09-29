@@ -209,7 +209,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     </div>
     <div class="worksheet-row">
       <div><b>Now practice the strokes on paper.</b><br><span style="color:var(--muted);font-size:.9rem">Practice the basic strokes first, then write 三、十、八、九. In Week 2, we’ll continue building the number characters.</span></div>
-      <a class="worksheet-link" href="First%20Semester%20Writing%20Assignments.pdf" target="_blank" rel="noopener">Open writing sheet →</a>
+      <a class="worksheet-link" href="Mandarin_Quest_Week_2_Number_Writing.pdf" target="_blank" rel="noopener">Open writing sheet →</a>
     </div>
   </section>
 
@@ -527,7 +527,7 @@ if(requestedWeek===1) selectWeek(1);
     <div class="char-grid three">
       ${[['yi','一','yī · one'],['er','二','èr · two'],['si','四','sì · four'],['wu','五','wǔ · five'],['liu','六','liù · six'],['qi','七','qī · seven']].map(x=>`<article class="char-card"><h3>${x[1]}</h3><div class="meta">${x[2]}</div><div class="hanzi-box" id="writer-${x[0]}"></div><div class="write-buttons"><button class="w2-watch" data-key="${x[0]}" data-hanzi="${x[1]}">▶ Watch</button><button class="w2-try quiz-btn" data-key="${x[0]}" data-hanzi="${x[1]}">✍️ Try It</button><button class="w2-reset reset-btn" data-key="${x[0]}" data-hanzi="${x[1]}">↻ Reset</button></div><div class="status" id="status-${x[0]}"></div></article>`).join('')}
     </div>
-    <div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice the number characters on your writing sheet. Say each number as you write it.</span></div><a class="worksheet-link" href="First%20Semester%20Writing%20Assignments.pdf" target="_blank" rel="noopener">Open writing packet →</a></div>`;
+    <div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice the number characters on your writing sheet. Say each number as you write it.</span></div><a class="worksheet-link" href="Mandarin_Quest_Week_2_Number_Writing.pdf" target="_blank" rel="noopener">Open writing packet →</a></div>`;
   let w2writers={};
   function getWriter(btn){const k=btn.dataset.key,h=btn.dataset.hanzi;if(!w2writers[k])w2writers[k]=HanziWriter.create('writer-'+k,h,{width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250});return w2writers[k];}
   document.querySelectorAll('.w2-watch').forEach(btn=>btn.onclick=()=>{const w=getWriter(btn);document.getElementById('status-'+btn.dataset.key).textContent='Watch the stroke direction and order.';w.animateCharacter();});
