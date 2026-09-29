@@ -458,32 +458,47 @@ if(requestedWeek===1) selectWeek(1);
 
   // Six activity cards
   const steps=[...document.querySelectorAll('.steps .step')];
-  steps[0].querySelector('p').textContent='Learn to count from 1–10 and listen for Chinese numbers.';
+  steps[0].querySelector('p').textContent='Learn to count from 1–10, then practice the new Week 2 words aloud.';
   steps[0].querySelector('.action').textContent='Start Week 2 videos →';
   steps[1].href='mandarin-quest-flashcards-autoplay.html?week=2';
   steps[1].querySelector('p').textContent="Listen, repeat, and practice this week's numbers and questions.";
   steps[2].querySelector('p').textContent='Practice writing Chinese number characters with correct stroke order.';
   steps[3].querySelector('p').textContent='Count objects and answer 几个？ aloud.';
-  steps[4].querySelector('p').textContent='Read and listen to a counting story using words you know.';
+  steps[4].querySelector('p').textContent='Read and listen to 《有几个？》 and count along with the story.';
 
-  // Watch & Learn: use two established counting videos for Week 2.
-  document.getElementById('videoTitle').textContent='Counting in Chinese';
-  document.querySelector('.video-intro').textContent='Watch these counting lessons, copy the numbers aloud, and use your fingers as you count.';
-  const vc=[...document.querySelectorAll('[data-video-card]')];
-  vc[0].style.display='block'; vc[0].querySelector('h3').textContent='1 · Numbers 1–10';
-  vc[0].querySelector('p').textContent='Count along out loud. Point or use your fingers for each number.';
-  vc[0].querySelector('iframe').src='https://www.youtube-nocookie.com/embed/2Ztq_FbVnQ4?rel=0';
-  vc[0].querySelector('iframe').title='Chinese Numbers 1 to 10';
-  vc[1].style.display='block'; vc[1].querySelector('h3').textContent='2 · Number Practice';
-  vc[1].querySelector('p').textContent='Listen again and see how many numbers you can say before the video does.';
-  vc[1].querySelector('iframe').src='https://www.youtube-nocookie.com/embed/rK_DN-roshk?rel=0';
-  vc[1].querySelector('iframe').title='Chinese Number Practice';
-  vc[2].style.display='none';
+  // Week 2 Watch & Learn: three number lessons + a guided practice video.
+  document.querySelector('#videoOverlay .eyebrow').textContent='WEEK 2 · WATCH & LEARN';
+  document.getElementById('videoTitle').textContent='Numbers & How Many?';
+  document.querySelector('.video-intro').textContent='Watch the number lessons in order and count along out loud. Finish with the practice video and answer along when you hear the new words.';
+  const vc=[...document.querySelectorAll('.video-card')];
+  const week2Videos=[
+    {title:'1 · Numbers 0–10',desc:'Count along out loud and use your fingers as you hear each number.',id:'2eLP3FuuEVs',iframeTitle:'Chinese Numbers 0 to 10'},
+    {title:'2 · Numbers 1–10',desc:'Listen again and try to say each number before you hear the answer.',id:'IYFTZ4E4BN8',iframeTitle:'Chinese Numbers 1 to 10'},
+    {title:'3 · Number Practice',desc:'Practice recognizing and saying the numbers you have learned.',id:'2Ztq_FbVnQ4',iframeTitle:'Chinese Number Practice'},
+    {title:'4 · Practice What You Learned',desc:'Now participate with the video. Listen for the new words and answer aloud instead of only watching.',id:'M4bon6Q0c94',iframeTitle:'Week 2 Mandarin Number and New Words Practice'}
+  ];
+  while(vc.length<week2Videos.length){
+    const card=vc[0].cloneNode(true);
+    card.querySelector('iframe').src='about:blank';
+    document.querySelector('.video-finish').before(card);
+    vc.push(card);
+  }
+  vc.forEach((card,i)=>{
+    if(i>=week2Videos.length){card.style.display='none';return;}
+    const v=week2Videos[i];
+    card.style.display='block';
+    card.querySelector('h3').textContent=v.title;
+    card.querySelector('p').textContent=v.desc;
+    const frame=card.querySelector('iframe');
+    frame.src=`https://www.youtube-nocookie.com/embed/${v.id}?rel=0`;
+    frame.title=v.iframeTitle;
+  });
   document.querySelector('.video-finish').querySelector('button').textContent="✓ I'm finished — go to Flashcards";
   document.getElementById('videoDone').onclick=e=>{e.stopImmediatePropagation();location.href='mandarin-quest-flashcards-autoplay.html?week=2';};
 
   // Week 2 writing. Keep the number set manageable: new practice 一 二 四 五 六 七,
   // while 三 八 九 十 were introduced interactively in Week 1.
+  writersReady=true; // Week 2 supplies its own Hanzi Writer instances below.
   const writingPanel=document.getElementById('writingPanel');
   writingPanel.innerHTML=`
     <div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK 2 WRITING</div>
