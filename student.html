@@ -422,7 +422,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&videoOverlay.classL
 const courseWeeks={
   1:{title:'你好！Ready for Week 1?',goal:"This week you'll learn to say hello, ask someone's name, and tell them your name.",ready:true},
   2:{title:'一、二、三！Ready for Week 2?',goal:"This week you'll count from 1–10 and ask how many.",ready:true},
-  3:{title:'动物！Ready for Week 3?',goal:"This week you'll identify animals and practice 是 / 不是.",ready:false},
+  3:{title:'动物！Ready for Week 3?',goal:"This week you'll identify animals, ask what an animal is, and practice 是 / 不是 / 是不是.",ready:true},
   4:{title:'你几岁？Ready for Week 4?',goal:"This week you'll ask and tell how old someone is.",ready:false},
   5:{title:'什么颜色？Ready for Week 5?',goal:"This week you'll learn basic colors and describe things.",ready:false},
   6:{title:'更多颜色！Ready for Week 6?',goal:"This week you'll add more colors and keep building descriptions.",ready:false},
@@ -459,8 +459,8 @@ if(requestedWeek===1) selectWeek(1);
     btn.addEventListener('click',e=>{
       e.preventDefault(); e.stopImmediatePropagation();
       const n=Number(btn.dataset.week);
-      if(n<=2) location.href=location.pathname+'?week='+n;
-      else alert('Week '+n+' is coming next. Weeks 1 and 2 are ready now.');
+      if(n<=3) location.href=location.pathname+'?week='+n;
+      else alert('Week '+n+' is coming next. Weeks 1–3 are ready now.');
     },true);
   });
 
@@ -568,6 +568,103 @@ if(requestedWeek===1) selectWeek(1);
   document.getElementById('storyTitle').textContent='有几个？';
   document.querySelector('#storyOverlay .eyebrow').textContent='WEEK 2 STORY';
   renderStory();
+})();
+</script>
+
+
+<script>
+// Week 3: Animals + 是 / 不是 / 是不是 + 这是什么动物？
+(function(){
+  const requested=Math.min(8,Math.max(1,Number(new URLSearchParams(location.search).get('week'))||1));
+  if(requested!==3) return;
+
+  document.getElementById('weekHeroTitle').textContent='动物！Ready for Week 3?';
+  document.getElementById('weekHeroText').textContent="This week you'll identify animals, ask what an animal is, and answer with 是 / 不是.";
+  document.querySelectorAll('.week').forEach(btn=>{
+    btn.classList.toggle('current',Number(btn.dataset.week)===3);
+    const b=btn.querySelector('.badge'); if(b) b.remove();
+  });
+  const active=document.querySelector('.week[data-week="3"]');
+  if(active){const b=document.createElement('span');b.className='badge';b.textContent='Current quest';active.appendChild(b);}
+
+  const steps=[...document.querySelectorAll('.steps .step')];
+  steps[0].querySelector('p').textContent='Learn animal names, ask 这是什么动物？, and practice 是 / 不是 / 是不是.';
+  steps[0].querySelector('.action').textContent='Start Week 3 videos →';
+  steps[1].href='mandarin-quest-flashcards-autoplay.html?week=3';
+  steps[1].querySelector('p').textContent="Listen, repeat, and practice this week's animals and sentence patterns.";
+  steps[2].querySelector('p').textContent='Keep building Chinese writing skills with simple, high-value characters.';
+  steps[3].querySelector('p').textContent='Look at an animal, listen to the question, and answer aloud in Mandarin.';
+  steps[4].querySelector('p').textContent='Read and listen to an animal story using 这是什么动物？ and 是 / 不是.';
+
+  // Watch & Learn — two focused videos supplied for Week 3.
+  document.querySelector('#videoOverlay .eyebrow').textContent='WEEK 3 · WATCH & LEARN';
+  document.getElementById('videoTitle').textContent='Animals & 是不是';
+  document.querySelector('.video-intro').textContent='First learn the animal words and 这是什么动物？ Then use familiar numbers to focus on the new pattern 是 / 不是 / 是不是.';
+  const vc=[...document.querySelectorAll('.video-card')];
+  const vids=[
+    {title:'1 · Animals 动物',desc:'Learn animal names and listen for 这是什么动物？ Say the animal names aloud with the video.',id:'YQYhjdCb4r4',iframeTitle:'Mandarin animals and 这是什么动物'},
+    {title:'2 · 是 / 不是 / 是不是',desc:'Use familiar numbers to learn how to say “is,” “is not,” and ask “is it?”',id:'GUVWDjaxASY',iframeTitle:'Mandarin 是 不是 是不是 with numbers'}
+  ];
+  vc.forEach((card,i)=>{
+    if(i>=vids.length){card.style.display='none';return;}
+    const v=vids[i]; card.style.display='block';
+    card.querySelector('h3').textContent=v.title; card.querySelector('p').textContent=v.desc;
+    const f=card.querySelector('iframe'); f.src=`https://www.youtube-nocookie.com/embed/${v.id}?rel=0`; f.title=v.iframeTitle;
+  });
+  document.querySelector('.video-finish').querySelector('button').textContent="✓ I'm finished — go to Flashcards";
+  document.getElementById('videoDone').onclick=e=>{e.stopImmediatePropagation();location.href='mandarin-quest-flashcards-autoplay.html?week=3';};
+
+  // Speaking Challenge: audio-first, so beginning readers do not need to read the prompt.
+  speakingChallenges.splice(0,speakingChallenges.length,
+    {avatar:'🐱',title:'What animal is it?',cn:'🐱',help:'Listen, then name the animal in a full sentence.',answer:'这是猫。',promptAudio:'这是什么动物？',answerAudio:'这是猫。'},
+    {avatar:'🐶',title:'What animal is it?',cn:'🐶',help:'Listen, then answer aloud.',answer:'这是狗。',promptAudio:'这是什么动物？',answerAudio:'这是狗。'},
+    {avatar:'🐰',title:'Is it a cat?',cn:'🐰  ≠  🐱',help:'Listen carefully. Answer 是 or 不是.',answer:'不是。',promptAudio:'是不是猫？',answerAudio:'不是。'},
+    {avatar:'🐦',title:'Is it a bird?',cn:'🐦  =  鸟',help:'Listen carefully. Answer 是 or 不是.',answer:'是。',promptAudio:'是不是鸟？',answerAudio:'是。'},
+    {avatar:'🐢',title:'What animal is it?',cn:'🐢',help:'Bonus animal! Listen, then answer aloud.',answer:'这是乌龟。',promptAudio:'这是什么动物？',answerAudio:'这是乌龟。'},
+    {avatar:'🐟',title:'Animal challenge',cn:'🐟',help:'Bonus animal! Listen and answer the yes/no question.',answer:'是。',promptAudio:'是不是鱼？',answerAudio:'是。'}
+  );
+  speakingIndex=0; renderSpeaking();
+
+  // Week 3 Story Time — 《这是什么动物？》
+  // Short, repetitive, audio-first language using only this week's core patterns.
+  const week3Story=[
+    {pic:'👧 🌳',zh:'你好！',py:'Nǐ hǎo!',en:'Hello!'},
+    {pic:'🐱',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+    {pic:'🐱',zh:'这是猫。',py:'Zhè shì māo.',en:'This is a cat.'},
+    {pic:'🐶',zh:'是不是猫？',py:'Shì bu shì māo?',en:'Is it a cat?'},
+    {pic:'🐶',zh:'不是。这是狗。',py:'Bú shì. Zhè shì gǒu.',en:'No. This is a dog.'},
+    {pic:'🐦',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+    {pic:'🐦',zh:'这是鸟。',py:'Zhè shì niǎo.',en:'This is a bird.'},
+    {pic:'🐰',zh:'是不是兔子？',py:'Shì bu shì tùzi?',en:'Is it a rabbit?'},
+    {pic:'🐰',zh:'是！这是兔子。',py:'Shì! Zhè shì tùzi.',en:'Yes! This is a rabbit.'},
+    {pic:'🐢',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+    {pic:'🐢',zh:'这是乌龟。',py:'Zhè shì wūguī.',en:'This is a turtle.'},
+    {pic:'🐟 👋',zh:'这是鱼。再见！',py:'Zhè shì yú. Zàijiàn!',en:'This is a fish. Goodbye!'}
+  ];
+  week1Story.splice(0,week1Story.length,...week3Story);
+  storyIndex=0;
+  document.getElementById('storyTitle').textContent='这是什么动物？';
+  document.querySelector('#storyOverlay .eyebrow').textContent='WEEK 3 STORY';
+  renderStory();
+
+  // Add Week 3 words/chunks to the tap-for-help dictionary.
+  Object.assign(storyDictionary,{
+    '这是什么动物':{py:'zhè shì shénme dòngwù',en:'what animal is this?'},
+    '这是什么':{py:'zhè shì shénme',en:'what is this?'},
+    '是不是':{py:'shì bu shì',en:'is it? / is it or not?'},
+    '不是':{py:'bú shì',en:'is not / no'},
+    '这是':{py:'zhè shì',en:'this is'},
+    '动物':{py:'dòngwù',en:'animal'},
+    '猫':{py:'māo',en:'cat'},
+    '狗':{py:'gǒu',en:'dog'},
+    '鸟':{py:'niǎo',en:'bird'},
+    '兔子':{py:'tùzi',en:'rabbit'},
+    '乌龟':{py:'wūguī',en:'turtle'},
+    '鱼':{py:'yú',en:'fish'},
+    '是':{py:'shì',en:'is / yes'}
+  });
+  // Re-sort dictionary keys so longer phrases are matched before single characters.
+  dictKeys.splice(0,dictKeys.length,...Object.keys(storyDictionary).sort((a,b)=>b.length-a.length));
 })();
 </script>
 
