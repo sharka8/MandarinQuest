@@ -341,11 +341,12 @@ function renderSpeaking(){
   const c=speakingChallenges[speakingIndex];
   document.getElementById('challengeCount').textContent=`Challenge ${speakingIndex+1} of ${speakingChallenges.length}`;
   document.getElementById('challengeAvatar').textContent=c.avatar;document.getElementById('challengeTitle').textContent=c.title;document.getElementById('challengeCn').textContent=c.cn;document.getElementById('challengeHelp').textContent=c.help;document.getElementById('challengeAnswer').textContent=c.answer;document.getElementById('challengeAnswer').classList.remove('show');document.getElementById('speakProgressBar').style.width=`${((speakingIndex+1)/speakingChallenges.length)*100}%`;
+  if(c.promptAudio) setTimeout(()=>speakChinese(c.promptAudio),180);
 }
 function toggleSpeaking(){const open=!speakingPanel.classList.contains('open');speakingPanel.classList.toggle('open',open);speakingStep.setAttribute('aria-expanded',String(open));if(open){renderSpeaking();speakingPanel.scrollIntoView({behavior:'smooth',block:'start'});}}
 speakingStep.addEventListener('click',toggleSpeaking);speakingStep.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSpeaking();}});
-document.getElementById('listenChallenge').addEventListener('click',()=>speakChinese(speakingChallenges[speakingIndex].audio));
-document.getElementById('showAnswer').addEventListener('click',()=>{document.getElementById('challengeAnswer').classList.add('show');speakChinese(speakingChallenges[speakingIndex].audio);});
+document.getElementById('listenChallenge').addEventListener('click',()=>{const c=speakingChallenges[speakingIndex];speakChinese(c.promptAudio||c.audio);});
+document.getElementById('showAnswer').addEventListener('click',()=>{const c=speakingChallenges[speakingIndex];document.getElementById('challengeAnswer').classList.add('show');speakChinese(c.answerAudio||c.audio);});
 document.getElementById('nextChallenge').addEventListener('click',()=>{if(speakingIndex<speakingChallenges.length-1){speakingIndex++;renderSpeaking();}else{document.getElementById('challengeCard').style.display='none';document.getElementById('speakDone').classList.add('show');document.getElementById('speakProgressBar').style.width='100%';}});
 document.getElementById('restartChallenge').addEventListener('click',()=>{speakingIndex=0;document.getElementById('challengeCard').style.display='block';document.getElementById('speakDone').classList.remove('show');renderSpeaking();});
 
@@ -473,8 +474,8 @@ if(requestedWeek===1) selectWeek(1);
   const vc=[...document.querySelectorAll('.video-card')];
   const week2Videos=[
     {title:'1 · Numbers 0–10',desc:'Count along out loud and use your fingers as you hear each number.',id:'2eLP3FuuEVs',iframeTitle:'Chinese Numbers 0 to 10'},
-    {title:'2 · Numbers 1–10',desc:'Listen again and try to say each number before you hear the answer.',id:'IYFTZ4E4BN8',iframeTitle:'Chinese Numbers 1 to 10'},
-    {title:'3 · Number Practice',desc:'Practice recognizing and saying the numbers you have learned.',id:'2Ztq_FbVnQ4',iframeTitle:'Chinese Number Practice'},
+    {title:'2 · Chinese Number Hand Signs',desc:'Learn the hand gestures commonly used in China for the numbers 1–10.',id:'zVY-BlUwekw',iframeTitle:'Chinese Numbers 1 to 10 with Hand Gestures'},
+    {title:'3 · Numbers 1–10',desc:'Listen again and try to say each number before you hear the answer.',id:'IYFTZ4E4BN8',iframeTitle:'Chinese Numbers 1 to 10'},
     {title:'4 · Practice What You Learned',desc:'Now participate with the video. Listen for the new words and answer aloud instead of only watching.',id:'M4bon6Q0c94',iframeTitle:'Week 2 Mandarin Number and New Words Practice'}
   ];
   while(vc.length<week2Videos.length){
@@ -516,12 +517,12 @@ if(requestedWeek===1) selectWeek(1);
 
   // Week 2 speaking challenge
   speakingChallenges.splice(0,speakingChallenges.length,
-    {avatar:'1️⃣',title:'Count with me',cn:'1 · 2 · 3',help:'Say one, two, three in Mandarin.',answer:'一、二、三',audio:'一二三'},
-    {avatar:'🖐️',title:'Keep counting',cn:'4 · 5',help:'Say four and five in Mandarin.',answer:'四、五',audio:'四五'},
-    {avatar:'🔟',title:'Count to ten!',cn:'一 → 十',help:'Try all ten numbers without stopping.',answer:'一、二、三、四、五、六、七、八、九、十',audio:'一二三四五六七八九十'},
-    {avatar:'🍎🍎🍎',title:'How many?',cn:'几个？',help:'Count the apples and answer with the number.',answer:'三个。',audio:'三个'},
-    {avatar:'⭐⭐⭐⭐⭐',title:'How many stars?',cn:'有几个？',help:'Count, then answer aloud.',answer:'五个。',audio:'五个'},
-    {avatar:'❓',title:'Ask the question',cn:'How do you ask “How many?”',help:'Say the Mandarin question.',answer:'几个？',audio:'几个'}
+    {avatar:'1️⃣',title:'Listen and answer',cn:'1 · 2 · 3',help:'Listen first, then say the numbers aloud.',answer:'一、二、三',promptAudio:'一、二、三，你来说。',answerAudio:'一、二、三'},
+    {avatar:'🖐️',title:'Listen and answer',cn:'4 · 5',help:'Listen first, then say the numbers aloud.',answer:'四、五',promptAudio:'四、五，你来说。',answerAudio:'四、五'},
+    {avatar:'🔟',title:'Count to ten!',cn:'1 → 10',help:'Listen, then count all the way to ten.',answer:'一、二、三、四、五、六、七、八、九、十',promptAudio:'请从一数到十。',answerAudio:'一、二、三、四、五、六、七、八、九、十'},
+    {avatar:'🍎🍎🍎',title:'How many?',cn:'🍎 🍎 🍎',help:'Listen to the question, count, and answer aloud.',answer:'三个。',promptAudio:'有几个？',answerAudio:'三个'},
+    {avatar:'⭐⭐⭐⭐⭐',title:'How many?',cn:'⭐ ⭐ ⭐ ⭐ ⭐',help:'Listen to the question, count, and answer aloud.',answer:'五个。',promptAudio:'有几个？',answerAudio:'五个'},
+    {avatar:'❓',title:'Ask the question',cn:'🍎 🍎 🍎 🍎',help:'Now you ask the Mandarin question: “How many?”',answer:'有几个？',promptAudio:'你来问，有几个？',answerAudio:'有几个'}
   );
   speakingIndex=0;
   document.querySelector('#speakingPanel .eyebrow').textContent='WEEK 2 SPEAKING';
