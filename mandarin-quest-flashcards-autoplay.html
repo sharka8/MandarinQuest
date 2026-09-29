@@ -83,12 +83,11 @@
 <div class="start-overlay" id="startOverlay">
   <div class="start-box">
     <h2>Ready for Mandarin?</h2>
-    <p>Listen to each card, say it aloud, then flip it to check the meaning.</p>
+    <p>Look at each card and try to say it. Tap 🔊 whenever you want to hear the Mandarin.</p>
     <button id="startBtn">▶ Start Flashcards</button>
   </div>
 </div>
 <div class="shell">
-  <div style="margin-bottom:10px"><a id="lessonBack" href="student.html?week=1" style="font-weight:800;color:#18324a;text-decoration:none">← Back to My Lesson</a></div>
   <header>
     <div class="brand">MANDARIN <span>QUEST</span></div>
     <div class="settings">
@@ -134,7 +133,7 @@
     <button class="know" id="knowBtn">✓ I know it</button>
   </div>
 
-  <div class="footer-note">Listen first. Say it aloud. Then flip the card.</div>
+  <div class="footer-note">Try to remember it first. Tap 🔊 if you need help, then flip the card.</div>
 </div>
 
 <script>
@@ -266,7 +265,7 @@ const course = {
   }
 };
 
-let week = Math.min(8, Math.max(1, Number(new URLSearchParams(location.search).get("week")) || 1)), index = 0, flipped = false;
+let week = 1, index = 0, flipped = false;
 let traditional = false, showPinyin = false, showEnglish = false;
 let practiceAgain = [];
 let audioUnlocked = false;
@@ -338,7 +337,6 @@ function move(delta){
   index = (index + delta + n) % n;
   flipped = false;
   render();
-  if(audioUnlocked) setTimeout(speak, 120);
 }
 function flip(){ flipped = !flipped; render(); }
 
@@ -356,13 +354,10 @@ $("againBtn").addEventListener("click", ()=>{
 $("knowBtn").addEventListener("click", ()=>move(1));
 weekSelect.addEventListener("change", e=>{
   week=Number(e.target.value);
-  $("lessonBack").href = "student.html?week=" + week;
-  history.replaceState(null,"",location.pathname+"?week="+week);
   index=0;
   flipped=false;
   if(mode === "review") buildReviewCards();
   render();
-  if(audioUnlocked) setTimeout(speak, 120);
 });
 $("modeSelect").addEventListener("change", e=>{
   mode=e.target.value;
@@ -370,12 +365,10 @@ $("modeSelect").addEventListener("change", e=>{
   flipped=false;
   if(mode === "review") buildReviewCards();
   render();
-  if(audioUnlocked) setTimeout(speak, 120);
 });
 $("startBtn").addEventListener("click", ()=>{
   audioUnlocked = true;
   $("startOverlay").style.display = "none";
-  speak();
 });
 
 document.addEventListener("keydown", e=>{
@@ -384,8 +377,6 @@ document.addEventListener("keydown", e=>{
   if(e.key===" "){e.preventDefault();flip();}
   if(e.key.toLowerCase()==="a") speak();
 });
-weekSelect.value = String(week);
-$("lessonBack").href = "student.html?week=" + week;
 buildReviewCards();
 render();
 </script>
