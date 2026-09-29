@@ -43,6 +43,43 @@ main{max-width:1100px;margin:auto;padding:30px 22px 60px}
 footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34px}
 @media(max-width:800px){.steps{grid-template-columns:repeat(2,1fr)}.week-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){main{padding:20px 14px 45px}.topbar-inner{padding:14px}.hero{padding:23px}.moon{display:none}.steps{grid-template-columns:1fr}.week-grid{grid-template-columns:1fr 1fr}.practice{align-items:flex-start}}
+
+.writing-step{cursor:pointer}
+.writing-panel{display:none;margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:22px}
+.writing-panel.open{display:block}
+.writing-intro{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}
+.writing-intro h2{margin:0 0 5px}.writing-intro p{margin:0;color:var(--muted);line-height:1.45}
+.stroke-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:4px 0 14px}.stroke-item{background:var(--blue);border:1px solid #caddec;border-radius:16px;padding:12px 8px;text-align:center}.stroke-item b{display:block;font-size:1rem}.stroke-item span{display:block;color:var(--muted);font-size:.8rem;margin-top:3px}.stroke-mark{font-family:"Noto Sans SC",sans-serif;font-size:2.5rem;line-height:1.1;margin-bottom:5px}.rule-note{background:var(--cream);border:1px solid #eadcc3;border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:.9rem;line-height:1.45}.char-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.char-grid.three{grid-template-columns:repeat(3,1fr)}
+.char-card{border:1px solid var(--line);border-radius:20px;padding:18px;background:#fffaf2;text-align:center}
+.char-card h3{font-size:2rem;margin:0}.char-card .meta{color:var(--muted);margin:2px 0 12px}
+.hanzi-box{width:180px;height:180px;margin:0 auto 14px;background:white;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center}
+.write-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.write-buttons button,.worksheet-link{border:0;border-radius:12px;padding:10px 13px;font:inherit;font-weight:800;cursor:pointer}
+.animate-btn{background:var(--navy);color:white}.quiz-btn{background:var(--orange);color:white}.reset-btn{background:#edf1f4;color:var(--navy)}
+.worksheet-row{margin-top:18px;border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.worksheet-link{background:var(--navy);color:white;display:inline-block}
+.status{min-height:20px;margin-top:9px;font-size:.82rem;color:var(--muted)}
+@media(max-width:650px){.stroke-strip{grid-template-columns:repeat(2,1fr)}.char-grid,.char-grid.three{grid-template-columns:1fr}.writing-intro,.worksheet-row{flex-direction:column}.hanzi-box{width:160px;height:160px}}
+
+.speaking-step{cursor:pointer}
+.speaking-panel{display:none;margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:24px}
+.speaking-panel.open{display:block}
+.speak-progress{height:9px;background:#edf1f4;border-radius:999px;overflow:hidden;margin:14px 0 22px}.speak-progress-bar{height:100%;background:var(--orange);width:16.66%;transition:.25s}
+.challenge-card{max-width:700px;margin:auto;background:#fffaf2;border:1px solid #eadcc3;border-radius:24px;padding:28px;text-align:center}
+.challenge-count{font-size:.78rem;font-weight:900;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}.challenge-avatar{font-size:4rem;margin:10px 0}.challenge-card h3{font-size:1.55rem;margin:6px 0}.challenge-cn{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:900;margin:14px 0 5px}.challenge-help{color:var(--muted);min-height:24px}.challenge-answer{display:none;margin:16px auto 0;padding:13px 16px;background:var(--green);border-radius:14px;font-size:1.25rem;font-weight:800}.challenge-answer.show{display:block}
+.speak-controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:20px}.speak-controls button{border:0;border-radius:13px;padding:11px 15px;font:inherit;font-weight:800;cursor:pointer}.listen-btn{background:var(--navy);color:white}.answer-btn{background:var(--yellow);color:var(--navy)}.next-challenge{background:var(--orange);color:white}.speak-done{display:none;text-align:center;padding:20px}.speak-done.show{display:block}.speak-done .big{font-size:4rem}
+
+/* Week 1 storybook */
+.story-overlay{position:fixed;inset:0;background:rgba(24,50,74,.72);display:none;place-items:center;padding:18px;z-index:60}
+.story-overlay.open{display:grid}.story-modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--paper);border-radius:28px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.22)}
+.story-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.story-top h2{margin:0;font-size:1.35rem}
+.story-close{border:1px solid var(--line);background:white;border-radius:12px;padding:8px 12px;font-weight:800;cursor:pointer}
+.story-page{min-height:430px;border:1px solid var(--line);border-radius:24px;background:#fffaf2;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.story-picture{font-size:clamp(5rem,16vw,8rem);line-height:1;margin-bottom:20px}.story-chinese{font-size:clamp(2rem,7vw,3.4rem);font-weight:900;line-height:1.35}
+.story-pinyin{margin-top:10px;color:var(--muted);font-size:1.05rem;display:none}.story-english{margin-top:8px;color:var(--muted);font-size:.95rem;display:none}
+.story-tools,.story-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}.story-tools button,.story-nav button{border:1px solid var(--line);background:white;border-radius:14px;padding:10px 14px;font-weight:800;color:var(--navy);cursor:pointer}
+.story-nav button.primary{background:var(--navy);color:white;border-color:var(--navy)}.story-progress{height:8px;background:#eee7dc;border-radius:99px;overflow:hidden;margin-top:16px}.story-progress>div{height:100%;background:var(--orange);width:0}.story-count{text-align:center;color:var(--muted);font-size:.82rem;margin-top:7px}
+
 </style>
 </head>
 <body>
@@ -80,29 +117,91 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
       <div class="action">Start flashcards →</div>
     </a>
 
-    <div class="step disabled">
+    <div class="step writing-step" id="writingStep" role="button" tabindex="0" aria-expanded="false" aria-controls="writingPanel">
       <div class="step-number">STEP 3</div><div class="icon">✏️</div>
-      <h3>Chinese Writing</h3><p>Practice this week's character and reading sentence.</p>
-      <div class="action">Worksheet coming soon</div>
+      <h3>Chinese Writing</h3><p>Learn the basic strokes, then practice four easy characters that use different stroke types: 三, 十, 八, and 九.</p>
+      <div class="action">Practice writing →</div>
     </div>
 
-    <div class="step disabled">
+    <div class="step speaking-step" id="speakingStep" role="button" tabindex="0" aria-expanded="false" aria-controls="speakingPanel">
       <div class="step-number">STEP 4</div><div class="icon">🎮</div>
-      <h3>Practice Video</h3><p>Answer aloud and practice what you learned.</p>
-      <div class="action">Video coming soon</div>
+      <h3>Speaking Challenge</h3><p>Listen, answer aloud, and use this week's Mandarin.</p>
+      <div class="action">Start speaking challenge →</div>
     </div>
 
-    <a class="step" href="mandarin-quest-flashcards-autoplay.html">
-      <div class="step-number">STEP 5</div><div class="icon">⭐</div>
-      <h3>Quick Review</h3><p>Try the cards again. How many can you say before flipping?</p>
-      <div class="action">Review cards →</div>
-    </a>
+    <button class="step" id="storyStep" type="button" style="text-align:left;color:inherit;font:inherit;cursor:pointer">
+      <div class="step-number">STEP 5</div><div class="icon">📖</div>
+      <h3>Story Time</h3><p>Listen and read a tiny story using Mandarin you already know.</p>
+      <div class="action">Read this week's story →</div>
+    </button>
 
     <div class="step disabled">
       <div class="step-number">STEP 6</div><div class="icon">💬</div>
       <h3>Live Mandarin</h3><p>Use what you learned in your live Mandarin Quest classes.</p>
       <div class="action">Class information</div>
     </div>
+  </section>
+
+  <section class="writing-panel" id="writingPanel" aria-label="Week 1 Chinese writing practice">
+    <div class="writing-intro">
+      <div>
+        <div class="eyebrow" style="color:var(--orange)">WEEK 1 WRITING</div>
+        <h2>Start with strokes, then write 三 十 八 九</h2>
+        <p>First learn the direction of five basic strokes. Then see how those strokes come together in four simple number characters. Choose <b>Watch</b> first, then <b>Try It</b>.</p>
+      </div>
+    </div>
+    <div class="stroke-strip" aria-label="Five basic Chinese strokes">
+      <div class="stroke-item"><div class="stroke-mark">一</div><b>横</b><span>héng · →</span></div>
+      <div class="stroke-item"><div class="stroke-mark">丨</div><b>竖</b><span>shù · ↓</span></div>
+      <div class="stroke-item"><div class="stroke-mark">丿</div><b>撇</b><span>piě · ↙</span></div>
+      <div class="stroke-item"><div class="stroke-mark">㇏</div><b>捺</b><span>nà · ↘</span></div>
+      <div class="stroke-item"><div class="stroke-mark">丶</div><b>点</b><span>diǎn · dot</span></div>
+    </div>
+    <div class="rule-note"><b>Remember:</b> write from <b>top to bottom</b> and <b>left to right</b>. When a horizontal and vertical stroke cross, the horizontal stroke usually comes first.</div>
+    <div class="char-grid">
+      <article class="char-card">
+        <h3>三</h3><div class="meta">sān · three</div>
+        <div class="hanzi-box" id="writer-san"></div>
+        <div class="write-buttons"><button class="animate-btn" data-char="san">▶ Watch</button><button class="quiz-btn" data-char="san">✍️ Try It</button><button class="reset-btn" data-char="san">↻ Reset</button></div>
+        <div class="status" id="status-san"></div>
+      </article>
+      <article class="char-card">
+        <h3>十</h3><div class="meta">shí · ten</div>
+        <div class="hanzi-box" id="writer-shi"></div>
+        <div class="write-buttons"><button class="animate-btn" data-char="shi">▶ Watch</button><button class="quiz-btn" data-char="shi">✍️ Try It</button><button class="reset-btn" data-char="shi">↻ Reset</button></div>
+        <div class="status" id="status-shi"></div>
+      </article>
+      <article class="char-card">
+        <h3>八</h3><div class="meta">bā · eight</div>
+        <div class="hanzi-box" id="writer-ba"></div>
+        <div class="write-buttons"><button class="animate-btn" data-char="ba">▶ Watch</button><button class="quiz-btn" data-char="ba">✍️ Try It</button><button class="reset-btn" data-char="ba">↻ Reset</button></div>
+        <div class="status" id="status-ba"></div>
+      </article>
+      <article class="char-card">
+        <h3>九</h3><div class="meta">jiǔ · nine</div>
+        <div class="hanzi-box" id="writer-jiu"></div>
+        <div class="write-buttons"><button class="animate-btn" data-char="jiu">▶ Watch</button><button class="quiz-btn" data-char="jiu">✍️ Try It</button><button class="reset-btn" data-char="jiu">↻ Reset</button></div>
+        <div class="status" id="status-jiu"></div>
+      </article>
+    </div>
+    <div class="worksheet-row">
+      <div><b>Now practice the strokes on paper.</b><br><span style="color:var(--muted);font-size:.9rem">Practice the basic strokes first, then write 三、十、八、九. In Week 2, we’ll continue building the number characters.</span></div>
+      <a class="worksheet-link" href="First%20Semester%20Writing%20Assignments.pdf" target="_blank" rel="noopener">Open writing sheet →</a>
+    </div>
+  </section>
+
+  <section class="speaking-panel" id="speakingPanel" aria-label="Week 1 speaking challenge">
+    <div class="writing-intro">
+      <div><div class="eyebrow" style="color:var(--orange)">WEEK 1 SPEAKING</div><h2>Say it out loud!</h2><p>Listen to each challenge, answer in Mandarin, then check your answer. No typing needed.</p></div>
+    </div>
+    <div class="speak-progress"><div class="speak-progress-bar" id="speakProgressBar"></div></div>
+    <div class="challenge-card" id="challengeCard">
+      <div class="challenge-count" id="challengeCount"></div><div class="challenge-avatar" id="challengeAvatar">🐼</div>
+      <h3 id="challengeTitle"></h3><div class="challenge-cn" id="challengeCn"></div><div class="challenge-help" id="challengeHelp"></div>
+      <div class="challenge-answer" id="challengeAnswer"></div>
+      <div class="speak-controls"><button class="listen-btn" id="listenChallenge">🔊 Listen</button><button class="answer-btn" id="showAnswer">✓ Check answer</button><button class="next-challenge" id="nextChallenge">Next →</button></div>
+    </div>
+    <div class="speak-done" id="speakDone"><div class="big">🌟</div><h2>Week 1 speaking challenge complete!</h2><p>You practiced saying hello, asking and answering names, and saying goodbye.</p><button class="next-challenge" id="restartChallenge">Practice again</button></div>
   </section>
 
   <div class="section-head">
@@ -124,7 +223,106 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     <div class="practice-icon">💡</div>
     <div><h3>Grown-up tip</h3><p>Five minutes of listening and speaking several times during the week is more useful than one long study session. Encourage your learner to answer aloud.</p></div>
   </section>
+
+  <div class="story-overlay" id="storyOverlay" aria-hidden="true">
+    <section class="story-modal" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
+      <div class="story-top"><div><div class="eyebrow" style="color:var(--orange)">WEEK 1 STORY</div><h2 id="storyTitle">你好！新朋友</h2></div><button class="story-close" id="storyClose">✕ Close</button></div>
+      <div class="story-page"><div class="story-picture" id="storyPicture">🐼</div><div class="story-chinese" id="storyChinese">你好！</div><div class="story-pinyin" id="storyPinyin"></div><div class="story-english" id="storyEnglish"></div></div>
+      <div class="story-tools"><button id="storyAudio">🔊 Listen</button><button id="storyPinyinBtn">拼音 Pinyin: Off</button><button id="storyEnglishBtn">English: Off</button></div>
+      <div class="story-progress"><div id="storyBar"></div></div><div class="story-count" id="storyCount"></div>
+      <div class="story-nav"><button id="storyPrev">← Back</button><button class="primary" id="storyNext">Next →</button></div>
+    </section>
+  </div>
+
 </main>
 <footer>Mandarin Quest · Learn it. Say it. Use it.</footer>
+<script src="https://unpkg.com/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script>
+<script>
+const writingStep=document.getElementById('writingStep');
+const writingPanel=document.getElementById('writingPanel');
+let writers={};
+let writersReady=false;
+
+function initWriters(){
+  if(writersReady || typeof HanziWriter==='undefined') return;
+  const options={width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250};
+  writers.san=HanziWriter.create('writer-san','三',options);
+  writers.shi=HanziWriter.create('writer-shi','十',options);
+  writers.ba=HanziWriter.create('writer-ba','八',options);
+  writers.jiu=HanziWriter.create('writer-jiu','九',options);
+  writersReady=true;
+}
+function openWriting(){
+  const open=!writingPanel.classList.contains('open');
+  writingPanel.classList.toggle('open',open);
+  writingStep.setAttribute('aria-expanded',String(open));
+  if(open){initWriters();writingPanel.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+writingStep.addEventListener('click',openWriting);
+writingStep.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openWriting();}});
+
+document.querySelectorAll('.animate-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  initWriters(); const key=btn.dataset.char; document.getElementById('status-'+key).textContent='Watch the stroke direction and order.'; writers[key].animateCharacter();
+}));
+document.querySelectorAll('.quiz-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  initWriters(); const key=btn.dataset.char; const status=document.getElementById('status-'+key); status.textContent='Your turn! Draw the character stroke by stroke.';
+  writers[key].quiz({showHintAfterMisses:2,onComplete:()=>{status.textContent='Great job! You completed the character.';}});
+}));
+document.querySelectorAll('.reset-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  initWriters(); const key=btn.dataset.char; writers[key].cancelQuiz(); writers[key].showCharacter(); document.getElementById('status-'+key).textContent='';
+}));
+
+const speakingStep=document.getElementById('speakingStep');
+const speakingPanel=document.getElementById('speakingPanel');
+const speakingChallenges=[
+  {avatar:'🐼',title:'Say hello!',cn:'你好！',help:'Say it aloud before you check.',answer:'你好！',audio:'你好'},
+  {avatar:'👧',title:'Answer the question',cn:'你叫什么名字？',help:'Tell her your name in Mandarin.',answer:'我叫 ______。',audio:'你叫什么名字'},
+  {avatar:'🧒',title:'Ask my name',cn:'❓',help:'How do you ask “What is your name?”',answer:'你叫什么名字？',audio:'你叫什么名字'},
+  {avatar:'🙋',title:'Which word means “I / me”?',cn:'我  ·  你',help:'Say the correct Chinese word aloud.',answer:'我 · wǒ',audio:'我'},
+  {avatar:'👉',title:'Which word means “you”?',cn:'我  ·  你',help:'Say the correct Chinese word aloud.',answer:'你 · nǐ',audio:'你'},
+  {avatar:'👋',title:'Time to go!',cn:'How do you say goodbye?',help:'Say it in Mandarin.',answer:'再见！',audio:'再见'}
+];
+let speakingIndex=0;
+function speakChinese(text){
+  if(!('speechSynthesis' in window)) return; speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang='zh-CN';u.rate=.78;
+  const voices=speechSynthesis.getVoices();const zh=voices.find(v=>/^zh(-|_)?CN/i.test(v.lang))||voices.find(v=>/^zh/i.test(v.lang));if(zh)u.voice=zh;speechSynthesis.speak(u);
+}
+function renderSpeaking(){
+  const c=speakingChallenges[speakingIndex];
+  document.getElementById('challengeCount').textContent=`Challenge ${speakingIndex+1} of ${speakingChallenges.length}`;
+  document.getElementById('challengeAvatar').textContent=c.avatar;document.getElementById('challengeTitle').textContent=c.title;document.getElementById('challengeCn').textContent=c.cn;document.getElementById('challengeHelp').textContent=c.help;document.getElementById('challengeAnswer').textContent=c.answer;document.getElementById('challengeAnswer').classList.remove('show');document.getElementById('speakProgressBar').style.width=`${((speakingIndex+1)/speakingChallenges.length)*100}%`;
+}
+function toggleSpeaking(){const open=!speakingPanel.classList.contains('open');speakingPanel.classList.toggle('open',open);speakingStep.setAttribute('aria-expanded',String(open));if(open){renderSpeaking();speakingPanel.scrollIntoView({behavior:'smooth',block:'start'});}}
+speakingStep.addEventListener('click',toggleSpeaking);speakingStep.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSpeaking();}});
+document.getElementById('listenChallenge').addEventListener('click',()=>speakChinese(speakingChallenges[speakingIndex].audio));
+document.getElementById('showAnswer').addEventListener('click',()=>{document.getElementById('challengeAnswer').classList.add('show');speakChinese(speakingChallenges[speakingIndex].audio);});
+document.getElementById('nextChallenge').addEventListener('click',()=>{if(speakingIndex<speakingChallenges.length-1){speakingIndex++;renderSpeaking();}else{document.getElementById('challengeCard').style.display='none';document.getElementById('speakDone').classList.add('show');document.getElementById('speakProgressBar').style.width='100%';}});
+document.getElementById('restartChallenge').addEventListener('click',()=>{speakingIndex=0;document.getElementById('challengeCard').style.display='block';document.getElementById('speakDone').classList.remove('show');renderSpeaking();});
+
+</script>
+
+<script>
+const week1Story=[
+ {pic:"🐼",zh:"你好！",py:"nǐ hǎo!",en:"Hello!"},
+ {pic:"🐰",zh:"你好！",py:"nǐ hǎo!",en:"Hello!"},
+ {pic:"🐼",zh:"我叫小熊猫。",py:"wǒ jiào xiǎo xióngmāo.",en:"My name is Little Panda."},
+ {pic:"🐼 ❓ 🐰",zh:"你叫什么名字？",py:"nǐ jiào shénme míngzi?",en:"What's your name?"},
+ {pic:"🐰",zh:"我叫小兔。",py:"wǒ jiào xiǎo tù.",en:"My name is Little Rabbit."},
+ {pic:"🐼 🤝 🐰",zh:"你好，小兔！",py:"nǐ hǎo, xiǎo tù!",en:"Hello, Little Rabbit!"},
+ {pic:"🐰 🤝 🐼",zh:"你好，小熊猫！",py:"nǐ hǎo, xiǎo xióngmāo!",en:"Hello, Little Panda!"},
+ {pic:"🐼 👋 🐰",zh:"再见！",py:"zàijiàn!",en:"Goodbye!"}
+];
+let storyIndex=0,storyShowPinyin=false,storyShowEnglish=false;
+const sid=id=>document.getElementById(id);
+function renderStory(){const p=week1Story[storyIndex];sid("storyPicture").textContent=p.pic;sid("storyChinese").textContent=p.zh;sid("storyPinyin").textContent=p.py;sid("storyEnglish").textContent=p.en;sid("storyPinyin").style.display=storyShowPinyin?"block":"none";sid("storyEnglish").style.display=storyShowEnglish?"block":"none";sid("storyPinyinBtn").textContent=`拼音 Pinyin: ${storyShowPinyin?"On":"Off"}`;sid("storyEnglishBtn").textContent=`English: ${storyShowEnglish?"On":"Off"}`;sid("storyCount").textContent=`${storyIndex+1} / ${week1Story.length}`;sid("storyBar").style.width=`${((storyIndex+1)/week1Story.length)*100}%`;sid("storyPrev").disabled=storyIndex===0;sid("storyNext").textContent=storyIndex===week1Story.length-1?"Read Again ↻":"Next →";}
+function speakStory(){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(week1Story[storyIndex].zh);u.lang="zh-CN";u.rate=.72;const vs=speechSynthesis.getVoices();const zh=vs.find(v=>/^zh(-|_)?CN/i.test(v.lang))||vs.find(v=>/^zh/i.test(v.lang));if(zh)u.voice=zh;speechSynthesis.speak(u);}
+sid("storyStep").onclick=()=>{storyIndex=0;sid("storyOverlay").classList.add("open");sid("storyOverlay").setAttribute("aria-hidden","false");renderStory();};
+sid("storyClose").onclick=()=>{speechSynthesis.cancel();sid("storyOverlay").classList.remove("open");sid("storyOverlay").setAttribute("aria-hidden","true");};
+sid("storyAudio").onclick=speakStory;sid("storyPinyinBtn").onclick=()=>{storyShowPinyin=!storyShowPinyin;renderStory();};sid("storyEnglishBtn").onclick=()=>{storyShowEnglish=!storyShowEnglish;renderStory();};
+sid("storyPrev").onclick=()=>{if(storyIndex>0){storyIndex--;renderStory();}};sid("storyNext").onclick=()=>{storyIndex=storyIndex===week1Story.length-1?0:storyIndex+1;renderStory();};
+sid("storyOverlay").onclick=e=>{if(e.target===sid("storyOverlay"))sid("storyClose").click();};renderStory();
+</script>
+
 </body>
 </html>
