@@ -58,6 +58,13 @@
     .rating button{border-radius:14px;padding:11px 16px}
     .again{background:#fff7e8}.know{background:var(--good)}
     .footer-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:22px}
+    .lesson-nav{margin-bottom:18px}
+    .lesson-nav a{color:var(--ink);font-weight:750;text-decoration:none}
+    .lesson-nav a:hover{text-decoration:underline}
+    .complete{display:none;margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px;text-align:center;box-shadow:0 12px 35px rgba(41,50,58,.06)}
+    .complete h2{margin:0 0 8px;font-size:1.6rem}
+    .complete p{margin:0 0 20px;color:var(--muted)}
+    .continue-btn{display:inline-block;background:var(--ink);color:white;text-decoration:none;border-radius:16px;padding:14px 22px;font-weight:800}
     .start-overlay{
       position:fixed;inset:0;background:rgba(24,50,74,.72);display:grid;
       place-items:center;padding:20px;z-index:20;
@@ -88,6 +95,7 @@
   </div>
 </div>
 <div class="shell">
+  <div class="lesson-nav"><a href="student.html">← Back to My Lesson</a></div>
   <header>
     <div class="brand">MANDARIN <span>QUEST</span></div>
     <div class="settings">
@@ -130,6 +138,11 @@
   </div>
 
   <div class="footer-note">Listen first. Say it aloud. Then flip the card.</div>
+  <section class="complete" id="completeBox" aria-live="polite">
+    <h2>🎉 Great job! Flashcards complete.</h2>
+    <p>You practiced this week's Mandarin words.</p>
+    <a class="continue-btn" href="student.html#writing">Next: ✏️ Chinese Writing →</a>
+  </section>
 </div>
 
 <script>
@@ -187,6 +200,7 @@ function render(){
   $("englishBtn").textContent = `English: ${showEnglish ? "On" : "Off"}`;
   $("pinyinBtn").classList.toggle("active", showPinyin);
   $("englishBtn").classList.toggle("active", showEnglish);
+  $("nextBtn").textContent = index === set.cards.length - 1 ? "Finish →" : "Next →";
 }
 
 function speak(){
@@ -204,10 +218,19 @@ function speak(){
   speechSynthesis.speak(u);
 }
 
+function finishFlashcards(){
+  $("completeBox").style.display = "block";
+  $("completeBox").scrollIntoView({behavior:"smooth", block:"center"});
+}
 function move(delta){
   const n = course[week].cards.length;
+  if(delta > 0 && index === n - 1){
+    finishFlashcards();
+    return;
+  }
   index = (index + delta + n) % n;
   flipped = false;
+  $("completeBox").style.display = "none";
   render();
   if(audioUnlocked) setTimeout(speak, 120);
 }
