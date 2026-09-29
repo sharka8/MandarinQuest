@@ -97,10 +97,6 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
 @media(max-width:520px){.video-modal{padding:16px}}
 
 
-.video-lesson-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-.video-tab{border:1px solid var(--line);background:white;color:var(--navy);border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}
-.video-tab.active{background:var(--navy);color:white;border-color:var(--navy)}
-.video-card{margin-top:0}
 
 </style>
 </head>
@@ -263,27 +259,21 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
         <div><div class="eyebrow" style="color:var(--orange)">WEEK 1 · WATCH & LEARN</div><h2 id="videoTitle">Chinese Sounds, Tones & Names</h2></div>
         <button class="video-close" id="videoClose" aria-label="Close videos">✕ Close</button>
       </div>
-      <p class="video-intro">Watch these three short lessons in order. You do not need to memorize every sound—listen, imitate, and have fun speaking Chinese.</p>
+      <p class="video-intro">Watch these three short lessons in order. Scroll down when you finish each video. You do not need to memorize every sound—listen, imitate, and have fun speaking Chinese.</p>
 
-      <div class="video-lesson-tabs" role="tablist" aria-label="Week 1 videos">
-        <button class="video-tab active" data-video="0">1 · Sounds</button>
-        <button class="video-tab" data-video="1">2 · Tones</button>
-        <button class="video-tab" data-video="2">3 · Names</button>
-      </div>
-
-      <article class="video-card active-video" data-video-card="0">
+      <article class="video-card">
         <h3>1 · Chinese Sounds</h3>
         <p>Listen carefully and copy the sounds you hear.</p>
         <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/PKu0Hz1LC-A?rel=0" title="Chinese Sounds" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </article>
 
-      <article class="video-card" data-video-card="1" style="display:none">
+      <article class="video-card">
         <h3>2 · The Four Tones</h3>
         <p>Listen for how the voice moves up and down in Mandarin.</p>
         <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/b9RPzlRIDEs?rel=0" title="The Four Tones of Chinese" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </article>
 
-      <article class="video-card" data-video-card="2" style="display:none">
+      <article class="video-card">
         <h3>3 · What's Your Name?</h3>
         <p>Practice 你好、你叫什么名字？ and 我叫… before moving on to your flashcards.</p>
         <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/hP1NrkNMybo?rel=0" title="What's Your Name in Chinese" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
@@ -388,21 +378,22 @@ sid("storyOverlay").onclick=e=>{if(e.target===sid("storyOverlay"))sid("storyClos
 const watchStep=document.getElementById("watchStep");
 const videoOverlay=document.getElementById("videoOverlay");
 const videoClose=document.getElementById("videoClose");
-if(watchStep && videoOverlay){
-  const videoTabs=[...document.querySelectorAll(".video-tab")];
-  const videoCards=[...document.querySelectorAll("[data-video-card]")];
-  videoTabs.forEach(tab=>tab.addEventListener("click",()=>{
-    const i=tab.dataset.video;
-    videoTabs.forEach(t=>t.classList.toggle("active",t===tab));
-    videoCards.forEach(card=>card.style.display=card.dataset.videoCard===i?"block":"none");
-  }));
-  watchStep.addEventListener("click",()=>{videoOverlay.classList.add("open");videoOverlay.setAttribute("aria-hidden","false");});
-  const closeVideos=()=>{videoOverlay.classList.remove("open");videoOverlay.setAttribute("aria-hidden","true");};
-  videoClose.addEventListener("click",closeVideos);
-  videoOverlay.addEventListener("click",e=>{if(e.target===videoOverlay)closeVideos();});
-  document.getElementById("videoDone").addEventListener("click",()=>{window.location.href="mandarin-quest-flashcards-autoplay.html";});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&videoOverlay.classList.contains("open"))closeVideos();});
+const videoDone=document.getElementById("videoDone");
+function openVideos(){
+  videoOverlay.classList.add("open");
+  videoOverlay.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
 }
+function closeVideos(){
+  videoOverlay.classList.remove("open");
+  videoOverlay.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+watchStep.addEventListener("click",openVideos);
+videoClose.addEventListener("click",closeVideos);
+videoDone.addEventListener("click",()=>{window.location.href="mandarin-quest-flashcards-autoplay.html";});
+videoOverlay.addEventListener("click",e=>{if(e.target===videoOverlay)closeVideos();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&videoOverlay.classList.contains("open"))closeVideos();});
 </script>
 
 </body>
