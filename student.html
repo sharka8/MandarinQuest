@@ -32,7 +32,7 @@ main{max-width:1100px;margin:auto;padding:30px 22px 60px}
 .action{margin-top:auto;padding-top:15px;font-weight:800;color:var(--orange);font-size:.9rem}
 .disabled{opacity:.55;cursor:default}.disabled:hover{transform:none;box-shadow:none}
 .week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.week{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;min-height:128px;position:relative}
+.week{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;min-height:128px;position:relative;text-align:left;color:inherit;font:inherit;width:100%;cursor:pointer;transition:.18s}.week:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(40,50,60,.07)}
 .week.current{border:2px solid var(--orange);background:#fffaf2}
 .week-num{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
 .week h3{font-size:1rem;margin:7px 0 5px}.week p{font-size:.84rem;color:var(--muted);margin:0;line-height:1.35}
@@ -112,8 +112,8 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
   <section class="hero">
     <div>
       <div class="eyebrow">Course 1 · Getting to Know You</div>
-      <h1>你好！Ready for Week 1?</h1>
-      <p>This week you'll learn to say hello, ask someone's name, and tell them your name.</p>
+      <h1 id="weekHeroTitle">你好！Ready for Week 1?</h1>
+      <p id="weekHeroText">This week you'll learn to say hello, ask someone's name, and tell them your name.</p>
     </div>
     <div class="moon">🐼</div>
   </section>
@@ -226,15 +226,15 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     <div><h2>Your 8-week adventure</h2><p>New language builds on what you already know.</p></div>
   </div>
 
-  <section class="week-grid">
-    <div class="week current"><div class="week-num">Week 1</div><h3>Names</h3><p>你好 · 我 · 你 · 叫</p><span class="badge">Current quest</span></div>
-    <div class="week"><div class="week-num">Week 2</div><h3>Numbers 1–10</h3><p>Count and ask “how many?”</p></div>
-    <div class="week"><div class="week-num">Week 3</div><h3>Animals</h3><p>Identify animals with 是 / 不是.</p></div>
-    <div class="week"><div class="week-num">Week 4</div><h3>How Old?</h3><p>Ask and tell your age.</p></div>
-    <div class="week"><div class="week-num">Week 5</div><h3>Colors</h3><p>Red, yellow, blue and descriptions.</p></div>
-    <div class="week"><div class="week-num">Week 6</div><h3>More Colors</h3><p>Green, purple, orange and more.</p></div>
-    <div class="week"><div class="week-num">Week 7</div><h3>How Are You?</h3><p>Talk about how you are and what you like.</p></div>
-    <div class="week"><div class="week-num">Week 8</div><h3>All About Me</h3><p>Put it all together in Mandarin.</p></div>
+  <section class="week-grid" id="weekGrid" aria-label="Choose a course week">
+    <button class="week current" data-week="1"><div class="week-num">Week 1</div><h3>Names</h3><p>你好 · 我 · 你 · 叫</p><span class="badge">Current quest</span></button>
+    <button class="week" data-week="2"><div class="week-num">Week 2</div><h3>Numbers 1–10</h3><p>Count and ask “how many?”</p></button>
+    <button class="week" data-week="3"><div class="week-num">Week 3</div><h3>Animals</h3><p>Identify animals with 是 / 不是.</p></button>
+    <button class="week" data-week="4"><div class="week-num">Week 4</div><h3>How Old?</h3><p>Ask and tell your age.</p></button>
+    <button class="week" data-week="5"><div class="week-num">Week 5</div><h3>Colors</h3><p>Red, yellow, blue and descriptions.</p></button>
+    <button class="week" data-week="6"><div class="week-num">Week 6</div><h3>More Colors</h3><p>Green, purple, orange and more.</p></button>
+    <button class="week" data-week="7"><div class="week-num">Week 7</div><h3>How Are You?</h3><p>Talk about how you are and what you like.</p></button>
+    <button class="week" data-week="8"><div class="week-num">Week 8</div><h3>All About Me</h3><p>Put it all together in Mandarin.</p></button>
   </section>
 
   <section class="practice">
@@ -394,6 +394,144 @@ videoClose.addEventListener("click",closeVideos);
 videoDone.addEventListener("click",()=>{window.location.href="mandarin-quest-flashcards-autoplay.html";});
 videoOverlay.addEventListener("click",e=>{if(e.target===videoOverlay)closeVideos();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&videoOverlay.classList.contains("open"))closeVideos();});
+</script>
+
+
+<script>
+// Course navigation foundation: one student.html, selected with ?week=1 ... ?week=8.
+const courseWeeks={
+  1:{title:'你好！Ready for Week 1?',goal:"This week you'll learn to say hello, ask someone's name, and tell them your name.",ready:true},
+  2:{title:'一、二、三！Ready for Week 2?',goal:"This week you'll count from 1–10 and ask how many.",ready:true},
+  3:{title:'动物！Ready for Week 3?',goal:"This week you'll identify animals and practice 是 / 不是.",ready:false},
+  4:{title:'你几岁？Ready for Week 4?',goal:"This week you'll ask and tell how old someone is.",ready:false},
+  5:{title:'什么颜色？Ready for Week 5?',goal:"This week you'll learn basic colors and describe things.",ready:false},
+  6:{title:'更多颜色！Ready for Week 6?',goal:"This week you'll add more colors and keep building descriptions.",ready:false},
+  7:{title:'你好吗？Ready for Week 7?',goal:"This week you'll talk about how you are and what you like.",ready:false},
+  8:{title:'All About Me · Week 8',goal:"This week you'll put your Mandarin together to tell someone about yourself.",ready:false}
+};
+function selectWeek(n){
+  const w=courseWeeks[n]||courseWeeks[1];
+  document.querySelectorAll('.week').forEach(btn=>{
+    const active=Number(btn.dataset.week)===n; btn.classList.toggle('current',active);
+    const old=btn.querySelector('.badge'); if(old) old.remove();
+    if(active){const b=document.createElement('span');b.className='badge';b.textContent=w.ready?'Current quest':'Coming next';btn.appendChild(b);}
+  });
+  if(w.ready){
+    document.getElementById('weekHeroTitle').textContent=w.title; document.getElementById('weekHeroText').textContent=w.goal;
+    history.replaceState(null,'',location.pathname+'?week='+n); window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    alert('Week '+n+' is next to be built. Week 1 stays active until its activities are ready.');
+    selectWeek(1);
+  }
+}
+document.querySelectorAll('.week').forEach(btn=>btn.addEventListener('click',()=>selectWeek(Number(btn.dataset.week))));
+const requestedWeek=Math.min(8,Math.max(1,Number(new URLSearchParams(location.search).get('week'))||1));
+if(requestedWeek===1) selectWeek(1);
+</script>
+<script>
+// Week 2 content + reusable week navigation.
+(function(){
+  const requested=Math.min(8,Math.max(1,Number(new URLSearchParams(location.search).get('week'))||1));
+
+  // Reload the same course page when a week card is chosen. This keeps each week's
+  // activity state isolated while still using one student.html file.
+  document.querySelectorAll('.week').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.preventDefault(); e.stopImmediatePropagation();
+      const n=Number(btn.dataset.week);
+      if(n<=2) location.href=location.pathname+'?week='+n;
+      else alert('Week '+n+' is coming next. Weeks 1 and 2 are ready now.');
+    },true);
+  });
+
+  if(requested!==2) return;
+
+  // Hero + week selection
+  document.getElementById('weekHeroTitle').textContent='一、二、三！Ready for Week 2?';
+  document.getElementById('weekHeroText').textContent="This week you'll count from 1–10 and ask how many.";
+  document.querySelectorAll('.week').forEach(btn=>{
+    btn.classList.toggle('current',Number(btn.dataset.week)===2);
+    const b=btn.querySelector('.badge'); if(b) b.remove();
+  });
+  const activeWeek=document.querySelector('.week[data-week="2"]');
+  if(activeWeek){const b=document.createElement('span');b.className='badge';b.textContent='Current quest';activeWeek.appendChild(b);}
+
+  // Six activity cards
+  const steps=[...document.querySelectorAll('.steps .step')];
+  steps[0].querySelector('p').textContent='Learn to count from 1–10 and listen for Chinese numbers.';
+  steps[0].querySelector('.action').textContent='Start Week 2 videos →';
+  steps[1].href='mandarin-quest-flashcards-autoplay.html?week=2';
+  steps[1].querySelector('p').textContent="Listen, repeat, and practice this week's numbers and questions.";
+  steps[2].querySelector('p').textContent='Practice writing Chinese number characters with correct stroke order.';
+  steps[3].querySelector('p').textContent='Count objects and answer 几个？ aloud.';
+  steps[4].querySelector('p').textContent='Read and listen to a counting story using words you know.';
+
+  // Watch & Learn: use two established counting videos for Week 2.
+  document.getElementById('videoTitle').textContent='Counting in Chinese';
+  document.querySelector('.video-intro').textContent='Watch these counting lessons, copy the numbers aloud, and use your fingers as you count.';
+  const vc=[...document.querySelectorAll('[data-video-card]')];
+  vc[0].style.display='block'; vc[0].querySelector('h3').textContent='1 · Numbers 1–10';
+  vc[0].querySelector('p').textContent='Count along out loud. Point or use your fingers for each number.';
+  vc[0].querySelector('iframe').src='https://www.youtube-nocookie.com/embed/2Ztq_FbVnQ4?rel=0';
+  vc[0].querySelector('iframe').title='Chinese Numbers 1 to 10';
+  vc[1].style.display='block'; vc[1].querySelector('h3').textContent='2 · Number Practice';
+  vc[1].querySelector('p').textContent='Listen again and see how many numbers you can say before the video does.';
+  vc[1].querySelector('iframe').src='https://www.youtube-nocookie.com/embed/rK_DN-roshk?rel=0';
+  vc[1].querySelector('iframe').title='Chinese Number Practice';
+  vc[2].style.display='none';
+  document.querySelector('.video-finish').querySelector('button').textContent="✓ I'm finished — go to Flashcards";
+  document.getElementById('videoDone').onclick=e=>{e.stopImmediatePropagation();location.href='mandarin-quest-flashcards-autoplay.html?week=2';};
+
+  // Week 2 writing. Keep the number set manageable: new practice 一 二 四 五 六 七,
+  // while 三 八 九 十 were introduced interactively in Week 1.
+  const writingPanel=document.getElementById('writingPanel');
+  writingPanel.innerHTML=`
+    <div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK 2 WRITING</div>
+    <h2>Write Chinese numbers</h2><p>Watch the stroke order first, then trace each character with your finger or mouse. This week adds <b>一、二、四、五、六、七</b> and reviews the number characters from Week 1.</p></div></div>
+    <div class="rule-note"><b>Remember:</b> write from <b>top to bottom</b> and <b>left to right</b>. Say the number aloud while you write it.</div>
+    <div class="char-grid three">
+      ${[['yi','一','yī · one'],['er','二','èr · two'],['si','四','sì · four'],['wu','五','wǔ · five'],['liu','六','liù · six'],['qi','七','qī · seven']].map(x=>`<article class="char-card"><h3>${x[1]}</h3><div class="meta">${x[2]}</div><div class="hanzi-box" id="writer-${x[0]}"></div><div class="write-buttons"><button class="w2-watch" data-key="${x[0]}" data-hanzi="${x[1]}">▶ Watch</button><button class="w2-try quiz-btn" data-key="${x[0]}" data-hanzi="${x[1]}">✍️ Try It</button><button class="w2-reset reset-btn" data-key="${x[0]}" data-hanzi="${x[1]}">↻ Reset</button></div><div class="status" id="status-${x[0]}"></div></article>`).join('')}
+    </div>
+    <div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice the number characters on your writing sheet. Say each number as you write it.</span></div><a class="worksheet-link" href="First%20Semester%20Writing%20Assignments.pdf" target="_blank" rel="noopener">Open writing packet →</a></div>`;
+  let w2writers={};
+  function getWriter(btn){const k=btn.dataset.key,h=btn.dataset.hanzi;if(!w2writers[k])w2writers[k]=HanziWriter.create('writer-'+k,h,{width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250});return w2writers[k];}
+  document.querySelectorAll('.w2-watch').forEach(btn=>btn.onclick=()=>{const w=getWriter(btn);document.getElementById('status-'+btn.dataset.key).textContent='Watch the stroke direction and order.';w.animateCharacter();});
+  document.querySelectorAll('.w2-try').forEach(btn=>btn.onclick=()=>{const w=getWriter(btn),st=document.getElementById('status-'+btn.dataset.key);st.textContent='Your turn! Draw it stroke by stroke.';w.quiz({showHintAfterMisses:2,onComplete:()=>st.textContent='Great job!'});});
+  document.querySelectorAll('.w2-reset').forEach(btn=>btn.onclick=()=>{const w=getWriter(btn);w.cancelQuiz();w.showCharacter();document.getElementById('status-'+btn.dataset.key).textContent='';});
+
+  // Week 2 speaking challenge
+  speakingChallenges.splice(0,speakingChallenges.length,
+    {avatar:'1️⃣',title:'Count with me',cn:'1 · 2 · 3',help:'Say one, two, three in Mandarin.',answer:'一、二、三',audio:'一二三'},
+    {avatar:'🖐️',title:'Keep counting',cn:'4 · 5',help:'Say four and five in Mandarin.',answer:'四、五',audio:'四五'},
+    {avatar:'🔟',title:'Count to ten!',cn:'一 → 十',help:'Try all ten numbers without stopping.',answer:'一、二、三、四、五、六、七、八、九、十',audio:'一二三四五六七八九十'},
+    {avatar:'🍎🍎🍎',title:'How many?',cn:'几个？',help:'Count the apples and answer with the number.',answer:'三个。',audio:'三个'},
+    {avatar:'⭐⭐⭐⭐⭐',title:'How many stars?',cn:'有几个？',help:'Count, then answer aloud.',answer:'五个。',audio:'五个'},
+    {avatar:'❓',title:'Ask the question',cn:'How do you ask “How many?”',help:'Say the Mandarin question.',answer:'几个？',audio:'几个'}
+  );
+  speakingIndex=0;
+  document.querySelector('#speakingPanel .eyebrow').textContent='WEEK 2 SPEAKING';
+  document.querySelector('#speakingPanel h2').textContent='Count it out loud!';
+  document.querySelector('#speakingPanel .writing-intro p').textContent='Count what you see, answer in Mandarin, then check your answer.';
+  document.querySelector('#speakDone h2').textContent='Week 2 speaking challenge complete!';
+  document.querySelector('#speakDone p').textContent='You practiced counting from 1–10 and asking how many.';
+  renderSpeaking();
+
+  // Week 2 cumulative mini-story
+  const week2Story=[
+    {pic:'🐼',zh:'你好！',py:'nǐ hǎo!',en:'Hello!'},
+    {pic:'🍎',zh:'一个。',py:'yí ge.',en:'One.'},
+    {pic:'🍎🍎',zh:'两个。',py:'liǎng ge.',en:'Two.'},
+    {pic:'🍎🍎🍎',zh:'三个。',py:'sān ge.',en:'Three.'},
+    {pic:'❓🍎🍎🍎🍎',zh:'有几个？',py:'yǒu jǐ ge?',en:'How many are there?'},
+    {pic:'🍎🍎🍎🍎',zh:'四个！',py:'sì ge!',en:'Four!'},
+    {pic:'🐼 🔢',zh:'一、二、三、四、五！',py:'yī, èr, sān, sì, wǔ!',en:'One, two, three, four, five!'},
+    {pic:'🐼 👋',zh:'再见！',py:'zàijiàn!',en:'Goodbye!'}
+  ];
+  week1Story.splice(0,week1Story.length,...week2Story); storyIndex=0;
+  document.getElementById('storyTitle').textContent='有几个？';
+  document.querySelector('#storyOverlay .eyebrow').textContent='WEEK 2 STORY';
+  renderStory();
+})();
 </script>
 
 </body>
