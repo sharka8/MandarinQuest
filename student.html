@@ -80,6 +80,28 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
 .story-tools,.story-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}.story-tools button,.story-nav button{border:1px solid var(--line);background:white;border-radius:14px;padding:10px 14px;font-weight:800;color:var(--navy);cursor:pointer}
 .story-nav button.primary{background:var(--navy);color:white;border-color:var(--navy)}.story-progress{height:8px;background:#eee7dc;border-radius:99px;overflow:hidden;margin-top:16px}.story-progress>div{height:100%;background:var(--orange);width:0}.story-count{text-align:center;color:var(--muted);font-size:.82rem;margin-top:7px}
 
+
+/* Week 1 Watch & Learn */
+.video-overlay{position:fixed;inset:0;background:rgba(24,50,74,.72);display:none;place-items:center;padding:18px;z-index:70}
+.video-overlay.open{display:grid}
+.video-modal{width:min(920px,100%);max-height:94vh;overflow:auto;background:var(--paper);border-radius:28px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.22)}
+.video-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+.video-top h2{margin:.15rem 0 0;font-size:1.45rem}
+.video-close{border:1px solid var(--line);background:white;border-radius:12px;padding:8px 12px;font-weight:800;cursor:pointer}
+.video-intro{color:var(--muted);margin:0 0 18px}
+.video-card{background:white;border:1px solid var(--line);border-radius:20px;padding:16px;margin:14px 0}
+.video-card h3{margin:0 0 5px;font-size:1.05rem}.video-card p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+.video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:15px;background:#111}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-finish{display:flex;justify-content:center;margin-top:18px}.video-finish button{border:0;background:var(--navy);color:white;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer}
+@media(max-width:520px){.video-modal{padding:16px}}
+
+
+.video-lesson-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.video-tab{border:1px solid var(--line);background:white;color:var(--navy);border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}
+.video-tab.active{background:var(--navy);color:white;border-color:var(--navy)}
+.video-card{margin-top:0}
+
 </style>
 </head>
 <body>
@@ -105,11 +127,11 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
   </div>
 
   <section class="steps">
-    <div class="step disabled">
-      <div class="step-number">STEP 1</div><div class="icon">🎬</div>
-      <h3>Watch & Learn</h3><p>Meet this week's new Mandarin words and sentences.</p>
-      <div class="action">Video coming soon</div>
-    </div>
+    <button class="step" id="watchStep" type="button" style="text-align:left;color:inherit;font:inherit;cursor:pointer">
+      <div class="step-number">STEP 1</div><div class="icon">🎥</div>
+      <h3>Watch & Learn</h3><p>Learn Chinese sounds and tones, then practice saying hello and introducing yourself.</p>
+      <div class="action">Start Week 1 videos →</div>
+    </button>
 
     <a class="step" href="mandarin-quest-flashcards-autoplay.html">
       <div class="step-number">STEP 2</div><div class="icon">🃏</div>
@@ -234,6 +256,43 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     </section>
   </div>
 
+
+  <div class="video-overlay" id="videoOverlay" aria-hidden="true">
+    <section class="video-modal" role="dialog" aria-modal="true" aria-labelledby="videoTitle">
+      <div class="video-top">
+        <div><div class="eyebrow" style="color:var(--orange)">WEEK 1 · WATCH & LEARN</div><h2 id="videoTitle">Chinese Sounds, Tones & Names</h2></div>
+        <button class="video-close" id="videoClose" aria-label="Close videos">✕ Close</button>
+      </div>
+      <p class="video-intro">Watch these three short lessons in order. You do not need to memorize every sound—listen, imitate, and have fun speaking Chinese.</p>
+
+      <div class="video-lesson-tabs" role="tablist" aria-label="Week 1 videos">
+        <button class="video-tab active" data-video="0">1 · Sounds</button>
+        <button class="video-tab" data-video="1">2 · Tones</button>
+        <button class="video-tab" data-video="2">3 · Names</button>
+      </div>
+
+      <article class="video-card active-video" data-video-card="0">
+        <h3>1 · Chinese Sounds</h3>
+        <p>Listen carefully and copy the sounds you hear.</p>
+        <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/PKu0Hz1LC-A?rel=0" title="Chinese Sounds" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      </article>
+
+      <article class="video-card" data-video-card="1" style="display:none">
+        <h3>2 · The Four Tones</h3>
+        <p>Listen for how the voice moves up and down in Mandarin.</p>
+        <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/b9RPzlRIDEs?rel=0" title="The Four Tones of Chinese" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      </article>
+
+      <article class="video-card" data-video-card="2" style="display:none">
+        <h3>3 · What's Your Name?</h3>
+        <p>Practice 你好、你叫什么名字？ and 我叫… before moving on to your flashcards.</p>
+        <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/hP1NrkNMybo?rel=0" title="What's Your Name in Chinese" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      </article>
+
+      <div class="video-finish"><button id="videoDone">✓ I'm finished — go to Flashcards</button></div>
+    </section>
+  </div>
+
 </main>
 <footer>Mandarin Quest · Learn it. Say it. Use it.</footer>
 <script src="https://unpkg.com/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script>
@@ -322,6 +381,28 @@ sid("storyClose").onclick=()=>{speechSynthesis.cancel();sid("storyOverlay").clas
 sid("storyAudio").onclick=speakStory;sid("storyPinyinBtn").onclick=()=>{storyShowPinyin=!storyShowPinyin;renderStory();};sid("storyEnglishBtn").onclick=()=>{storyShowEnglish=!storyShowEnglish;renderStory();};
 sid("storyPrev").onclick=()=>{if(storyIndex>0){storyIndex--;renderStory();}};sid("storyNext").onclick=()=>{storyIndex=storyIndex===week1Story.length-1?0:storyIndex+1;renderStory();};
 sid("storyOverlay").onclick=e=>{if(e.target===sid("storyOverlay"))sid("storyClose").click();};renderStory();
+</script>
+
+
+<script>
+const watchStep=document.getElementById("watchStep");
+const videoOverlay=document.getElementById("videoOverlay");
+const videoClose=document.getElementById("videoClose");
+if(watchStep && videoOverlay){
+  const videoTabs=[...document.querySelectorAll(".video-tab")];
+  const videoCards=[...document.querySelectorAll("[data-video-card]")];
+  videoTabs.forEach(tab=>tab.addEventListener("click",()=>{
+    const i=tab.dataset.video;
+    videoTabs.forEach(t=>t.classList.toggle("active",t===tab));
+    videoCards.forEach(card=>card.style.display=card.dataset.videoCard===i?"block":"none");
+  }));
+  watchStep.addEventListener("click",()=>{videoOverlay.classList.add("open");videoOverlay.setAttribute("aria-hidden","false");});
+  const closeVideos=()=>{videoOverlay.classList.remove("open");videoOverlay.setAttribute("aria-hidden","true");};
+  videoClose.addEventListener("click",closeVideos);
+  videoOverlay.addEventListener("click",e=>{if(e.target===videoOverlay)closeVideos();});
+  document.getElementById("videoDone").addEventListener("click",()=>{window.location.href="mandarin-quest-flashcards-autoplay.html";});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&videoOverlay.classList.contains("open"))closeVideos();});
+}
 </script>
 
 </body>
