@@ -58,13 +58,6 @@
     .rating button{border-radius:14px;padding:11px 16px}
     .again{background:#fff7e8}.know{background:var(--good)}
     .footer-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:22px}
-    .lesson-nav{margin-bottom:18px}
-    .lesson-nav a{color:var(--ink);font-weight:750;text-decoration:none}
-    .lesson-nav a:hover{text-decoration:underline}
-    .complete{display:none;margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px;text-align:center;box-shadow:0 12px 35px rgba(41,50,58,.06)}
-    .complete h2{margin:0 0 8px;font-size:1.6rem}
-    .complete p{margin:0 0 20px;color:var(--muted)}
-    .continue-btn{display:inline-block;background:var(--ink);color:white;text-decoration:none;border-radius:16px;padding:14px 22px;font-weight:800}
     .start-overlay{
       position:fixed;inset:0;background:rgba(24,50,74,.72);display:grid;
       place-items:center;padding:20px;z-index:20;
@@ -95,11 +88,15 @@
   </div>
 </div>
 <div class="shell">
-  <div class="lesson-nav"><a href="student.html">← Back to My Lesson</a></div>
+  <div style="margin-bottom:10px"><a id="lessonBack" href="student.html?week=1" style="font-weight:800;color:#18324a;text-decoration:none">← Back to My Lesson</a></div>
   <header>
     <div class="brand">MANDARIN <span>QUEST</span></div>
     <div class="settings">
       <select id="weekSelect" aria-label="Choose week"></select>
+      <select id="modeSelect" aria-label="Choose practice mode">
+        <option value="week">This Week</option>
+        <option value="review">Review Everything</option>
+      </select>
       <button id="scriptBtn" title="Switch between Simplified and Traditional">简体</button>
       <button id="pinyinBtn">Pinyin: Off</button>
       <button id="englishBtn">English: Off</button>
@@ -138,11 +135,6 @@
   </div>
 
   <div class="footer-note">Listen first. Say it aloud. Then flip the card.</div>
-  <section class="complete" id="completeBox" aria-live="polite">
-    <h2>🎉 Great job! Flashcards complete.</h2>
-    <p>You practiced this week's Mandarin words.</p>
-    <a class="continue-btn" href="student.html#writing">Next: ✏️ Chinese Writing →</a>
-  </section>
 </div>
 
 <script>
@@ -164,13 +156,137 @@ const course = {
       {type:"Answer", s:"我叫___。", t:"我叫___。", p:"wǒ jiào ___.", e:"My name is ___.", icon:"🙂"},
       {type:"Goodbye", s:"再见", t:"再見", p:"zàijiàn", e:"goodbye", icon:"👋"}
     ]
+  },
+  2: {
+    title: "Week 2 · Numbers",
+    goal: "Count from 1–10 and ask how many.",
+    cards: [
+      {type:"Number",s:"一",t:"一",p:"yī",e:"one",icon:"1️⃣"},
+      {type:"Number",s:"二",t:"二",p:"èr",e:"two",icon:"2️⃣"},
+      {type:"Number",s:"三",t:"三",p:"sān",e:"three",icon:"3️⃣"},
+      {type:"Number",s:"四",t:"四",p:"sì",e:"four",icon:"4️⃣"},
+      {type:"Number",s:"五",t:"五",p:"wǔ",e:"five",icon:"5️⃣"},
+      {type:"Number",s:"六",t:"六",p:"liù",e:"six",icon:"6️⃣"},
+      {type:"Number",s:"七",t:"七",p:"qī",e:"seven",icon:"7️⃣"},
+      {type:"Number",s:"八",t:"八",p:"bā",e:"eight",icon:"8️⃣"},
+      {type:"Number",s:"九",t:"九",p:"jiǔ",e:"nine",icon:"9️⃣"},
+      {type:"Number",s:"十",t:"十",p:"shí",e:"ten",icon:"🔟"},
+      {type:"Question",s:"几个？",t:"幾個？",p:"jǐ ge?",e:"how many?",icon:"❓"},
+      {type:"Question",s:"有几个？",t:"有幾個？",p:"yǒu jǐ ge?",e:"How many are there?",icon:"🔢"}
+    ]
+  },
+  3: {
+    title: "Week 3 · Animals",
+    goal: "Name animals and say what something is or isn't.",
+    cards: [
+      {type:"Animal",s:"猫",t:"貓",p:"māo",e:"cat",icon:"🐱"},
+      {type:"Animal",s:"狗",t:"狗",p:"gǒu",e:"dog",icon:"🐶"},
+      {type:"Animal",s:"鸟",t:"鳥",p:"niǎo",e:"bird",icon:"🐦"},
+      {type:"Animal",s:"兔子",t:"兔子",p:"tùzi",e:"rabbit",icon:"🐰"},
+      {type:"Animal",s:"鱼",t:"魚",p:"yú",e:"fish",icon:"🐟"},
+      {type:"Animal",s:"乌龟",t:"烏龜",p:"wūguī",e:"turtle",icon:"🐢"},
+      {type:"Word",s:"是",t:"是",p:"shì",e:"is / am / are",icon:"✓"},
+      {type:"Word",s:"不是",t:"不是",p:"bú shì",e:"is not / am not / are not",icon:"✗"},
+      {type:"Question",s:"这是什么？",t:"這是什麼？",p:"zhè shì shénme?",e:"What is this?",icon:"❓"},
+      {type:"Sentence",s:"这是猫。",t:"這是貓。",p:"zhè shì māo.",e:"This is a cat.",icon:"🐱"}
+    ]
+  },
+  4: {
+    title: "Week 4 · How Old?",
+    goal: "Ask someone's age and tell your age.",
+    cards: [
+      {type:"Word",s:"岁",t:"歲",p:"suì",e:"years old",icon:"🎂"},
+      {type:"Question",s:"几岁？",t:"幾歲？",p:"jǐ suì?",e:"how old?",icon:"🎈"},
+      {type:"Question",s:"你几岁？",t:"你幾歲？",p:"nǐ jǐ suì?",e:"How old are you?",icon:"❓"},
+      {type:"Answer",s:"我五岁。",t:"我五歲。",p:"wǒ wǔ suì.",e:"I'm five years old.",icon:"5️⃣"},
+      {type:"Answer",s:"我六岁。",t:"我六歲。",p:"wǒ liù suì.",e:"I'm six years old.",icon:"6️⃣"},
+      {type:"Answer",s:"我七岁。",t:"我七歲。",p:"wǒ qī suì.",e:"I'm seven years old.",icon:"7️⃣"},
+      {type:"Answer",s:"我八岁。",t:"我八歲。",p:"wǒ bā suì.",e:"I'm eight years old.",icon:"8️⃣"},
+      {type:"Mini intro",s:"我叫___。我___岁。",t:"我叫___。我___歲。",p:"wǒ jiào ___. wǒ ___ suì.",e:"My name is ___. I'm ___ years old.",icon:"🙂"}
+    ]
+  },
+  5: {
+    title: "Week 5 · Colors",
+    goal: "Name red, yellow, and blue and ask what color something is.",
+    cards: [
+      {type:"Color",s:"红色",t:"紅色",p:"hóngsè",e:"red",icon:"🔴"},
+      {type:"Color",s:"黄色",t:"黃色",p:"huángsè",e:"yellow",icon:"🟡"},
+      {type:"Color",s:"蓝色",t:"藍色",p:"lánsè",e:"blue",icon:"🔵"},
+      {type:"Word",s:"颜色",t:"顏色",p:"yánsè",e:"color",icon:"🎨"},
+      {type:"Question",s:"什么颜色？",t:"什麼顏色？",p:"shénme yánsè?",e:"What color?",icon:"❓"},
+      {type:"Sentence",s:"红色的猫",t:"紅色的貓",p:"hóngsè de māo",e:"a red cat",icon:"🐱"},
+      {type:"Sentence",s:"蓝色的鸟",t:"藍色的鳥",p:"lánsè de niǎo",e:"a blue bird",icon:"🐦"}
+    ]
+  },
+  6: {
+    title: "Week 6 · More Colors",
+    goal: "Add more colors and use them to describe familiar things.",
+    cards: [
+      {type:"Color",s:"绿色",t:"綠色",p:"lǜsè",e:"green",icon:"🟢"},
+      {type:"Color",s:"紫色",t:"紫色",p:"zǐsè",e:"purple",icon:"🟣"},
+      {type:"Color",s:"橙色",t:"橙色",p:"chéngsè",e:"orange",icon:"🟠"},
+      {type:"Color",s:"粉色",t:"粉色",p:"fěnsè",e:"pink",icon:"🌸"},
+      {type:"Color",s:"黑色",t:"黑色",p:"hēisè",e:"black",icon:"⚫"},
+      {type:"Color",s:"白色",t:"白色",p:"báisè",e:"white",icon:"⚪"},
+      {type:"Color",s:"灰色",t:"灰色",p:"huīsè",e:"gray",icon:"🌫️"},
+      {type:"Color",s:"棕色",t:"棕色",p:"zōngsè",e:"brown",icon:"🟤"},
+      {type:"Question",s:"它是什么颜色？",t:"它是什麼顏色？",p:"tā shì shénme yánsè?",e:"What color is it?",icon:"❓"}
+    ]
+  },
+  7: {
+    title: "Week 7 · How Are You? & Likes",
+    goal: "Ask how someone is and talk about favorite colors.",
+    cards: [
+      {type:"Question",s:"你好吗？",t:"你好嗎？",p:"nǐ hǎo ma?",e:"How are you?",icon:"🙂"},
+      {type:"Answer",s:"我很好。",t:"我很好。",p:"wǒ hěn hǎo.",e:"I'm very well.",icon:"😊"},
+      {type:"Question",s:"好不好？",t:"好不好？",p:"hǎo bu hǎo?",e:"Is it good? / Okay?",icon:"👍"},
+      {type:"Word",s:"喜欢",t:"喜歡",p:"xǐhuan",e:"to like",icon:"❤️"},
+      {type:"Word",s:"不喜欢",t:"不喜歡",p:"bù xǐhuan",e:"don't like",icon:"💔"},
+      {type:"Question",s:"你喜欢什么颜色？",t:"你喜歡什麼顏色？",p:"nǐ xǐhuan shénme yánsè?",e:"What color do you like?",icon:"🎨"},
+      {type:"Answer",s:"我喜欢蓝色。",t:"我喜歡藍色。",p:"wǒ xǐhuan lánsè.",e:"I like blue.",icon:"🔵"},
+      {type:"Word",s:"他",t:"他",p:"tā",e:"he / him",icon:"👦"},
+      {type:"Word",s:"她",t:"她",p:"tā",e:"she / her",icon:"👧"}
+    ]
+  },
+  8: {
+    title: "Week 8 · All About Me",
+    goal: "Put names, age, colors, animals, and likes together.",
+    cards: [
+      {type:"Question",s:"你叫什么名字？",t:"你叫什麼名字？",p:"nǐ jiào shénme míngzi?",e:"What's your name?",icon:"❓"},
+      {type:"Answer",s:"我叫___。",t:"我叫___。",p:"wǒ jiào ___.",e:"My name is ___.",icon:"🙂"},
+      {type:"Question",s:"你几岁？",t:"你幾歲？",p:"nǐ jǐ suì?",e:"How old are you?",icon:"🎂"},
+      {type:"Answer",s:"我___岁。",t:"我___歲。",p:"wǒ ___ suì.",e:"I'm ___ years old.",icon:"🎈"},
+      {type:"Question",s:"你喜欢什么颜色？",t:"你喜歡什麼顏色？",p:"nǐ xǐhuan shénme yánsè?",e:"What color do you like?",icon:"🎨"},
+      {type:"Answer",s:"我喜欢___色。",t:"我喜歡___色。",p:"wǒ xǐhuan ___ sè.",e:"I like ___.",icon:"❤️"},
+      {type:"Question",s:"这是什么？",t:"這是什麼？",p:"zhè shì shénme?",e:"What is this?",icon:"❓"},
+      {type:"Sentence",s:"这是兔子。",t:"這是兔子。",p:"zhè shì tùzi.",e:"This is a rabbit.",icon:"🐰"},
+      {type:"Question",s:"有几个？",t:"有幾個？",p:"yǒu jǐ ge?",e:"How many are there?",icon:"🔢"},
+      {type:"Mini intro",s:"你好！我叫___。我___岁。",t:"你好！我叫___。我___歲。",p:"nǐ hǎo! wǒ jiào ___. wǒ ___ suì.",e:"Hello! My name is ___. I'm ___ years old.",icon:"👋"}
+    ]
   }
 };
 
-let week = 1, index = 0, flipped = false;
+let week = Math.min(8, Math.max(1, Number(new URLSearchParams(location.search).get("week")) || 1)), index = 0, flipped = false;
 let traditional = false, showPinyin = false, showEnglish = false;
 let practiceAgain = [];
 let audioUnlocked = false;
+let mode = "week";
+let reviewCards = [];
+
+function buildReviewCards(){
+  reviewCards = [];
+  for(let w=1; w<=week; w++){
+    course[w].cards.forEach(c => reviewCards.push(c));
+  }
+  // Shuffle cumulative review so retrieval is mixed.
+  for(let i=reviewCards.length-1; i>0; i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [reviewCards[i],reviewCards[j]]=[reviewCards[j],reviewCards[i]];
+  }
+}
+function activeCards(){
+  return mode === "review" ? reviewCards : course[week].cards;
+}
 
 const $ = id => document.getElementById(id);
 const weekSelect = $("weekSelect");
@@ -181,26 +297,25 @@ Object.keys(course).forEach(w => {
   weekSelect.appendChild(opt);
 });
 
-function currentCard(){ return course[week].cards[index]; }
+function currentCard(){ return activeCards()[index]; }
 
 function render(){
-  const set = course[week], c = currentCard();
-  $("weekTitle").textContent = set.title + " Flashcards";
-  $("weekGoal").textContent = set.goal;
+  const set = course[week], c = currentCard(), cards = activeCards();
+  $("weekTitle").textContent = mode === "review" ? `Review Through ${set.title}` : set.title + " Flashcards";
+  $("weekGoal").textContent = mode === "review" ? `Mixed review from Weeks 1–${week}.` : set.goal;
   $("type").textContent = c.type;
   $("visual").textContent = c.icon || "";
   $("hanzi").textContent = traditional ? c.t : c.s;
   $("pinyin").textContent = (showPinyin || flipped) ? c.p : "";
   $("english").textContent = (showEnglish || flipped) ? c.e : "";
   $("hint").textContent = flipped ? "Say it one more time before moving on." : "Tap the card to reveal the meaning";
-  $("count").textContent = `${index+1} / ${set.cards.length}`;
-  $("bar").style.width = `${((index+1)/set.cards.length)*100}%`;
+  $("count").textContent = `${index+1} / ${cards.length}`;
+  $("bar").style.width = `${((index+1)/cards.length)*100}%`;
   $("scriptBtn").textContent = traditional ? "繁體" : "简体";
   $("pinyinBtn").textContent = `Pinyin: ${showPinyin ? "On" : "Off"}`;
   $("englishBtn").textContent = `English: ${showEnglish ? "On" : "Off"}`;
   $("pinyinBtn").classList.toggle("active", showPinyin);
   $("englishBtn").classList.toggle("active", showEnglish);
-  $("nextBtn").textContent = index === set.cards.length - 1 ? "Finish →" : "Next →";
 }
 
 function speak(){
@@ -218,19 +333,10 @@ function speak(){
   speechSynthesis.speak(u);
 }
 
-function finishFlashcards(){
-  $("completeBox").style.display = "block";
-  $("completeBox").scrollIntoView({behavior:"smooth", block:"center"});
-}
 function move(delta){
-  const n = course[week].cards.length;
-  if(delta > 0 && index === n - 1){
-    finishFlashcards();
-    return;
-  }
+  const n = activeCards().length;
   index = (index + delta + n) % n;
   flipped = false;
-  $("completeBox").style.display = "none";
   render();
   if(audioUnlocked) setTimeout(speak, 120);
 }
@@ -250,8 +356,19 @@ $("againBtn").addEventListener("click", ()=>{
 $("knowBtn").addEventListener("click", ()=>move(1));
 weekSelect.addEventListener("change", e=>{
   week=Number(e.target.value);
+  $("lessonBack").href = "student.html?week=" + week;
+  history.replaceState(null,"",location.pathname+"?week="+week);
   index=0;
   flipped=false;
+  if(mode === "review") buildReviewCards();
+  render();
+  if(audioUnlocked) setTimeout(speak, 120);
+});
+$("modeSelect").addEventListener("change", e=>{
+  mode=e.target.value;
+  index=0;
+  flipped=false;
+  if(mode === "review") buildReviewCards();
   render();
   if(audioUnlocked) setTimeout(speak, 120);
 });
@@ -267,6 +384,9 @@ document.addEventListener("keydown", e=>{
   if(e.key===" "){e.preventDefault();flip();}
   if(e.key.toLowerCase()==="a") speak();
 });
+weekSelect.value = String(week);
+$("lessonBack").href = "student.html?week=" + week;
+buildReviewCards();
 render();
 </script>
 </body>
