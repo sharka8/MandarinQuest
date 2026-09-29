@@ -592,7 +592,7 @@ if(requestedWeek===1) selectWeek(1);
   steps[0].querySelector('.action').textContent='Start Week 3 videos →';
   steps[1].href='mandarin-quest-flashcards-autoplay.html?week=3';
   steps[1].querySelector('p').textContent="Listen, repeat, and practice this week's animals and sentence patterns.";
-  steps[2].querySelector('p').textContent='Keep building Chinese writing skills with simple, high-value characters.';
+  steps[2].querySelector('p').textContent='Practice writing just two useful characters: 是 and 不.';
   steps[3].querySelector('p').textContent='Look at an animal, listen to the question, and answer aloud in Mandarin.';
   steps[4].querySelector('p').textContent='Read and listen to an animal story using 这是什么动物？ and 是 / 不是.';
 
@@ -613,6 +613,23 @@ if(requestedWeek===1) selectWeek(1);
   });
   document.querySelector('.video-finish').querySelector('button').textContent="✓ I'm finished — go to Flashcards";
   document.getElementById('videoDone').onclick=e=>{e.stopImmediatePropagation();location.href='mandarin-quest-flashcards-autoplay.html?week=3';};
+
+  // Week 3 writing: only 是 and 不. Keep handwriting intentionally lighter than oral vocabulary.
+  writersReady=true;
+  const writingPanel=document.getElementById('writingPanel');
+  writingPanel.innerHTML=`
+    <div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK 3 WRITING</div>
+    <h2>Write 是 and 不</h2><p>This week has just two new writing characters. Watch the stroke order, trace each one, then connect them to the spoken pattern <b>是 / 不是</b>.</p></div></div>
+    <div class="rule-note"><b>Keep it simple:</b> animal words such as 猫、狗、鸟 and 兔子 are for listening, speaking, and reading this week - you do not need to write them yet.</div>
+    <div class="char-grid">
+      ${[['shi','是','shì · is / yes'],['bu','不','bù · not']].map(x=>`<article class="char-card"><h3>${x[1]}</h3><div class="meta">${x[2]}</div><div class="hanzi-box" id="writer-w3-${x[0]}"></div><div class="write-buttons"><button class="w3-watch" data-key="${x[0]}" data-hanzi="${x[1]}">▶ Watch</button><button class="w3-try quiz-btn" data-key="${x[0]}" data-hanzi="${x[1]}">✍️ Try It</button><button class="w3-reset reset-btn" data-key="${x[0]}" data-hanzi="${x[1]}">↻ Reset</button></div><div class="status" id="status-w3-${x[0]}"></div></article>`).join('')}
+    </div>
+    <div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Trace and write 是 and 不, then practice recognizing 是 / 不是.</span></div><a class="worksheet-link" href="Mandarin_Quest_Week_3_Shi_Bu_Writing.pdf" target="_blank" rel="noopener">Open writing sheet →</a></div>`;
+  let w3writers={};
+  function getW3Writer(btn){const k=btn.dataset.key,h=btn.dataset.hanzi;if(!w3writers[k])w3writers[k]=HanziWriter.create('writer-w3-'+k,h,{width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250});return w3writers[k];}
+  document.querySelectorAll('.w3-watch').forEach(btn=>btn.onclick=()=>{const w=getW3Writer(btn);document.getElementById('status-w3-'+btn.dataset.key).textContent='Watch the stroke direction and order.';w.animateCharacter();});
+  document.querySelectorAll('.w3-try').forEach(btn=>btn.onclick=()=>{const w=getW3Writer(btn),st=document.getElementById('status-w3-'+btn.dataset.key);st.textContent='Your turn! Draw it stroke by stroke.';w.quiz({showHintAfterMisses:2,onComplete:()=>st.textContent='Great job!'});});
+  document.querySelectorAll('.w3-reset').forEach(btn=>btn.onclick=()=>{const w=getW3Writer(btn);w.cancelQuiz();w.showCharacter();document.getElementById('status-w3-'+btn.dataset.key).textContent='';});
 
   // Speaking Challenge: audio-first, so beginning readers do not need to read the prompt.
   speakingChallenges.splice(0,speakingChallenges.length,
@@ -665,6 +682,88 @@ if(requestedWeek===1) selectWeek(1);
   });
   // Re-sort dictionary keys so longer phrases are matched before single characters.
   dictKeys.splice(0,dictKeys.length,...Object.keys(storyDictionary).sort((a,b)=>b.length-a.length));
+})();
+</script>
+
+
+<script>
+/* Week 3 writing safety patch: ensures ?week=3 can never fall back to Week 1 markup. */
+(function(){
+  const requested = Number(new URLSearchParams(location.search).get('week')) || 1;
+  if(requested !== 3) return;
+
+  const panel = document.getElementById('writingPanel');
+  const step = document.getElementById('writingStep');
+  if(!panel || !step) return;
+
+  function renderWeek3Writing(){
+    if(panel.dataset.week3Ready === '1') return;
+    panel.dataset.week3Ready='1';
+    panel.setAttribute('aria-label','Week 3 Chinese writing practice');
+    panel.innerHTML=`
+      <div class="writing-intro">
+        <div>
+          <div class="eyebrow" style="color:var(--orange)">WEEK 3 WRITING</div>
+          <h2>Write 是 and 不</h2>
+          <p>This week has only two writing characters. Watch the stroke order, then try writing each one yourself.</p>
+        </div>
+      </div>
+      <div class="rule-note"><b>Keep it simple:</b> animal words such as 猫、狗、鸟 and 兔子 are for listening, speaking, and reading this week. You do not need to write them yet.</div>
+      <div class="char-grid">
+        <article class="char-card">
+          <h3>是</h3><div class="meta">shì · is / yes</div>
+          <div class="hanzi-box" id="writer-w3-shi"></div>
+          <div class="write-buttons">
+            <button class="w3f-watch" data-key="shi" data-hanzi="是">▶ Watch</button>
+            <button class="w3f-try quiz-btn" data-key="shi" data-hanzi="是">✍️ Try It</button>
+            <button class="w3f-reset reset-btn" data-key="shi" data-hanzi="是">↻ Reset</button>
+          </div>
+          <div class="status" id="status-w3f-shi"></div>
+        </article>
+        <article class="char-card">
+          <h3>不</h3><div class="meta">bù · not</div>
+          <div class="hanzi-box" id="writer-w3-bu"></div>
+          <div class="write-buttons">
+            <button class="w3f-watch" data-key="bu" data-hanzi="不">▶ Watch</button>
+            <button class="w3f-try quiz-btn" data-key="bu" data-hanzi="不">✍️ Try It</button>
+            <button class="w3f-reset reset-btn" data-key="bu" data-hanzi="不">↻ Reset</button>
+          </div>
+          <div class="status" id="status-w3f-bu"></div>
+        </article>
+      </div>
+      <div class="worksheet-row">
+        <div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Trace and write 是 and 不, then practice recognizing 是 / 不是.</span></div>
+        <a class="worksheet-link" href="Mandarin_Quest_Week_3_Shi_Bu_Writing.pdf" target="_blank" rel="noopener">Open writing sheet →</a>
+      </div>`;
+
+    const ws={};
+    function getWriter(btn){
+      const k=btn.dataset.key, h=btn.dataset.hanzi;
+      if(!ws[k]) ws[k]=HanziWriter.create('writer-w3-'+k,h,{
+        width:180,height:180,padding:12,showOutline:true,
+        strokeAnimationSpeed:1,delayBetweenStrokes:250
+      });
+      return ws[k];
+    }
+    panel.querySelectorAll('.w3f-watch').forEach(btn=>btn.onclick=()=>{
+      const w=getWriter(btn), st=document.getElementById('status-w3f-'+btn.dataset.key);
+      st.textContent='Watch the stroke direction and order.'; w.animateCharacter();
+    });
+    panel.querySelectorAll('.w3f-try').forEach(btn=>btn.onclick=e=>{
+      e.stopImmediatePropagation();
+      const w=getWriter(btn), st=document.getElementById('status-w3f-'+btn.dataset.key);
+      st.textContent='Your turn! Draw it stroke by stroke.';
+      w.quiz({showHintAfterMisses:2,onComplete:()=>st.textContent='Great job!'});
+    });
+    panel.querySelectorAll('.w3f-reset').forEach(btn=>btn.onclick=e=>{
+      e.stopImmediatePropagation();
+      const w=getWriter(btn); w.cancelQuiz(); w.showCharacter();
+      document.getElementById('status-w3f-'+btn.dataset.key).textContent='';
+    });
+  }
+
+  renderWeek3Writing();
+  step.addEventListener('click',renderWeek3Writing,true);
 })();
 </script>
 
