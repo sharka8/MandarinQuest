@@ -423,7 +423,7 @@ const courseWeeks={
   1:{title:'你好！Ready for Week 1?',goal:"This week you'll learn to say hello, ask someone's name, and tell them your name.",ready:true},
   2:{title:'一、二、三！Ready for Week 2?',goal:"This week you'll count from 1–10 and ask how many.",ready:true},
   3:{title:'动物！Ready for Week 3?',goal:"This week you'll identify animals, ask what an animal is, and practice 是 / 不是 / 是不是.",ready:true},
-  4:{title:'你几岁？Ready for Week 4?',goal:"This week you'll ask and tell how old someone is.",ready:false},
+  4:{title:'你几岁？Ready for Week 4?',goal:"This week you'll ask and tell how old someone is, then introduce yourself with your name and age.",ready:true},
   5:{title:'什么颜色？Ready for Week 5?',goal:"This week you'll learn basic colors and describe things.",ready:false},
   6:{title:'更多颜色！Ready for Week 6?',goal:"This week you'll add more colors and keep building descriptions.",ready:false},
   7:{title:'你好吗？Ready for Week 7?',goal:"This week you'll talk about how you are and what you like.",ready:false},
@@ -459,8 +459,8 @@ if(requestedWeek===1) selectWeek(1);
     btn.addEventListener('click',e=>{
       e.preventDefault(); e.stopImmediatePropagation();
       const n=Number(btn.dataset.week);
-      if(n<=3) location.href=location.pathname+'?week='+n;
-      else alert('Week '+n+' is coming next. Weeks 1–3 are ready now.');
+      if(n<=4) location.href=location.pathname+'?week='+n;
+      else alert('Week '+n+' is coming next. Weeks 1–4 are ready now.');
     },true);
   });
 
@@ -764,6 +764,90 @@ if(requestedWeek===1) selectWeek(1);
 
   renderWeek3Writing();
   step.addEventListener('click',renderWeek3Writing,true);
+})();
+</script>
+
+
+<script>
+// Week 4: Age + self-introduction
+(function(){
+  const requested=Math.min(8,Math.max(1,Number(new URLSearchParams(location.search).get('week'))||1));
+  if(requested!==4) return;
+
+  document.getElementById('weekHeroTitle').textContent='你几岁？Ready for Week 4?';
+  document.getElementById('weekHeroText').textContent="This week you'll ask and tell how old someone is, then introduce yourself with your name and age.";
+  document.querySelectorAll('.week').forEach(btn=>{btn.classList.toggle('current',Number(btn.dataset.week)===4);const b=btn.querySelector('.badge');if(b)b.remove();});
+  const active=document.querySelector('.week[data-week="4"]');
+  if(active){const b=document.createElement('span');b.className='badge';b.textContent='Current quest';active.appendChild(b);}
+
+  const steps=[...document.querySelectorAll('.steps .step')];
+  steps[0].querySelector('p').textContent='Learn to ask 你几岁？ and answer with 我___岁。';
+  steps[0].querySelector('.action').textContent='Start Week 4 videos →';
+  steps[1].href='mandarin-quest-flashcards-autoplay.html?week=4';
+  steps[1].querySelector('p').textContent="Practice 岁, 几岁？, 你几岁？ and age-answer chunks.";
+  steps[2].querySelector('p').textContent='Learn to write 几 and 岁, then read 几岁？ and familiar ages.';
+  steps[3].querySelector('p').textContent='Listen to age questions and answer aloud in Mandarin.';
+  steps[4].querySelector('p').textContent='Read and listen to 《你几岁？》 and meet friends of different ages.';
+
+  // Videos supplied for Week 4.
+  document.querySelector('#videoOverlay .eyebrow').textContent='WEEK 4 · WATCH & LEARN';
+  document.getElementById('videoTitle').textContent='Age & Self-Introduction';
+  document.querySelector('.video-intro').textContent='Watch the lessons in order. Listen for 你几岁？ and practice answering with 我___岁。';
+  const vc=[...document.querySelectorAll('.video-card')];
+  const vids=[
+    {title:'1 · How Old Are You?',desc:'Listen for the age question and practice answering aloud.',id:'aoXCzhs9BA0'},
+    {title:'2 · Age Practice',desc:'Keep practicing age questions and answers in Mandarin.',id:'z-6vgbyiBE0'},
+    {title:'3 · Practice What You Learned',desc:'Answer along and use your name and age together.',id:'FOCMhcDwgpg'}
+  ];
+  vc.forEach((card,i)=>{if(i>=vids.length){card.style.display='none';return;}const v=vids[i];card.style.display='block';card.querySelector('h3').textContent=v.title;card.querySelector('p').textContent=v.desc;const f=card.querySelector('iframe');f.src=`https://www.youtube-nocookie.com/embed/${v.id}?rel=0`;f.title=v.title;});
+  document.querySelector('.video-finish button').textContent="✓ I'm finished — go to Flashcards";
+  document.getElementById('videoDone').onclick=e=>{e.stopImmediatePropagation();location.href='mandarin-quest-flashcards-autoplay.html?week=4';};
+
+  // Writing: 几 + 岁
+  writersReady=true;
+  const panel=document.getElementById('writingPanel');
+  panel.innerHTML=`
+    <div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK 4 WRITING</div>
+    <h2>Write 几 and 岁</h2><p>These two characters make this week's key question: <b>几岁？</b></p></div></div>
+    <div class="rule-note"><b>Connect it to what you say:</b> 几岁？ means “how old?” After writing the new characters, read ages such as 五岁、六岁、七岁 and 八岁.</div>
+    <div class="char-grid">
+      ${[['ji','几','jǐ · how many / how old'],['sui','岁','suì · years old']].map(x=>`<article class="char-card"><h3>${x[1]}</h3><div class="meta">${x[2]}</div><div class="hanzi-box" id="writer-w4-${x[0]}"></div><div class="write-buttons"><button class="w4-watch" data-key="${x[0]}" data-hanzi="${x[1]}">▶ Watch</button><button class="w4-try quiz-btn" data-key="${x[0]}" data-hanzi="${x[1]}">✍️ Try It</button><button class="w4-reset reset-btn" data-key="${x[0]}" data-hanzi="${x[1]}">↻ Reset</button></div><div class="status" id="status-w4-${x[0]}"></div></article>`).join('')}
+    </div>
+    <div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Trace and write 几 and 岁, then read 几岁？ and familiar ages.</span></div><a class="worksheet-link" href="Mandarin_Quest_Week_4_Ji_Sui_Writing.pdf" target="_blank" rel="noopener">Open writing sheet →</a></div>`;
+  const writers={};
+  function writer(btn){const k=btn.dataset.key,h=btn.dataset.hanzi;if(!writers[k])writers[k]=HanziWriter.create('writer-w4-'+k,h,{width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250});return writers[k];}
+  panel.querySelectorAll('.w4-watch').forEach(btn=>btn.onclick=()=>{const w=writer(btn);document.getElementById('status-w4-'+btn.dataset.key).textContent='Watch the stroke direction and order.';w.animateCharacter();});
+  panel.querySelectorAll('.w4-try').forEach(btn=>btn.onclick=e=>{e.stopImmediatePropagation();const w=writer(btn),st=document.getElementById('status-w4-'+btn.dataset.key);st.textContent='Your turn! Draw it stroke by stroke.';w.quiz({showHintAfterMisses:2,onComplete:()=>st.textContent='Great job!'});});
+  panel.querySelectorAll('.w4-reset').forEach(btn=>btn.onclick=e=>{e.stopImmediatePropagation();const w=writer(btn);w.cancelQuiz();w.showCharacter();document.getElementById('status-w4-'+btn.dataset.key).textContent='';});
+
+  speakingChallenges.splice(0,speakingChallenges.length,
+    {avatar:'🎂',title:'How old?',cn:'5️⃣ 🎂',help:'Listen, then answer in a full sentence.',answer:'我五岁。',promptAudio:'你几岁？',answerAudio:'我五岁。'},
+    {avatar:'🎂',title:'How old?',cn:'6️⃣ 🎂',help:'Listen, then answer aloud.',answer:'我六岁。',promptAudio:'你几岁？',answerAudio:'我六岁。'},
+    {avatar:'🎂',title:'How old?',cn:'7️⃣ 🎂',help:'Listen, then answer aloud.',answer:'我七岁。',promptAudio:'你几岁？',answerAudio:'我七岁。'},
+    {avatar:'🎂',title:'How old?',cn:'8️⃣ 🎂',help:'Listen, then answer aloud.',answer:'我八岁。',promptAudio:'你几岁？',answerAudio:'我八岁。'},
+    {avatar:'👧',title:'Ask the question',cn:'👧 ❓ 🎂',help:'Ask the girl how old she is.',answer:'你几岁？',promptAudio:'问她几岁。',answerAudio:'你几岁？'},
+    {avatar:'⭐',title:'Tell about yourself',cn:'🙋',help:'Say your own name and age.',answer:'我叫___。我___岁。',promptAudio:'你叫什么名字？你几岁？',answerAudio:'我叫小美。我七岁。'}
+  );
+  speakingIndex=0;renderSpeaking();
+
+  const story=[
+    {pic:'🐼 👋',zh:'你好！我叫小熊猫。',py:'Nǐ hǎo! Wǒ jiào Xiǎo Xióngmāo.',en:'Hello! My name is Little Panda.'},
+    {pic:'🐰',zh:'你好！我叫小兔。',py:'Nǐ hǎo! Wǒ jiào Xiǎo Tù.',en:'Hello! My name is Little Rabbit.'},
+    {pic:'🐼 ❓ 🐰',zh:'小兔，你几岁？',py:'Xiǎo Tù, nǐ jǐ suì?',en:'Little Rabbit, how old are you?'},
+    {pic:'🐰 6️⃣',zh:'我六岁。',py:'Wǒ liù suì.',en:'I am six years old.'},
+    {pic:'🐰 ❓ 🐼',zh:'你几岁？',py:'Nǐ jǐ suì?',en:'How old are you?'},
+    {pic:'🐼 7️⃣',zh:'我七岁。',py:'Wǒ qī suì.',en:'I am seven years old.'},
+    {pic:'🐶 👋',zh:'你好！我叫小狗。',py:'Nǐ hǎo! Wǒ jiào Xiǎo Gǒu.',en:'Hello! My name is Little Dog.'},
+    {pic:'🐼 ❓ 🐶',zh:'你几岁？',py:'Nǐ jǐ suì?',en:'How old are you?'},
+    {pic:'🐶 8️⃣',zh:'我八岁。',py:'Wǒ bā suì.',en:'I am eight years old.'},
+    {pic:'🐼 🐰 🐶 👋',zh:'再见！',py:'Zàijiàn!',en:'Goodbye!'}
+  ];
+  week1Story.splice(0,week1Story.length,...story);storyIndex=0;
+  document.getElementById('storyTitle').textContent='你几岁？';
+  document.querySelector('#storyOverlay .eyebrow').textContent='WEEK 4 STORY';
+  Object.assign(storyDictionary,{'你几岁':{py:'nǐ jǐ suì',en:'how old are you?'},'几岁':{py:'jǐ suì',en:'how old?'},'岁':{py:'suì',en:'years old'},'六岁':{py:'liù suì',en:'six years old'},'七岁':{py:'qī suì',en:'seven years old'},'八岁':{py:'bā suì',en:'eight years old'}});
+  dictKeys.splice(0,dictKeys.length,...Object.keys(storyDictionary).sort((a,b)=>b.length-a.length));
+  renderStory();
 })();
 </script>
 
