@@ -135,6 +135,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
 }
 </style>
 
+<style>
+.quest-inline-next{display:flex;justify-content:center;margin:22px 0 8px}
+.quest-inline-next button,#speakingNextBtn{border:0;border-radius:999px;padding:13px 22px;background:#18324a;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -196,7 +200,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     </div>
   </section>
 
-  <section class="writing-panel" id="writingPanel" aria-label="Week 1 Chinese writing practice">
+  <section class="writing-panel" id="writingPanel" data-quest-anchor="writing" aria-label="Week 1 Chinese writing practice">
     <div class="writing-intro">
       <div>
         <div class="eyebrow" style="color:var(--orange)">WEEK 1 WRITING</div>
@@ -244,7 +248,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     </div>
   </section>
 
-  <section class="speaking-panel" id="speakingPanel" aria-label="Week 1 speaking challenge">
+  <section class="speaking-panel" id="speakingPanel" data-quest-anchor="speaking" aria-label="Week 1 speaking challenge">
     <div class="writing-intro">
       <div><div class="eyebrow" style="color:var(--orange)">WEEK 1 SPEAKING</div><h2>Say it out loud!</h2><p>Listen to each challenge, answer in Mandarin, then check your answer. No typing needed.</p></div>
     </div>
@@ -255,7 +259,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
       <div class="challenge-answer" id="challengeAnswer"></div>
       <div class="speak-controls"><button class="listen-btn" id="listenChallenge">🔊 Listen</button><button class="answer-btn" id="showAnswer">✓ Check answer</button><button class="next-challenge" id="nextChallenge">Next →</button></div>
     </div>
-    <div class="speak-done" id="speakDone"><div class="big">🌟</div><h2>Week 1 speaking challenge complete!</h2><p>You practiced saying hello, asking and answering names, and saying goodbye.</p><button class="next-challenge" id="restartChallenge">Practice again</button></div>
+    <div class="speak-done" id="speakDone"><div class="big">🌟</div><h2>Week 1 speaking challenge complete!</h2><p>You practiced saying hello, asking and answering names, and saying goodbye.</p><button class="next-challenge" id="restartChallenge">Practice again</button> <button class="next-challenge" id="speakingNextBtn">Next: Story Time →</button></div>
   </section>
 
   <div class="section-head">
@@ -379,9 +383,27 @@ const weeks={
  step:['Learn 红色、黄色、蓝色 and ask 什么颜色？',"Practice this week's colors and color questions.",'Learn to write 红 and 色, then put them together as 红色.','Look at colors and animals, listen to the question, and answer aloud.','Try reading 《什么颜色？》 and use colors with animals.'],
  videos:{title:'Colors 颜色',intro:'Watch the color lessons in order. Say each color aloud and listen for 什么颜色？',items:[['1 · Colors 颜色','Learn and practice basic colors.','8xOGqPCd_K4'],['2 · Color Practice','Listen and answer along with the video.','6sEttb2seZw'],['3 · Practice What You Learned','Use the color words aloud.','sUMdcArwITU']]},
  writing:{title:'Write 红 and 色',note:'These two characters make 红色 — red. Focus on the two new characters, then read familiar color words.',chars:[['hong','红','hóng · red'],['se','色','sè · color']],pdf:'Mandarin_Quest_Week_5_Hong_Se_Writing.pdf',pdfText:'Open writing sheet →'},
- speaking:[{avatar:'🔴',title:'What color?',cn:'🔴',help:'Answer with the color.',answer:'红色。',promptAudio:'什么颜色？',answerAudio:'红色。'},{avatar:'🟡',title:'What color?',cn:'🟡',help:'Answer aloud.',answer:'黄色。',promptAudio:'什么颜色？',answerAudio:'黄色。'},{avatar:'🔵',title:'What color?',cn:'🔵',help:'Answer aloud.',answer:'蓝色。',promptAudio:'什么颜色？',answerAudio:'蓝色。'},{avatar:'🐱 🔴',title:'Describe the cat',cn:'🐱 🔴',help:'Say “red cat.”',answer:'红色的猫。',promptAudio:'猫是什么颜色？',answerAudio:'红色的猫。'},{avatar:'🐦 🔵',title:'Describe the bird',cn:'🐦 🔵',help:'Say “blue bird.”',answer:'蓝色的鸟。',promptAudio:'鸟是什么颜色？',answerAudio:'蓝色的鸟。'},{avatar:'🐶 🟡',title:'Color challenge',cn:'🐶 🟡',help:'Answer the yes/no question.',answer:'不是。是黄色。',promptAudio:'是不是蓝色？',answerAudio:'不是。是黄色。'}],
- storyTitle:'什么颜色？',story:[{pic:'🐱 🔴',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},{pic:'🐱 🔴',zh:'这是猫。',py:'Zhè shì māo.',en:'This is a cat.'},{pic:'🐱 🔴 ❓',zh:'什么颜色？',py:'Shénme yánsè?',en:'What color?'},{pic:'🐱 🔴',zh:'红色！',py:'Hóngsè!',en:'Red!'},{pic:'🐦 🔵',zh:'这是鸟。',py:'Zhè shì niǎo.',en:'This is a bird.'},{pic:'🐦 🔵 ❓',zh:'是不是红色？',py:'Shì bu shì hóngsè?',en:'Is it red?'},{pic:'🐦 🔵',zh:'不是。是蓝色。',py:'Bú shì. Shì lánsè.',en:'No. It is blue.'},{pic:'🐶 🟡',zh:'这是狗。',py:'Zhè shì gǒu.',en:'This is a dog.'},{pic:'🐶 🟡 ❓',zh:'什么颜色？',py:'Shénme yánsè?',en:'What color?'},{pic:'🐶 🟡 👋',zh:'黄色！再见！',py:'Huángsè! Zàijiàn!',en:'Yellow! Goodbye!'}]
-}
+ speaking:[
+      {avatar:'🔴',title:'What color?',cn:'🔴',help:'Listen, then answer with the color.',answer:'红色。',promptAudio:'什么颜色？',answerAudio:'红色。'},
+      {avatar:'🔴🐱',title:'Describe it',cn:'🔴🐱',help:'Use color + 的 + animal.',answer:'红色的猫。',promptAudio:'这是什么动物？',answerAudio:'这是红色的猫。'},
+      {avatar:'🔵🐢',title:'Describe it',cn:'🔵🐢',help:'Use color + 的 + animal.',answer:'蓝色的乌龟。',promptAudio:'这是什么动物？',answerAudio:'这是蓝色的乌龟。'},
+      {avatar:'🟡🐰',title:'Describe it',cn:'🟡🐰',help:'Use color + 的 + animal.',answer:'黄色的兔子。',promptAudio:'这是什么动物？',answerAudio:'这是黄色的兔子。'},
+      {avatar:'🟡🐰 🟡🐰 🟡🐰',title:'How many?',cn:'🟡🐰  🟡🐰  🟡🐰',help:'Count the yellow rabbits.',answer:'有三个黄色的兔子。',promptAudio:'有几个黄色的兔子？',answerAudio:'有三个黄色的兔子。'},
+      {avatar:'🔵🐢',title:'Yes or no?',cn:'🔵🐢',help:'Answer 是 or 不是.',answer:'是。',promptAudio:'是不是蓝色的乌龟？',answerAudio:'是。'},
+      {avatar:'🎂',title:'Review',cn:'🎂',help:'Answer with your own age.',answer:'我___岁。',promptAudio:'你几岁？',answerAudio:'我六岁。'}
+    ],storyTitle:'什么颜色？',story:[
+      {pic:'🐰',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+      {pic:'🐰',zh:'这是兔子。',py:'Zhè shì tùzi.',en:'This is a rabbit.'},
+      {pic:'🟡🐰',zh:'这是黄色的兔子。',py:'Zhè shì huángsè de tùzi.',en:'This is a yellow rabbit.'},
+      {pic:'🟡🐰 🟡🐰 🟡🐰',zh:'有几个黄色的兔子？',py:'Yǒu jǐ ge huángsè de tùzi?',en:'How many yellow rabbits are there?'},
+      {pic:'🟡🐰 🟡🐰 🟡🐰',zh:'有三个黄色的兔子。',py:'Yǒu sān ge huángsè de tùzi.',en:'There are three yellow rabbits.'},
+      {pic:'🔵🐢',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+      {pic:'🔵🐢',zh:'这是蓝色的乌龟。',py:'Zhè shì lánsè de wūguī.',en:'This is a blue turtle.'},
+      {pic:'🔵🐢',zh:'是不是蓝色的乌龟？',py:'Shì bu shì lánsè de wūguī?',en:'Is it a blue turtle?'},
+      {pic:'🔵🐢',zh:'是！这是蓝色的乌龟。',py:'Shì! Zhè shì lánsè de wūguī.',en:'Yes! This is a blue turtle.'},
+      {pic:'🔴🐱 👋',zh:'这是红色的猫。再见！',py:'Zhè shì hóngsè de māo. Zàijiàn!',en:'This is a red cat. Goodbye!'}
+    ]
+  }
 };
 
 const dict={"红色":['hóngsè','red'],"黄色":['huángsè','yellow'],"蓝色":['lánsè','blue'],"颜色":['yánsè','color'],"什么颜色":['shénme yánsè','what color?'],"的":['de','describing/possessive particle'],"你好":['nǐ hǎo','hello'],"我叫":['wǒ jiào','my name is'],"再见":['zàijiàn','goodbye'],"有几个":['yǒu jǐ ge','how many are there?'],"几个":['jǐ ge','how many?'],"这是什么动物":['zhè shì shénme dòngwù','what animal is this?'],"是不是":['shì bu shì','is it?'],"不是":['bú shì','is not / no'],"这是":['zhè shì','this is'],"动物":['dòngwù','animal'],"猫":['māo','cat'],"狗":['gǒu','dog'],"鸟":['niǎo','bird'],"兔子":['tùzi','rabbit'],"乌龟":['wūguī','turtle'],"鱼":['yú','fish'],"你几岁":['nǐ jǐ suì','how old are you?'],"几岁":['jǐ suì','how old?'],"岁":['suì','years old'],"六岁":['liù suì','six years old'],"七岁":['qī suì','seven years old'],"八岁":['bā suì','eight years old']};
@@ -412,22 +434,26 @@ function renderVideos(){
 }
 
 let writerMap={};
-function renderWriting(){const x=w.writing;$('writingPanel').setAttribute('aria-label',`Week ${activeWeek} Chinese writing practice`);$('writingPanel').innerHTML=`<div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK ${activeWeek} WRITING</div><h2>${x.title}</h2><p>${x.note}</p></div></div><div class="rule-note"><b>Remember:</b> Watch the stroke order first, then try it yourself.</div><div class="char-grid">${x.chars.map(c=>`<article class="char-card"><h3>${c[1]}</h3><div class="meta">${c[2]}</div><div class="hanzi-box" id="writer-${activeWeek}-${c[0]}"></div><div class="write-buttons"><button class="uw-watch" data-key="${c[0]}" data-hanzi="${c[1]}">▶ Watch</button><button class="uw-try quiz-btn" data-key="${c[0]}" data-hanzi="${c[1]}">✍️ Try It</button><button class="uw-reset reset-btn" data-key="${c[0]}" data-hanzi="${c[1]}">↻ Reset</button></div><div class="status" id="status-${activeWeek}-${c[0]}"></div></article>`).join('')}</div><div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice this week's writing on paper.</span></div><a class="worksheet-link" href="${x.pdf}" target="_blank" rel="noopener">${x.pdfText}</a></div>`;
+function renderWriting(){const x=w.writing;$('writingPanel').setAttribute('aria-label',`Week ${activeWeek} Chinese writing practice`);$('writingPanel').innerHTML=`<div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK ${activeWeek} WRITING</div><h2>${x.title}</h2><p>${x.note}</p></div></div><div class="rule-note"><b>Remember:</b> Watch the stroke order first, then try it yourself.</div><div class="char-grid">${x.chars.map(c=>`<article class="char-card"><h3>${c[1]}</h3><div class="meta">${c[2]}</div><div class="hanzi-box" id="writer-${activeWeek}-${c[0]}"></div><div class="write-buttons"><button class="uw-watch" data-key="${c[0]}" data-hanzi="${c[1]}">▶ Watch</button><button class="uw-try quiz-btn" data-key="${c[0]}" data-hanzi="${c[1]}">✍️ Try It</button><button class="uw-reset reset-btn" data-key="${c[0]}" data-hanzi="${c[1]}">↻ Reset</button></div><div class="status" id="status-${activeWeek}-${c[0]}"></div></article>`).join('')}</div><div class="quest-inline-next"><button type="button" id="writingNextBtn">Next: Speaking Challenge →</button></div><div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice this week's writing on paper.</span></div><a class="worksheet-link" href="${x.pdf}" target="_blank" rel="noopener">${x.pdfText}</a></div>`;
  const get=btn=>{const k=btn.dataset.key;if(!writerMap[k])writerMap[k]=HanziWriter.create(`writer-${activeWeek}-${k}`,btn.dataset.hanzi,{width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250});return writerMap[k];};
  document.querySelectorAll('.uw-watch').forEach(b=>b.onclick=()=>{get(b).animateCharacter();});document.querySelectorAll('.uw-try').forEach(b=>b.onclick=()=>{const st=$(`status-${activeWeek}-${b.dataset.key}`);st.textContent='Your turn!';get(b).quiz({showHintAfterMisses:2,onComplete:()=>st.textContent='Great job!'});});document.querySelectorAll('.uw-reset').forEach(b=>b.onclick=()=>{const q=get(b);q.cancelQuiz();q.showCharacter();$(`status-${activeWeek}-${b.dataset.key}`).textContent='';});
+ const wn=$('writingNextBtn'); if(wn) wn.onclick=()=>{const p=$('writingPanel');p.classList.remove('open');$('speakingStep').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('speakingStep').click(),450);};
  const toggle=()=>{const p=$('writingPanel'),open=!p.classList.contains('open');p.classList.toggle('open',open);$('writingStep').setAttribute('aria-expanded',String(open));if(open)p.scrollIntoView({behavior:'smooth',block:'start'});};$('writingStep').onclick=toggle;$('writingStep').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
 }
 
 let speakingIndex=0;
 function renderSpeaking(){const a=w.speaking,c=a[speakingIndex];$('challengeCount').textContent=`Challenge ${speakingIndex+1} of ${a.length}`;$('challengeAvatar').textContent=c.avatar;$('challengeTitle').textContent=c.title;$('challengeCn').textContent=c.cn;$('challengeHelp').textContent=c.help;$('challengeAnswer').textContent=c.answer;$('challengeAnswer').classList.remove('show');$('speakProgressBar').style.width=`${((speakingIndex+1)/a.length)*100}%`;document.querySelector('#speakingPanel .eyebrow').textContent=`WEEK ${activeWeek} SPEAKING`;$('speakDone').querySelector('h2').textContent=`Week ${activeWeek} speaking challenge complete!`;if($('speakingPanel').classList.contains('open'))setTimeout(()=>speakChinese(c.promptAudio),180);}
-function setupSpeaking(){const toggle=()=>{const p=$('speakingPanel'),open=!p.classList.contains('open');p.classList.toggle('open',open);$('speakingStep').setAttribute('aria-expanded',String(open));if(open){renderSpeaking();p.scrollIntoView({behavior:'smooth',block:'start'});}};$('speakingStep').onclick=toggle;$('speakingStep').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};$('listenChallenge').onclick=()=>speakChinese(w.speaking[speakingIndex].promptAudio);$('showAnswer').onclick=()=>{const c=w.speaking[speakingIndex];$('challengeAnswer').classList.add('show');speakChinese(c.answerAudio);};$('nextChallenge').onclick=()=>{if(speakingIndex<w.speaking.length-1){speakingIndex++;renderSpeaking();}else{$('challengeCard').style.display='none';$('speakDone').classList.add('show');}};$('restartChallenge').onclick=()=>{speakingIndex=0;$('challengeCard').style.display='block';$('speakDone').classList.remove('show');renderSpeaking();};renderSpeaking();}
+function setupSpeaking(){const toggle=()=>{const p=$('speakingPanel'),open=!p.classList.contains('open');p.classList.toggle('open',open);$('speakingStep').setAttribute('aria-expanded',String(open));if(open){renderSpeaking();p.scrollIntoView({behavior:'smooth',block:'start'});}};$('speakingStep').onclick=toggle;$('speakingStep').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};$('listenChallenge').onclick=()=>speakChinese(w.speaking[speakingIndex].promptAudio);$('showAnswer').onclick=()=>{const c=w.speaking[speakingIndex];$('challengeAnswer').classList.add('show');speakChinese(c.answerAudio);};$('nextChallenge').onclick=()=>{if(speakingIndex<w.speaking.length-1){speakingIndex++;renderSpeaking();}else{$('challengeCard').style.display='none';$('speakDone').classList.add('show');}};$('speakingNextBtn').onclick=()=>{const p=$('speakingPanel');p.classList.remove('open');$('storyStep').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('storyStep').click(),450);};$('restartChallenge').onclick=()=>{speakingIndex=0;$('challengeCard').style.display='block';$('speakDone').classList.remove('show');renderSpeaking();};renderSpeaking();}
 
 let storyIndex=0,showPy=false,showEn=false,activeWord='';
 function storyText(text){const el=$('storyChinese');el.innerHTML='';let i=0;while(i<text.length){let hit='';for(const k of dictKeys)if(text.startsWith(k,i)){hit=k;break;}if(hit){const b=document.createElement('button');b.type='button';b.className='story-word';b.textContent=hit;b.onclick=e=>{e.stopPropagation();const d=dict[hit];activeWord=hit;$('dictZh').textContent=hit;$('dictPy').textContent=d[0];$('dictEn').textContent=d[1];$('storyDict').classList.add('open');const r=b.getBoundingClientRect();const dw=Math.min(250,innerWidth-24);$('storyDict').style.left=Math.min(innerWidth-dw-12,Math.max(12,r.left))+'px';$('storyDict').style.top=Math.min(innerHeight-170,r.bottom+8)+'px';};el.appendChild(b);i+=hit.length;}else{el.appendChild(document.createTextNode(text[i++]));}}}
-function drawStory(){$('storyDict').classList.remove('open');activeWord='';const p=w.story[storyIndex],pic=$('storyPicture');if(p.img){pic.textContent='';pic.style.backgroundImage=`url(${p.img})`;pic.classList.add('artwork');}else{pic.style.backgroundImage='';pic.classList.remove('artwork');pic.textContent=p.pic||'';}storyText(p.zh);$('storyPinyin').textContent=p.py;$('storyEnglish').textContent=p.en;$('storyPinyin').style.display=showPy?'block':'none';$('storyEnglish').style.display=showEn?'block':'none';$('storyPinyinBtn').textContent=`拼音 Pinyin: ${showPy?'On':'Off'}`;$('storyEnglishBtn').textContent=`English: ${showEn?'On':'Off'}`;$('storyCount').textContent=`${storyIndex+1} / ${w.story.length}`;$('storyBar').style.width=`${((storyIndex+1)/w.story.length)*100}%`;$('storyPrev').disabled=storyIndex===0;$('storyNext').textContent=storyIndex===w.story.length-1?'Read Again ↻':'Next →';}
-function renderStory(){$('storyTitle').textContent=w.storyTitle;document.querySelector('#storyOverlay .eyebrow').textContent=`WEEK ${activeWeek} STORY`;$('storyStep').onclick=()=>{storyIndex=0;$('storyOverlay').classList.add('open');$('storyOverlay').setAttribute('aria-hidden','false');drawStory();};$('storyClose').onclick=()=>{speechSynthesis.cancel();$('storyOverlay').classList.remove('open');$('storyOverlay').setAttribute('aria-hidden','true');};$('storyAudio').onclick=()=>speakChinese(w.story[storyIndex].zh,.72);$('storyPinyinBtn').onclick=()=>{showPy=!showPy;drawStory();};$('storyEnglishBtn').onclick=()=>{showEn=!showEn;drawStory();};$('storyPrev').onclick=()=>{if(storyIndex>0){storyIndex--;drawStory();}};$('storyNext').onclick=()=>{storyIndex=storyIndex===w.story.length-1?0:storyIndex+1;drawStory();};$('dictAudio').onclick=e=>{e.stopPropagation();if(activeWord)speakChinese(activeWord,.68);};$('dictClose').onclick=e=>{e.stopPropagation();$('storyDict').classList.remove('open');activeWord='';};$('storyDict').onclick=e=>e.stopPropagation();$('storyOverlay').addEventListener('click',e=>{if(!e.target.closest('.story-word')&&!e.target.closest('#storyDict')){$('storyDict').classList.remove('open');activeWord='';}});$('storyOverlay').onclick=e=>{if(e.target===$('storyOverlay'))$('storyClose').click();};drawStory();}
+function drawStory(){$('storyDict').classList.remove('open');activeWord='';const p=w.story[storyIndex],pic=$('storyPicture');if(p.img){pic.textContent='';pic.style.backgroundImage=`url(${p.img})`;pic.classList.add('artwork');}else{pic.style.backgroundImage='';pic.classList.remove('artwork');pic.textContent=p.pic||'';}storyText(p.zh);$('storyPinyin').textContent=p.py;$('storyEnglish').textContent=p.en;$('storyPinyin').style.display=showPy?'block':'none';$('storyEnglish').style.display=showEn?'block':'none';$('storyPinyinBtn').textContent=`拼音 Pinyin: ${showPy?'On':'Off'}`;$('storyEnglishBtn').textContent=`English: ${showEn?'On':'Off'}`;$('storyCount').textContent=`${storyIndex+1} / ${w.story.length}`;$('storyBar').style.width=`${((storyIndex+1)/w.story.length)*100}%`;$('storyPrev').disabled=storyIndex===0;$('storyNext').textContent=storyIndex===w.story.length-1?'Next: Live Mandarin →':'Next →';}
+function renderStory(){$('storyTitle').textContent=w.storyTitle;document.querySelector('#storyOverlay .eyebrow').textContent=`WEEK ${activeWeek} STORY`;$('storyStep').onclick=()=>{storyIndex=0;$('storyOverlay').classList.add('open');$('storyOverlay').setAttribute('aria-hidden','false');drawStory();};$('storyClose').onclick=()=>{speechSynthesis.cancel();$('storyOverlay').classList.remove('open');$('storyOverlay').setAttribute('aria-hidden','true');};$('storyAudio').onclick=()=>speakChinese(w.story[storyIndex].zh,.72);$('storyPinyinBtn').onclick=()=>{showPy=!showPy;drawStory();};$('storyEnglishBtn').onclick=()=>{showEn=!showEn;drawStory();};$('storyPrev').onclick=()=>{if(storyIndex>0){storyIndex--;drawStory();}};$('storyNext').onclick=()=>{if(storyIndex===w.story.length-1){$('storyClose').click();const steps=Array.from(document.querySelectorAll('.step'));if(steps[5])steps[5].scrollIntoView({behavior:'smooth',block:'center'});}else{storyIndex++;drawStory();}};$('dictAudio').onclick=e=>{e.stopPropagation();if(activeWord)speakChinese(activeWord,.68);};$('dictClose').onclick=e=>{e.stopPropagation();$('storyDict').classList.remove('open');activeWord='';};$('storyDict').onclick=e=>e.stopPropagation();$('storyOverlay').addEventListener('click',e=>{if(!e.target.closest('.story-word')&&!e.target.closest('#storyDict')){$('storyDict').classList.remove('open');activeWord='';}});$('storyOverlay').onclick=e=>{if(e.target===$('storyOverlay'))$('storyClose').click();};drawStory();}
 
 renderWeek();setupSpeaking();
+if(location.hash==='#writing'){
+  setTimeout(()=>{ const p=$('writingPanel'); if(!p.classList.contains('open')) $('writingStep').click(); p.scrollIntoView({behavior:'smooth',block:'start'}); },250);
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('videoClose').click();$('storyClose').click();}});
 })();
 </script>
@@ -453,7 +479,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('videoClose').cli
  const labels=['Watch & Learn','Flashcards','Chinese Writing','Speaking Challenge','Story Time','Live Mandarin'];
  let current=0;
  const nav=document.getElementById('questNav'), btn=document.getElementById('questNext');
- function cards(){return Array.from(document.querySelectorAll('.step-card')).slice(0,6)}
+ function cards(){return Array.from(document.querySelectorAll('.step')).slice(0,6)}
  function showAfter(i){
    current=i;
    if(i>=5){nav.hidden=true;return}
