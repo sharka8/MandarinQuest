@@ -136,8 +136,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
 </style>
 
 <style>
-.quest-inline-next{display:flex;justify-content:center;margin:22px 0 8px}
-.quest-inline-next button,#speakingNextBtn{border:0;border-radius:999px;padding:13px 22px;background:#18324a;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+#speakingNextBtn{border:0;border-radius:999px;padding:13px 22px;background:#18324a;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
 </style>
 <style>
 .yellow-bunny{width:92px;height:112px;vertical-align:middle;display:inline-block}
@@ -179,7 +178,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
       <div class="action">Start Week 1 videos →</div>
     </button>
 
-    <a class="step" href="mandarin-quest-flashcards-autoplay.html?week=5">
+    <a class="step" href="./mandarin-quest-flashcards-autoplay.html?week=5&v=20260930">
       <div class="step-number">STEP 2</div><div class="icon">🃏</div>
       <h3>Flashcards</h3><p>Listen, repeat, and learn this week's Mandarin.</p>
       <div class="action">Start flashcards →</div>
@@ -507,7 +506,7 @@ function renderWeek(){
  document.querySelectorAll('.week').forEach(btn=>{const n=Number(btn.dataset.week);btn.classList.toggle('current',n===activeWeek);const old=btn.querySelector('.badge');if(old)old.remove();if(n===activeWeek){const b=document.createElement('span');b.className='badge';b.textContent='Current quest';btn.appendChild(b);}});
  const steps=[...document.querySelectorAll('.steps .step')]; w.step.forEach((t,i)=>steps[i].querySelector('p').textContent=t);
  steps[0].querySelector('.action').textContent=`Start Week ${activeWeek} videos →`;
- steps[1].href=`mandarin-quest-flashcards-autoplay.html?week=${activeWeek}`;
+ steps[1].href=`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`; steps[1].onclick=(e)=>{e.preventDefault(); window.location.assign(`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`);};
  document.querySelectorAll('.week').forEach(btn=>btn.onclick=()=>{const n=Number(btn.dataset.week);if(n<=5)location.href=`${location.pathname}?week=${n}`;else alert(`Week ${n} is coming next. Weeks 1–5 are ready now.`);});
  renderVideos();renderWriting();renderSpeaking();renderStory();
 }
@@ -517,17 +516,16 @@ function renderVideos(){
  const modal=document.querySelector('.video-modal'),finish=document.querySelector('.video-finish');let cards=[...document.querySelectorAll('.video-card')];
  while(cards.length<w.videos.items.length){const c=cards[0].cloneNode(true);modal.insertBefore(c,finish);cards.push(c);}
  cards.forEach((c,i)=>{if(i>=w.videos.items.length){c.style.display='none';return;}const [t,d,id]=w.videos.items[i];c.style.display='block';c.querySelector('h3').textContent=t;c.querySelector('p').textContent=d;const f=c.querySelector('iframe');f.src=`https://www.youtube-nocookie.com/embed/${id}?rel=0`;f.title=t;});
- $('videoDone').onclick=()=>location.href=`mandarin-quest-flashcards-autoplay.html?week=${activeWeek}`;
+ $('videoDone').onclick=()=>window.location.assign(`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`);
  $('watchStep').onclick=()=>{$('videoOverlay').classList.add('open');$('videoOverlay').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
  $('videoClose').onclick=()=>{$('videoOverlay').classList.remove('open');$('videoOverlay').setAttribute('aria-hidden','true');document.body.style.overflow='';};
  $('videoOverlay').onclick=e=>{if(e.target===$('videoOverlay'))$('videoClose').click();};
 }
 
 let writerMap={};
-function renderWriting(){const x=w.writing;$('writingPanel').setAttribute('aria-label',`Week ${activeWeek} Chinese writing practice`);$('writingPanel').innerHTML=`<div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK ${activeWeek} WRITING</div><h2>${x.title}</h2><p>${x.note}</p></div></div><div class="rule-note"><b>Remember:</b> Watch the stroke order first, then try it yourself.</div><div class="char-grid">${x.chars.map(c=>`<article class="char-card"><h3>${c[1]}</h3><div class="meta">${c[2]}</div><div class="hanzi-box" id="writer-${activeWeek}-${c[0]}"></div><div class="write-buttons"><button class="uw-watch" data-key="${c[0]}" data-hanzi="${c[1]}">▶ Watch</button><button class="uw-try quiz-btn" data-key="${c[0]}" data-hanzi="${c[1]}">✍️ Try It</button><button class="uw-reset reset-btn" data-key="${c[0]}" data-hanzi="${c[1]}">↻ Reset</button></div><div class="status" id="status-${activeWeek}-${c[0]}"></div></article>`).join('')}</div><div class="quest-inline-next"><button type="button" id="writingNextBtn">Next: Speaking Challenge →</button></div><div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice this week's writing on paper.</span></div><a class="worksheet-link" href="${x.pdf}" target="_blank" rel="noopener">${x.pdfText}</a></div>`;
+function renderWriting(){const x=w.writing;$('writingPanel').setAttribute('aria-label',`Week ${activeWeek} Chinese writing practice`);$('writingPanel').innerHTML=`<div class="writing-intro"><div><div class="eyebrow" style="color:var(--orange)">WEEK ${activeWeek} WRITING</div><h2>${x.title}</h2><p>${x.note}</p></div></div><div class="rule-note"><b>Remember:</b> Watch the stroke order first, then try it yourself.</div><div class="char-grid">${x.chars.map(c=>`<article class="char-card"><h3>${c[1]}</h3><div class="meta">${c[2]}</div><div class="hanzi-box" id="writer-${activeWeek}-${c[0]}"></div><div class="write-buttons"><button class="uw-watch" data-key="${c[0]}" data-hanzi="${c[1]}">▶ Watch</button><button class="uw-try quiz-btn" data-key="${c[0]}" data-hanzi="${c[1]}">✍️ Try It</button><button class="uw-reset reset-btn" data-key="${c[0]}" data-hanzi="${c[1]}">↻ Reset</button></div><div class="status" id="status-${activeWeek}-${c[0]}"></div></article>`).join('')}</div><div class="worksheet-row"><div><b>Paper practice</b><br><span style="color:var(--muted);font-size:.9rem">Practice this week's writing on paper.</span></div><a class="worksheet-link" href="${x.pdf}" target="_blank" rel="noopener">${x.pdfText}</a></div>`;
  const get=btn=>{const k=btn.dataset.key;if(!writerMap[k])writerMap[k]=HanziWriter.create(`writer-${activeWeek}-${k}`,btn.dataset.hanzi,{width:180,height:180,padding:12,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250});return writerMap[k];};
  document.querySelectorAll('.uw-watch').forEach(b=>b.onclick=()=>{get(b).animateCharacter();});document.querySelectorAll('.uw-try').forEach(b=>b.onclick=()=>{const st=$(`status-${activeWeek}-${b.dataset.key}`);st.textContent='Your turn!';get(b).quiz({showHintAfterMisses:2,onComplete:()=>st.textContent='Great job!'});});document.querySelectorAll('.uw-reset').forEach(b=>b.onclick=()=>{const q=get(b);q.cancelQuiz();q.showCharacter();$(`status-${activeWeek}-${b.dataset.key}`).textContent='';});
- const wn=$('writingNextBtn'); if(wn) wn.onclick=()=>{const p=$('writingPanel');p.classList.remove('open');$('speakingStep').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('speakingStep').click(),450);};
  const toggle=()=>{const p=$('writingPanel'),open=!p.classList.contains('open');p.classList.toggle('open',open);$('writingStep').setAttribute('aria-expanded',String(open));if(open)p.scrollIntoView({behavior:'smooth',block:'start'});};$('writingStep').onclick=toggle;$('writingStep').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
 }
 
