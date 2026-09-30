@@ -403,4 +403,36 @@ renderWeek();setupSpeaking();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('videoClose').click();$('storyClose').click();}});
 })();
 </script>
+
+<style>
+.quest-step-complete{display:flex;justify-content:center;margin:22px 0 6px}
+.quest-next-btn{border:0;border-radius:14px;padding:13px 22px;cursor:pointer;background:var(--navy,#17324d);color:#fff;font-weight:800;font-size:1rem;box-shadow:0 5px 14px rgba(0,0,0,.10)}
+.quest-next-btn:hover{transform:translateY(-1px)}
+.quest-next-btn:focus{outline:3px solid var(--orange,#ef8b2c);outline-offset:3px}
+.step-card.quest-done{opacity:.72}
+</style>
+<script>
+(function(){
+ const names=['Watch & Learn','Flashcards','Chinese Writing','Speaking Challenge','Story Time','Live Mandarin'];
+ const cards=()=>Array.from(document.querySelectorAll('.step-card'));
+ function go(i){const el=cards()[i];if(el){el.scrollIntoView({behavior:'smooth',block:'center'});}}
+ function add(host,i){
+   if(!host||i>=5||host.querySelector('.quest-next-btn'))return;
+   const w=document.createElement('div');w.className='quest-step-complete';
+   const b=document.createElement('button');b.type='button';b.className='quest-next-btn';
+   b.textContent='Next: '+names[i+1]+' →';
+   b.onclick=()=>{cards()[i]?.classList.add('quest-done');go(i+1);};
+   w.appendChild(b);host.appendChild(w);
+ }
+ function install(){
+   add(document.getElementById('writingPanel'),2);
+   add(document.getElementById('speakingPanel')||document.querySelector('.speaking-panel,.speaking-content'),3);
+   add(document.getElementById('storyCard')||document.querySelector('.story-card,.story-content,.story-reader'),4);
+   add(document.querySelector('.video-modal,.video-content,#videoPanel,#videoModal .modal-card'),0);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+ new MutationObserver(install).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
 </body></html>
