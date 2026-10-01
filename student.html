@@ -272,10 +272,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
   </section>
 
   <div class="section-head">
-    <div><h2>Your 8-week adventure</h2><p>New language builds on what you already know.</p></div>
+    <div><h2>Your 12-week adventure</h2><p>New language builds on what you already know.</p></div>
   </div>
 
-  <section class="week-grid" id="weekGrid" aria-label="Choose a course week">
+  <section class="week-grid" id="weekGrid" aria-label="Choose one of 12 course weeks">
     <button class="week current" data-week="1"><div class="week-num">Week 1</div><h3>Names</h3><p>你好 · 我 · 你 · 叫</p><span class="badge">Current quest</span></button>
     <button class="week" data-week="2"><div class="week-num">Week 2</div><h3>Numbers 1–10</h3><p>Count and ask “how many?”</p></button>
     <button class="week" data-week="3"><div class="week-num">Week 3</div><h3>Animals</h3><p>Identify animals with 是 / 不是.</p></button>
@@ -284,6 +284,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     <button class="week" data-week="6"><div class="week-num">Week 6</div><h3>More Colors</h3><p>Green, purple, orange and more.</p></button>
     <button class="week" data-week="7"><div class="week-num">Week 7</div><h3>How Are You?</h3><p>Talk about how you are and what you like.</p></button>
     <button class="week" data-week="8"><div class="week-num">Week 8</div><h3>All About Me</h3><p>Put it all together in Mandarin.</p></button>
+    <button class="week" data-week="9"><div class="week-num">Week 9</div><h3>My Family</h3><p>爸爸 · 妈妈 · 哥哥 · 姐姐 · 弟弟 · 妹妹 · 有 / 没有</p></button>
+    <button class="week" data-week="10"><div class="week-num">Week 10</div><h3>Family Ages & Bigger Numbers</h3><p>Numbers 11–120 · review ages · ask how old family members are.</p></button>
+    <button class="week" data-week="11"><div class="week-num">Week 11</div><h3>Hobbies & Abilities</h3><p>唱歌 · 跳舞 · 打球 · 看书 · 画画 · 游泳 · 会 / 不会</p></button>
+    <button class="week" data-week="12"><div class="week-num">Week 12</div><h3>Meet & Introduce People</h3><p>Review self-introductions, meet people, and introduce someone else.</p></button>
   </section>
 
   <section class="practice">
@@ -507,7 +511,7 @@ function renderWeek(){
  const steps=[...document.querySelectorAll('.steps .step')]; w.step.forEach((t,i)=>steps[i].querySelector('p').textContent=t);
  steps[0].querySelector('.action').textContent=`Start Week ${activeWeek} videos →`;
  steps[1].href=`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`; steps[1].onclick=(e)=>{e.preventDefault(); window.location.assign(`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`);};
- document.querySelectorAll('.week').forEach(btn=>btn.onclick=()=>{const n=Number(btn.dataset.week);if(n<=5)location.href=`${location.pathname}?week=${n}`;else alert(`Week ${n} is coming next. Weeks 1–5 are ready now.`);});
+ document.querySelectorAll('.week').forEach(btn=>btn.onclick=()=>{const n=Number(btn.dataset.week);if(n<=5)location.href=`${location.pathname}?week=${n}`;else alert(`Week ${n} is part of the 12-week Mandarin Quest course and is coming next. Weeks 1–5 are ready now.`);});
  renderVideos();renderWriting();renderSpeaking();renderStory();
 }
 
