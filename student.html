@@ -116,7 +116,39 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
 
 
 </style>
-</head>
+
+<style>
+/* Story reader: show the complete illustration. The modal may scroll vertically on short screens. */
+#storyOverlay, .story-overlay{overflow-y:auto !important;align-items:flex-start !important}
+#storyCard, .story-card, .story-content, .story-reader{
+  max-height:none !important;
+  overflow:visible !important;
+  margin:24px auto !important;
+}
+#storyCard img, .story-card img, .story-content img, .story-reader img,
+.story-image img, #storyImage{
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center !important;
+}
+</style>
+
+<style>
+#speakingNextBtn{border:0;border-radius:999px;padding:13px 22px;background:#18324a;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+</style>
+<style>
+.yellow-bunny{width:92px;height:112px;vertical-align:middle;display:inline-block}
+.yellow-bunny-row{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap}
+#storyPicture .yellow-bunny{width:150px;height:185px}
+#storyPicture .yellow-bunny-row .yellow-bunny{width:125px;height:155px}
+</style>
+<style>
+.colored-animal{width:150px;height:160px;display:inline-block;vertical-align:middle}
+.colored-animal-row{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap}
+#storyPicture .colored-animal{width:190px;height:190px}
+</style></head>
 <body>
 <header class="topbar">
   <div class="topbar-inner">
@@ -146,7 +178,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
       <div class="action">Start Week 1 videos →</div>
     </button>
 
-    <a class="step" href="mandarin-quest-flashcards-autoplay.html">
+    <a class="step" href="./mandarin-quest-flashcards-autoplay.html?week=5&v=20260930">
       <div class="step-number">STEP 2</div><div class="icon">🃏</div>
       <h3>Flashcards</h3><p>Listen, repeat, and learn this week's Mandarin.</p>
       <div class="action">Start flashcards →</div>
@@ -177,7 +209,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     </div>
   </section>
 
-  <section class="writing-panel" id="writingPanel" aria-label="Week 1 Chinese writing practice">
+  <section class="writing-panel" id="writingPanel" data-quest-anchor="writing" aria-label="Week 1 Chinese writing practice">
     <div class="writing-intro">
       <div>
         <div class="eyebrow" style="color:var(--orange)">WEEK 1 WRITING</div>
@@ -225,7 +257,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     </div>
   </section>
 
-  <section class="speaking-panel" id="speakingPanel" aria-label="Week 1 speaking challenge">
+  <section class="speaking-panel" id="speakingPanel" data-quest-anchor="speaking" aria-label="Week 1 speaking challenge">
     <div class="writing-intro">
       <div><div class="eyebrow" style="color:var(--orange)">WEEK 1 SPEAKING</div><h2>Say it out loud!</h2><p>Listen to each challenge, answer in Mandarin, then check your answer. No typing needed.</p></div>
     </div>
@@ -236,7 +268,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
       <div class="challenge-answer" id="challengeAnswer"></div>
       <div class="speak-controls"><button class="listen-btn" id="listenChallenge">🔊 Listen</button><button class="answer-btn" id="showAnswer">✓ Check answer</button><button class="next-challenge" id="nextChallenge">Next →</button></div>
     </div>
-    <div class="speak-done" id="speakDone"><div class="big">🌟</div><h2>Week 1 speaking challenge complete!</h2><p>You practiced saying hello, asking and answering names, and saying goodbye.</p><button class="next-challenge" id="restartChallenge">Practice again</button></div>
+    <div class="speak-done" id="speakDone"><div class="big">🌟</div><h2>Week 1 speaking challenge complete!</h2><p>You practiced saying hello, asking and answering names, and saying goodbye.</p><button class="next-challenge" id="restartChallenge">Practice again</button> <button class="next-challenge" id="speakingNextBtn">Next: Story Time →</button></div>
   </section>
 
   <div class="section-head">
@@ -327,7 +359,7 @@ const weeks={
  hero:'你好！Ready for Week 1?', goal:"This week you'll learn to say hello, ask someone's name, and tell them your name.",
  step:['Learn Chinese sounds and tones, then practice saying hello and introducing yourself.',"Listen, repeat, and learn this week's Mandarin.",'Learn basic strokes, then practice 三、十、八、九.','Listen, answer aloud, and use this week’s Mandarin.','Try reading 《你好！新朋友》 using Mandarin you already know.'],
  videos:{title:'Chinese Sounds, Tones & Names',intro:'Watch these three short lessons in order. Listen, imitate, and have fun speaking Chinese.',items:[['1 · Chinese Sounds','Listen carefully and copy the sounds you hear.','PKu0Hz1LC-A'],['2 · The Four Tones','Listen for how the voice moves up and down in Mandarin.','b9RPzlRIDEs'],["3 · Names & Introductions",'Practice 你好、你叫什么名字？ and 我叫…','Q9S_ze8YBd8']]},
- writing:{title:'Start with strokes, then write 三 十 八 九',note:'Practice four simple number characters and basic stroke direction.',chars:[['san','三','sān · three'],['shi','十','shí · ten'],['ba','八','bā · eight'],['jiu','九','jiǔ · nine']],pdf:'Mandarin_Quest_Week_2_Number_Writing.pdf',pdfText:'Open writing sheet →'},
+ writing:{title:'Start with strokes, then write 三 十 八 九',note:'Practice four simple number characters and basic stroke direction.',chars:[['san','三','sān · three'],['shi','十','shí · ten'],['ba','八','bā · eight'],['jiu','九','jiǔ · nine']],pdf:'First%20Semester%20Writing%20Assignments.pdf',pdfText:'Open writing sheet →'},
  speaking:[{avatar:'🐼',title:'Say hello!',cn:'你好！',help:'Say it aloud before you check.',answer:'你好！',promptAudio:'你好',answerAudio:'你好'},{avatar:'👧',title:'Answer the question',cn:'你叫什么名字？',help:'Tell her your name in Mandarin.',answer:'我叫 ______。',promptAudio:'你叫什么名字？',answerAudio:'我叫小美。'},{avatar:'🧒',title:'Ask my name',cn:'❓',help:'How do you ask “What is your name?”',answer:'你叫什么名字？',promptAudio:'问我的名字。',answerAudio:'你叫什么名字？'},{avatar:'👋',title:'Time to go!',cn:'👋',help:'Say goodbye in Mandarin.',answer:'再见！',promptAudio:'怎么说 goodbye？',answerAudio:'再见'}],
  storyTitle:'你好！新朋友',story:[{pic:'🐼',zh:'你好！',py:'nǐ hǎo!',en:'Hello!'},{pic:'🐰',zh:'你好！',py:'nǐ hǎo!',en:'Hello!'},{pic:'🐼',zh:'我叫小熊猫。',py:'wǒ jiào xiǎo xióngmāo.',en:'My name is Little Panda.'},{pic:'🐼 ❓ 🐰',zh:'你叫什么名字？',py:'nǐ jiào shénme míngzi?',en:"What's your name?"},{pic:'🐰',zh:'我叫小兔。',py:'wǒ jiào xiǎo tù.',en:'My name is Little Rabbit.'},{pic:'🐼 👋 🐰',zh:'再见！',py:'zàijiàn!',en:'Goodbye!'}]
 },
@@ -356,27 +388,114 @@ const weeks={
  storyTitle:'你几岁？',story:[{pic:'🐼 👋',zh:'你好！我叫小熊猫。',py:'Nǐ hǎo! Wǒ jiào Xiǎo Xióngmāo.',en:'Hello! My name is Little Panda.'},{pic:'🐰',zh:'你好！我叫小兔。',py:'Nǐ hǎo! Wǒ jiào Xiǎo Tù.',en:'Hello! My name is Little Rabbit.'},{pic:'🐼 ❓ 🐰',zh:'小兔，你几岁？',py:'Xiǎo Tù, nǐ jǐ suì?',en:'Little Rabbit, how old are you?'},{pic:'🐰 6️⃣',zh:'我六岁。',py:'Wǒ liù suì.',en:'I am six years old.'},{pic:'🐰 ❓ 🐼',zh:'你几岁？',py:'Nǐ jǐ suì?',en:'How old are you?'},{pic:'🐼 7️⃣',zh:'我七岁。',py:'Wǒ qī suì.',en:'I am seven years old.'},{pic:'🐶 👋',zh:'你好！我叫小狗。',py:'Nǐ hǎo! Wǒ jiào Xiǎo Gǒu.',en:'Hello! My name is Little Dog.'},{pic:'🐼 ❓ 🐶',zh:'你几岁？',py:'Nǐ jǐ suì?',en:'How old are you?'},{pic:'🐶 8️⃣',zh:'我八岁。',py:'Wǒ bā suì.',en:'I am eight years old.'},{pic:'🐼 🐰 🐶 👋',zh:'再见！',py:'Zàijiàn!',en:'Goodbye!'}]
 },
 5:{
- hero:'颜色！Ready for Week 5?',
- goal:"This week you'll learn red, yellow, and blue and use 的 to describe animals by color.",
- step:[
-  'Learn 红色、黄色、蓝色 and listen for color words in Mandarin.',
-  'Flashcards are coming next. We’ll add them after the videos are tested.',
-  'Writing practice is coming next.',
-  'Speaking Challenge is coming next.',
-  'Story Time is coming next.'
- ],
- videos:{
-  title:'Colors + 的',
-  intro:'Watch these three color lessons. Say the color words aloud as you hear them. We’ll use these words next to describe animals, such as 黄色的兔子.',
-  items:[
-   ['1 · Colors in Chinese','Listen for 红色、黄色、蓝色 and repeat the colors aloud.','8xOGqPCd_K4'],
-   ['2 · Practice the Colors','Keep listening and saying the color words with the video.','6sEttb2seZw'],
-   ['3 · Color Review','Review the colors and try to answer before the video gives the answer.','sUMdcArwITU']
-  ]
- }
-}};
+ hero:'什么颜色？Ready for Week 5?',goal:"This week you'll name red, yellow, and blue, ask what color something is, and describe familiar animals.",
+ step:['Learn 红色、黄色、蓝色 and ask 什么颜色？',"Practice this week's colors and color questions.",'Learn to write 红 and 色, then put them together as 红色.','Look at colors and animals, listen to the question, and answer aloud.','Try reading 《什么颜色？》 and use colors with animals.'],
+ videos:{title:'Colors 颜色',intro:'Watch the color lessons in order. Say each color aloud and listen for 什么颜色？',items:[['1 · Colors 颜色','Learn and practice basic colors.','8xOGqPCd_K4'],['2 · Color Practice','Listen and answer along with the video.','6sEttb2seZw'],['3 · Practice What You Learned','Use the color words aloud.','sUMdcArwITU']]},
+ writing:{title:'Write 红 and 色',note:'These two characters make 红色 — red. Focus on the two new characters, then read familiar color words.',chars:[['hong','红','hóng · red'],['se','色','sè · color']],pdf:'Mandarin_Quest_Week_5_Hong_Se_Writing.pdf',pdfText:'Open writing sheet →'},
+ speaking:[
+      {avatar:'🔴',title:'What color?',cn:'🔴',help:'Listen, then answer with the color.',answer:'红色。',promptAudio:'什么颜色？',answerAudio:'红色。'},
+      {avatar:'',avatarHtml:`<svg class="colored-animal" viewBox="0 0 140 150" aria-label="red cat" role="img"><path d="M35 48 L28 15 L55 34 M105 48 L112 15 L85 34" fill="#E94E4E"/><circle cx="70" cy="72" r="46" fill="#E94E4E"/><ellipse cx="70" cy="123" rx="37" ry="24" fill="#E94E4E"/><circle cx="53" cy="68" r="5" fill="#18324A"/><circle cx="87" cy="68" r="5" fill="#18324A"/><path d="M70 78 l-7 7 h14 z" fill="#F7A0A0"/><path d="M70 86 Q61 96 53 90 M70 86 Q79 96 87 90" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/><path d="M38 83 H10 M39 91 H13 M102 83 H130 M101 91 H127" stroke="#18324A" stroke-width="2"/></svg>`,title:'Describe it',cn:'🔴🐱',help:'Use color + 的 + animal.',answer:'红色的猫。',promptAudio:'这是什么动物？',answerAudio:'这是红色的猫。'},
+      {avatar:'',avatarHtml:`<svg class="colored-animal" viewBox="0 0 170 130" aria-label="blue turtle" role="img"><ellipse cx="80" cy="70" rx="55" ry="39" fill="#4D8EDB"/><path d="M42 50 Q80 28 118 50 Q104 70 118 90 Q80 110 42 90 Q56 70 42 50Z" fill="#9FC7F5" opacity=".55"/><circle cx="143" cy="70" r="20" fill="#4D8EDB"/><circle cx="149" cy="65" r="3.5" fill="#18324A"/><ellipse cx="38" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="38" cy="35" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="35" rx="15" ry="9" fill="#4D8EDB"/><path d="M23 70 L7 62 L7 78 Z" fill="#4D8EDB"/></svg>`,title:'Describe it',cn:'🔵🐢',help:'Use color + 的 + animal.',answer:'蓝色的乌龟。',promptAudio:'这是什么动物？',answerAudio:'这是蓝色的乌龟。'},
+      {avatar:'🟡🐰',title:'Describe it',cn:'🟡🐰',help:'Use color + 的 + animal.',answer:'黄色的兔子。',promptAudio:'这是什么动物？',answerAudio:'这是黄色的兔子。'},
+      {avatar:'',avatarHtml:`<div class="yellow-bunny-row"><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg></div>`,title:'How many?',cn:'',help:'Count the yellow rabbits.',answer:'有三个黄色的兔子。',promptAudio:'有几个黄色的兔子？',answerAudio:'有三个黄色的兔子。'},
+      {avatar:'',avatarHtml:`<svg class="colored-animal" viewBox="0 0 170 130" aria-label="blue turtle" role="img"><ellipse cx="80" cy="70" rx="55" ry="39" fill="#4D8EDB"/><path d="M42 50 Q80 28 118 50 Q104 70 118 90 Q80 110 42 90 Q56 70 42 50Z" fill="#9FC7F5" opacity=".55"/><circle cx="143" cy="70" r="20" fill="#4D8EDB"/><circle cx="149" cy="65" r="3.5" fill="#18324A"/><ellipse cx="38" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="38" cy="35" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="35" rx="15" ry="9" fill="#4D8EDB"/><path d="M23 70 L7 62 L7 78 Z" fill="#4D8EDB"/></svg>`,title:'Yes or no?',cn:'🔵🐢',help:'Answer 是 or 不是.',answer:'是。',promptAudio:'是不是蓝色的乌龟？',answerAudio:'是。'},
+      {avatar:'🎂',title:'Review',cn:'🎂',help:'Answer with your own age.',answer:'我___岁。',promptAudio:'你几岁？',answerAudio:'我六岁。'}
+    ],storyTitle:'什么颜色？',story:[
+      {pic:'🐰',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+      {pic:'🐰',zh:'这是兔子。',py:'Zhè shì tùzi.',en:'This is a rabbit.'},
+      {pic:'',picHtml:`<svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg>`,zh:'这是黄色的兔子。',py:'Zhè shì huángsè de tùzi.',en:'This is a yellow rabbit.'},
+      {pic:'',picHtml:`<div class="yellow-bunny-row"><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg></div>`,zh:'有几个黄色的兔子？',py:'Yǒu jǐ ge huángsè de tùzi?',en:'How many yellow rabbits are there?'},
+      {pic:'',picHtml:`<div class="yellow-bunny-row"><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg><svg class="yellow-bunny" viewBox="0 0 120 150" aria-label="yellow rabbit" role="img">
+<ellipse cx="42" cy="30" rx="15" ry="31" fill="#F7C948"/><ellipse cx="78" cy="30" rx="15" ry="31" fill="#F7C948"/>
+<ellipse cx="42" cy="30" rx="6" ry="20" fill="#FFE08A"/><ellipse cx="78" cy="30" rx="6" ry="20" fill="#FFE08A"/>
+<circle cx="60" cy="75" r="40" fill="#F7C948"/><ellipse cx="60" cy="124" rx="34" ry="25" fill="#F7C948"/>
+<circle cx="46" cy="70" r="4" fill="#18324A"/><circle cx="74" cy="70" r="4" fill="#18324A"/>
+<ellipse cx="60" cy="82" rx="5" ry="4" fill="#E9786A"/>
+<path d="M60 86 Q54 94 48 89 M60 86 Q66 94 72 89" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/>
+<circle cx="91" cy="120" r="13" fill="#FFE08A"/>
+</svg></div>`,zh:'有三个黄色的兔子。',py:'Yǒu sān ge huángsè de tùzi.',en:'There are three yellow rabbits.'},
+      {pic:'',picHtml:`<svg class="colored-animal" viewBox="0 0 170 130" aria-label="blue turtle" role="img"><ellipse cx="80" cy="70" rx="55" ry="39" fill="#4D8EDB"/><path d="M42 50 Q80 28 118 50 Q104 70 118 90 Q80 110 42 90 Q56 70 42 50Z" fill="#9FC7F5" opacity=".55"/><circle cx="143" cy="70" r="20" fill="#4D8EDB"/><circle cx="149" cy="65" r="3.5" fill="#18324A"/><ellipse cx="38" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="38" cy="35" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="35" rx="15" ry="9" fill="#4D8EDB"/><path d="M23 70 L7 62 L7 78 Z" fill="#4D8EDB"/></svg>`,zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
+      {pic:'',picHtml:`<svg class="colored-animal" viewBox="0 0 170 130" aria-label="blue turtle" role="img"><ellipse cx="80" cy="70" rx="55" ry="39" fill="#4D8EDB"/><path d="M42 50 Q80 28 118 50 Q104 70 118 90 Q80 110 42 90 Q56 70 42 50Z" fill="#9FC7F5" opacity=".55"/><circle cx="143" cy="70" r="20" fill="#4D8EDB"/><circle cx="149" cy="65" r="3.5" fill="#18324A"/><ellipse cx="38" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="38" cy="35" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="35" rx="15" ry="9" fill="#4D8EDB"/><path d="M23 70 L7 62 L7 78 Z" fill="#4D8EDB"/></svg>`,zh:'这是蓝色的乌龟。',py:'Zhè shì lánsè de wūguī.',en:'This is a blue turtle.'},
+      {pic:'',picHtml:`<svg class="colored-animal" viewBox="0 0 170 130" aria-label="blue turtle" role="img"><ellipse cx="80" cy="70" rx="55" ry="39" fill="#4D8EDB"/><path d="M42 50 Q80 28 118 50 Q104 70 118 90 Q80 110 42 90 Q56 70 42 50Z" fill="#9FC7F5" opacity=".55"/><circle cx="143" cy="70" r="20" fill="#4D8EDB"/><circle cx="149" cy="65" r="3.5" fill="#18324A"/><ellipse cx="38" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="38" cy="35" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="35" rx="15" ry="9" fill="#4D8EDB"/><path d="M23 70 L7 62 L7 78 Z" fill="#4D8EDB"/></svg>`,zh:'是不是蓝色的乌龟？',py:'Shì bu shì lánsè de wūguī?',en:'Is it a blue turtle?'},
+      {pic:'',picHtml:`<svg class="colored-animal" viewBox="0 0 170 130" aria-label="blue turtle" role="img"><ellipse cx="80" cy="70" rx="55" ry="39" fill="#4D8EDB"/><path d="M42 50 Q80 28 118 50 Q104 70 118 90 Q80 110 42 90 Q56 70 42 50Z" fill="#9FC7F5" opacity=".55"/><circle cx="143" cy="70" r="20" fill="#4D8EDB"/><circle cx="149" cy="65" r="3.5" fill="#18324A"/><ellipse cx="38" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="105" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="38" cy="35" rx="15" ry="9" fill="#4D8EDB"/><ellipse cx="108" cy="35" rx="15" ry="9" fill="#4D8EDB"/><path d="M23 70 L7 62 L7 78 Z" fill="#4D8EDB"/></svg>`,zh:'是！这是蓝色的乌龟。',py:'Shì! Zhè shì lánsè de wūguī.',en:'Yes! This is a blue turtle.'},
+      {pic:'',picHtml:`<div class='colored-animal-row'><svg class="colored-animal" viewBox="0 0 140 150" aria-label="red cat" role="img"><path d="M35 48 L28 15 L55 34 M105 48 L112 15 L85 34" fill="#E94E4E"/><circle cx="70" cy="72" r="46" fill="#E94E4E"/><ellipse cx="70" cy="123" rx="37" ry="24" fill="#E94E4E"/><circle cx="53" cy="68" r="5" fill="#18324A"/><circle cx="87" cy="68" r="5" fill="#18324A"/><path d="M70 78 l-7 7 h14 z" fill="#F7A0A0"/><path d="M70 86 Q61 96 53 90 M70 86 Q79 96 87 90" fill="none" stroke="#18324A" stroke-width="3" stroke-linecap="round"/><path d="M38 83 H10 M39 91 H13 M102 83 H130 M101 91 H127" stroke="#18324A" stroke-width="2"/></svg><span style='font-size:70px'>👋</span></div>`,zh:'这是红色的猫。再见！',py:'Zhè shì hóngsè de māo. Zàijiàn!',en:'This is a red cat. Goodbye!'}
+    ]
+  }
+};
 
-const dict={"你好":['nǐ hǎo','hello'],"我叫":['wǒ jiào','my name is'],"再见":['zàijiàn','goodbye'],"有几个":['yǒu jǐ ge','how many are there?'],"几个":['jǐ ge','how many?'],"这是什么动物":['zhè shì shénme dòngwù','what animal is this?'],"是不是":['shì bu shì','is it?'],"不是":['bú shì','is not / no'],"这是":['zhè shì','this is'],"动物":['dòngwù','animal'],"猫":['māo','cat'],"狗":['gǒu','dog'],"鸟":['niǎo','bird'],"兔子":['tùzi','rabbit'],"乌龟":['wūguī','turtle'],"鱼":['yú','fish'],"你几岁":['nǐ jǐ suì','how old are you?'],"几岁":['jǐ suì','how old?'],"岁":['suì','years old'],"六岁":['liù suì','six years old'],"七岁":['qī suì','seven years old'],"八岁":['bā suì','eight years old']};
+const dict={"红色":['hóngsè','red'],"黄色":['huángsè','yellow'],"蓝色":['lánsè','blue'],"颜色":['yánsè','color'],"什么颜色":['shénme yánsè','what color?'],"的":['de','describing/possessive particle'],"你好":['nǐ hǎo','hello'],"我叫":['wǒ jiào','my name is'],"再见":['zàijiàn','goodbye'],"有几个":['yǒu jǐ ge','how many are there?'],"几个":['jǐ ge','how many?'],"这是什么动物":['zhè shì shénme dòngwù','what animal is this?'],"是不是":['shì bu shì','is it?'],"不是":['bú shì','is not / no'],"这是":['zhè shì','this is'],"动物":['dòngwù','animal'],"猫":['māo','cat'],"狗":['gǒu','dog'],"鸟":['niǎo','bird'],"兔子":['tùzi','rabbit'],"乌龟":['wūguī','turtle'],"鱼":['yú','fish'],"你几岁":['nǐ jǐ suì','how old are you?'],"几岁":['jǐ suì','how old?'],"岁":['suì','years old'],"六岁":['liù suì','six years old'],"七岁":['qī suì','seven years old'],"八岁":['bā suì','eight years old']};
 const dictKeys=Object.keys(dict).sort((a,b)=>b.length-a.length);
 const w=weeks[activeWeek];
 
@@ -387,21 +506,9 @@ function renderWeek(){
  document.querySelectorAll('.week').forEach(btn=>{const n=Number(btn.dataset.week);btn.classList.toggle('current',n===activeWeek);const old=btn.querySelector('.badge');if(old)old.remove();if(n===activeWeek){const b=document.createElement('span');b.className='badge';b.textContent='Current quest';btn.appendChild(b);}});
  const steps=[...document.querySelectorAll('.steps .step')]; w.step.forEach((t,i)=>steps[i].querySelector('p').textContent=t);
  steps[0].querySelector('.action').textContent=`Start Week ${activeWeek} videos →`;
- steps[1].href=`mandarin-quest-flashcards-autoplay.html?week=${activeWeek}`;
- document.querySelectorAll('.week').forEach(btn=>btn.onclick=()=>{const n=Number(btn.dataset.week);if(n<=5)location.href=`${location.pathname}?week=${n}`;else alert(`Week ${n} is coming next. Weeks 1–4 are ready now.`);});
- renderVideos();
- if(activeWeek===5){
-   const flash=steps[1];
-   flash.removeAttribute('href');
-   flash.style.cursor='default';
-   flash.querySelector('.action').textContent='Coming next';
-   [steps[2],steps[3],steps[4]].forEach(step=>{
-     step.style.opacity='.58'; step.style.cursor='default'; step.style.pointerEvents='none';
-     step.querySelector('.action').textContent='Coming next';
-   });
-   return;
- }
- renderWriting();renderSpeaking();renderStory();
+ steps[1].href=`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`; steps[1].onclick=(e)=>{e.preventDefault(); window.location.assign(`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`);};
+ document.querySelectorAll('.week').forEach(btn=>btn.onclick=()=>{const n=Number(btn.dataset.week);if(n<=5)location.href=`${location.pathname}?week=${n}`;else alert(`Week ${n} is coming next. Weeks 1–5 are ready now.`);});
+ renderVideos();renderWriting();renderSpeaking();renderStory();
 }
 
 function renderVideos(){
@@ -409,7 +516,7 @@ function renderVideos(){
  const modal=document.querySelector('.video-modal'),finish=document.querySelector('.video-finish');let cards=[...document.querySelectorAll('.video-card')];
  while(cards.length<w.videos.items.length){const c=cards[0].cloneNode(true);modal.insertBefore(c,finish);cards.push(c);}
  cards.forEach((c,i)=>{if(i>=w.videos.items.length){c.style.display='none';return;}const [t,d,id]=w.videos.items[i];c.style.display='block';c.querySelector('h3').textContent=t;c.querySelector('p').textContent=d;const f=c.querySelector('iframe');f.src=`https://www.youtube-nocookie.com/embed/${id}?rel=0`;f.title=t;});
- $('videoDone').onclick=()=>location.href=`mandarin-quest-flashcards-autoplay.html?week=${activeWeek}`;
+ $('videoDone').onclick=()=>window.location.assign(`./mandarin-quest-flashcards-autoplay.html?week=${activeWeek}&v=20260930`);
  $('watchStep').onclick=()=>{$('videoOverlay').classList.add('open');$('videoOverlay').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
  $('videoClose').onclick=()=>{$('videoOverlay').classList.remove('open');$('videoOverlay').setAttribute('aria-hidden','true');document.body.style.overflow='';};
  $('videoOverlay').onclick=e=>{if(e.target===$('videoOverlay'))$('videoClose').click();};
@@ -423,18 +530,23 @@ function renderWriting(){const x=w.writing;$('writingPanel').setAttribute('aria-
 }
 
 let speakingIndex=0;
-function renderSpeaking(){const a=w.speaking,c=a[speakingIndex];$('challengeCount').textContent=`Challenge ${speakingIndex+1} of ${a.length}`;$('challengeAvatar').textContent=c.avatar;$('challengeTitle').textContent=c.title;$('challengeCn').textContent=c.cn;$('challengeHelp').textContent=c.help;$('challengeAnswer').textContent=c.answer;$('challengeAnswer').classList.remove('show');$('speakProgressBar').style.width=`${((speakingIndex+1)/a.length)*100}%`;document.querySelector('#speakingPanel .eyebrow').textContent=`WEEK ${activeWeek} SPEAKING`;$('speakDone').querySelector('h2').textContent=`Week ${activeWeek} speaking challenge complete!`;if($('speakingPanel').classList.contains('open'))setTimeout(()=>speakChinese(c.promptAudio),180);}
-function setupSpeaking(){const toggle=()=>{const p=$('speakingPanel'),open=!p.classList.contains('open');p.classList.toggle('open',open);$('speakingStep').setAttribute('aria-expanded',String(open));if(open){renderSpeaking();p.scrollIntoView({behavior:'smooth',block:'start'});}};$('speakingStep').onclick=toggle;$('speakingStep').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};$('listenChallenge').onclick=()=>speakChinese(w.speaking[speakingIndex].promptAudio);$('showAnswer').onclick=()=>{const c=w.speaking[speakingIndex];$('challengeAnswer').classList.add('show');speakChinese(c.answerAudio);};$('nextChallenge').onclick=()=>{if(speakingIndex<w.speaking.length-1){speakingIndex++;renderSpeaking();}else{$('challengeCard').style.display='none';$('speakDone').classList.add('show');}};$('restartChallenge').onclick=()=>{speakingIndex=0;$('challengeCard').style.display='block';$('speakDone').classList.remove('show');renderSpeaking();};renderSpeaking();}
+function renderSpeaking(){const a=w.speaking,c=a[speakingIndex];$('challengeCount').textContent=`Challenge ${speakingIndex+1} of ${a.length}`;$('challengeAvatar').innerHTML=c.avatarHtml||''; if(!c.avatarHtml) $('challengeAvatar').textContent=c.avatar;$('challengeTitle').textContent=c.title;$('challengeCn').textContent=c.cn;$('challengeHelp').textContent=c.help;$('challengeAnswer').textContent=c.answer;$('challengeAnswer').classList.remove('show');$('speakProgressBar').style.width=`${((speakingIndex+1)/a.length)*100}%`;document.querySelector('#speakingPanel .eyebrow').textContent=`WEEK ${activeWeek} SPEAKING`;$('speakDone').querySelector('h2').textContent=`Week ${activeWeek} speaking challenge complete!`;if($('speakingPanel').classList.contains('open'))setTimeout(()=>speakChinese(c.promptAudio),180);}
+function setupSpeaking(){const toggle=()=>{const p=$('speakingPanel'),open=!p.classList.contains('open');p.classList.toggle('open',open);$('speakingStep').setAttribute('aria-expanded',String(open));if(open){renderSpeaking();p.scrollIntoView({behavior:'smooth',block:'start'});}};$('speakingStep').onclick=toggle;$('speakingStep').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};$('listenChallenge').onclick=()=>speakChinese(w.speaking[speakingIndex].promptAudio);$('showAnswer').onclick=()=>{const c=w.speaking[speakingIndex];$('challengeAnswer').classList.add('show');speakChinese(c.answerAudio);};$('nextChallenge').onclick=()=>{if(speakingIndex<w.speaking.length-1){speakingIndex++;renderSpeaking();}else{$('challengeCard').style.display='none';$('speakDone').classList.add('show');}};$('speakingNextBtn').onclick=()=>{const p=$('speakingPanel');p.classList.remove('open');$('storyStep').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('storyStep').click(),450);};$('restartChallenge').onclick=()=>{speakingIndex=0;$('challengeCard').style.display='block';$('speakDone').classList.remove('show');renderSpeaking();};renderSpeaking();}
 
 let storyIndex=0,showPy=false,showEn=false,activeWord='';
 function storyText(text){const el=$('storyChinese');el.innerHTML='';let i=0;while(i<text.length){let hit='';for(const k of dictKeys)if(text.startsWith(k,i)){hit=k;break;}if(hit){const b=document.createElement('button');b.type='button';b.className='story-word';b.textContent=hit;b.onclick=e=>{e.stopPropagation();const d=dict[hit];activeWord=hit;$('dictZh').textContent=hit;$('dictPy').textContent=d[0];$('dictEn').textContent=d[1];$('storyDict').classList.add('open');const r=b.getBoundingClientRect();const dw=Math.min(250,innerWidth-24);$('storyDict').style.left=Math.min(innerWidth-dw-12,Math.max(12,r.left))+'px';$('storyDict').style.top=Math.min(innerHeight-170,r.bottom+8)+'px';};el.appendChild(b);i+=hit.length;}else{el.appendChild(document.createTextNode(text[i++]));}}}
-function drawStory(){$('storyDict').classList.remove('open');activeWord='';const p=w.story[storyIndex],pic=$('storyPicture');if(p.img){pic.textContent='';pic.style.backgroundImage=`url(${p.img})`;pic.classList.add('artwork');}else{pic.style.backgroundImage='';pic.classList.remove('artwork');pic.textContent=p.pic||'';}storyText(p.zh);$('storyPinyin').textContent=p.py;$('storyEnglish').textContent=p.en;$('storyPinyin').style.display=showPy?'block':'none';$('storyEnglish').style.display=showEn?'block':'none';$('storyPinyinBtn').textContent=`拼音 Pinyin: ${showPy?'On':'Off'}`;$('storyEnglishBtn').textContent=`English: ${showEn?'On':'Off'}`;$('storyCount').textContent=`${storyIndex+1} / ${w.story.length}`;$('storyBar').style.width=`${((storyIndex+1)/w.story.length)*100}%`;$('storyPrev').disabled=storyIndex===0;$('storyNext').textContent=storyIndex===w.story.length-1?'Read Again ↻':'Next →';}
-function renderStory(){$('storyTitle').textContent=w.storyTitle;document.querySelector('#storyOverlay .eyebrow').textContent=`WEEK ${activeWeek} STORY`;$('storyStep').onclick=()=>{storyIndex=0;$('storyOverlay').classList.add('open');$('storyOverlay').setAttribute('aria-hidden','false');drawStory();};$('storyClose').onclick=()=>{speechSynthesis.cancel();$('storyOverlay').classList.remove('open');$('storyOverlay').setAttribute('aria-hidden','true');};$('storyAudio').onclick=()=>speakChinese(w.story[storyIndex].zh,.72);$('storyPinyinBtn').onclick=()=>{showPy=!showPy;drawStory();};$('storyEnglishBtn').onclick=()=>{showEn=!showEn;drawStory();};$('storyPrev').onclick=()=>{if(storyIndex>0){storyIndex--;drawStory();}};$('storyNext').onclick=()=>{storyIndex=storyIndex===w.story.length-1?0:storyIndex+1;drawStory();};$('dictAudio').onclick=e=>{e.stopPropagation();if(activeWord)speakChinese(activeWord,.68);};$('dictClose').onclick=e=>{e.stopPropagation();$('storyDict').classList.remove('open');activeWord='';};$('storyDict').onclick=e=>e.stopPropagation();$('storyOverlay').addEventListener('click',e=>{if(!e.target.closest('.story-word')&&!e.target.closest('#storyDict')){$('storyDict').classList.remove('open');activeWord='';}});$('storyOverlay').onclick=e=>{if(e.target===$('storyOverlay'))$('storyClose').click();};drawStory();}
+function drawStory(){$('storyDict').classList.remove('open');activeWord='';const p=w.story[storyIndex],pic=$('storyPicture');if(p.img){pic.textContent='';pic.style.backgroundImage=`url(${p.img})`;pic.classList.add('artwork');}else{pic.style.backgroundImage='';pic.classList.remove('artwork');if(p.picHtml){pic.innerHTML=p.picHtml;}else{pic.textContent=p.pic||'';}}storyText(p.zh);$('storyPinyin').textContent=p.py;$('storyEnglish').textContent=p.en;$('storyPinyin').style.display=showPy?'block':'none';$('storyEnglish').style.display=showEn?'block':'none';$('storyPinyinBtn').textContent=`拼音 Pinyin: ${showPy?'On':'Off'}`;$('storyEnglishBtn').textContent=`English: ${showEn?'On':'Off'}`;$('storyCount').textContent=`${storyIndex+1} / ${w.story.length}`;$('storyBar').style.width=`${((storyIndex+1)/w.story.length)*100}%`;$('storyPrev').disabled=storyIndex===0;$('storyNext').textContent=storyIndex===w.story.length-1?'Next: Live Mandarin →':'Next →';}
+function renderStory(){$('storyTitle').textContent=w.storyTitle;document.querySelector('#storyOverlay .eyebrow').textContent=`WEEK ${activeWeek} STORY`;$('storyStep').onclick=()=>{storyIndex=0;$('storyOverlay').classList.add('open');$('storyOverlay').setAttribute('aria-hidden','false');drawStory();};$('storyClose').onclick=()=>{speechSynthesis.cancel();$('storyOverlay').classList.remove('open');$('storyOverlay').setAttribute('aria-hidden','true');};$('storyAudio').onclick=()=>speakChinese(w.story[storyIndex].zh,.72);$('storyPinyinBtn').onclick=()=>{showPy=!showPy;drawStory();};$('storyEnglishBtn').onclick=()=>{showEn=!showEn;drawStory();};$('storyPrev').onclick=()=>{if(storyIndex>0){storyIndex--;drawStory();}};$('storyNext').onclick=()=>{if(storyIndex===w.story.length-1){$('storyClose').click();const steps=Array.from(document.querySelectorAll('.step'));if(steps[5])steps[5].scrollIntoView({behavior:'smooth',block:'center'});}else{storyIndex++;drawStory();}};$('dictAudio').onclick=e=>{e.stopPropagation();if(activeWord)speakChinese(activeWord,.68);};$('dictClose').onclick=e=>{e.stopPropagation();$('storyDict').classList.remove('open');activeWord='';};$('storyDict').onclick=e=>e.stopPropagation();$('storyOverlay').addEventListener('click',e=>{if(!e.target.closest('.story-word')&&!e.target.closest('#storyDict')){$('storyDict').classList.remove('open');activeWord='';}});$('storyOverlay').onclick=e=>{if(e.target===$('storyOverlay'))$('storyClose').click();};drawStory();}
 
-renderWeek();if(activeWeek<=4)setupSpeaking();
+renderWeek();setupSpeaking();
+if(location.hash==='#writing'){
+  setTimeout(()=>{ const p=$('writingPanel'); if(!p.classList.contains('open')) $('writingStep').click(); p.scrollIntoView({behavior:'smooth',block:'start'}); },250);
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('videoClose').click();$('storyClose').click();}});
 })();
 </script>
+
+
 
 
 </body></html>
