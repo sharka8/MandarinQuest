@@ -202,7 +202,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
       <div class="action">Read this week's story →</div>
     </button>
 
-    <a class="step" id="liveClassStep" href="https://outschool.com/classes/first-semester-chinese-getting-to-know-you-little-friends-JBeCEJyK?sectionUid=08a48e84-7b15-4926-81c4-dea7bf2e4b6e&showDetails=true&usid=CLhd9WK9&signup=true" target="_blank" rel="noopener">
+    <a class="step" id="liveClassStep" href="https://outschool.com/classroom/08a48e84-7b15-4926-81c4-dea7bf2e4b6e" target="_blank" rel="noopener">
       <div class="step-number">STEP 6</div><div class="icon">💬</div>
       <h3>Live Mandarin</h3><p>Use what you learned in your live Mandarin Quest classes.</p>
       <div class="action">View live class information →</div>
@@ -281,7 +281,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:8px 20px 34
     <button class="week" data-week="3"><div class="week-num">Week 3</div><h3>Animals</h3><p>Identify animals with 是 / 不是.</p></button>
     <button class="week" data-week="4"><div class="week-num">Week 4</div><h3>How Old?</h3><p>Ask and tell your age.</p></button>
     <button class="week" data-week="5"><div class="week-num">Week 5</div><h3>Colors</h3><p>Red, yellow, blue and descriptions.</p></button>
-    <button class="week" data-week="6"><div class="week-num">Week 6</div><h3>More Colors</h3><p>Green, purple, orange and more.</p></button>
+    <button class="week" data-week="6"><div class="week-num">Week 6</div><h3>Colors I Like</h3><p>More colors + 喜欢 / 不喜欢.</p></button>
     <button class="week" data-week="7"><div class="week-num">Week 7</div><h3>How Are You?</h3><p>Talk about how you are and what you like.</p></button>
     <button class="week" data-week="8"><div class="week-num">Week 8</div><h3>All About Me</h3><p>Put it all together in Mandarin.</p></button>
     <button class="week" data-week="9"><div class="week-num">Week 9</div><h3>My Family</h3><p>爸爸 · 妈妈 · 哥哥 · 姐姐 · 弟弟 · 妹妹 · 有 / 没有</p></button>
@@ -498,36 +498,62 @@ const weeks={
     ]
   },
 6:{
- hero:'好多颜色！Ready for Week 6?',goal:"This week you'll add green, purple, and orange, explore a few extra colors, and keep using color + 的 + animal.",
- step:['Learn 绿色、紫色、橙色 and review the colors you already know.',"Practice this week's colors and build color + 的 + animal phrases.",'Write 鱼 and 的, then try the optional sentence 红色的鱼几岁？','Look at colored animals, listen to the question, and answer aloud.','Try reading 《好多颜色！》 using colors, animals, counting, and familiar questions.'],
- videos:{title:'More Colors 更多颜色',intro:'Review the colors you know and listen for new colors. Say each color aloud, then practice describing familiar animals with 的.',items:[['1 · Colors 颜色','Review familiar colors and listen for new ones.','8xOGqPCd_K4'],['2 · Color Practice','Listen and answer along with the video.','6sEttb2seZw'],['3 · Practice What You Learned','Say the colors aloud and get ready to describe animals.','sUMdcArwITU']]},
+ hero:'你喜欢什么颜色？Ready for Week 6?',goal:"This week you'll add green, purple, and orange and learn to say what you like and don't like with 喜欢 and 不喜欢.",
+ step:['Learn 绿色、紫色、橙色 and review the colors you already know.',"Practice this week's colors plus 喜欢 and 不喜欢.",'Write 鱼 and 的, then try the optional sentence 红色的鱼几岁？','Listen and answer questions about colors you like and do not like.','Try reading 《你喜欢什么颜色？》 using colors, 喜欢 / 不喜欢, animals, and familiar questions.'],
+ videos:{title:'More Colors + Likes 更多颜色',intro:'Review the colors you know, listen for new colors, and practice saying which colors you like and do not like.',items:[['1 · Colors 颜色','Review familiar colors and listen for new ones.','8xOGqPCd_K4'],['2 · Color Practice','Listen and answer along with the video.','6sEttb2seZw'],['3 · Practice What You Learned','Say the colors aloud and get ready to use 喜欢 and 不喜欢.','sUMdcArwITU']]},
  writing:{title:'Write 鱼 and 的',note:'Practice 鱼 and 的. Then, if you want an extra challenge, put familiar characters together in a sentence.',chars:[['yu','鱼','yú · fish'],['de','的','de · links a description to a thing']],optional:'红色的鱼几岁？',optionalPy:'Hóngsè de yú jǐ suì?',optionalEn:'How old is the red fish?',pdf:'Mandarin_Quest_Week_6_Yu_De_Writing.pdf',pdfText:'Open writing sheet →'},
  speaking:[
  {avatar:'🟢',title:'What color?',cn:'🟢',help:'Listen, then answer with the color.',answer:'绿色。',promptAudio:'什么颜色？',answerAudio:'绿色。'},
- {avatar:'🟣',title:'What color?',cn:'🟣',help:'Listen, then answer with the color.',answer:'紫色。',promptAudio:'什么颜色？',answerAudio:'紫色。'},
- {avatar:'🟠',title:'What color?',cn:'🟠',help:'Listen, then answer with the color.',answer:'橙色。',promptAudio:'什么颜色？',answerAudio:'橙色。'},
- {avatar:'🐢',title:'Describe it',cn:'🟢🐢',help:'Use color + 的 + animal.',answer:'绿色的乌龟。',promptAudio:'这是什么动物？',answerAudio:'这是绿色的乌龟。'},
- {avatar:'🐰🐰',title:'How many?',cn:'🟣🐰 🟣🐰',help:'Count the purple rabbits.',answer:'有两个紫色的兔子。',promptAudio:'有几个紫色的兔子？',answerAudio:'有两个紫色的兔子。'},
- {avatar:'🐶',title:'Yes or no?',cn:'🟠🐶',help:'Answer 是 or 不是.',answer:'是。',promptAudio:'是不是橙色的狗？',answerAudio:'是。'},
- {avatar:'🐟 🎂',title:'Review age',cn:'🔴🐟 ❓ 🎂',help:'Ask how old the red fish is.',answer:'红色的鱼几岁？',promptAudio:'红色的鱼几岁？',answerAudio:'红色的鱼六岁。'}
+ {avatar:'💜',title:'Do you like purple?',cn:'🟣 👍 ❓',help:'Answer with 喜欢 or 不喜欢.',answer:'我喜欢紫色。',promptAudio:'你喜欢紫色吗？',answerAudio:'我喜欢紫色。'},
+ {avatar:'🧡',title:'Do you like orange?',cn:'🟠 👎',help:'Say that you do not like orange.',answer:'我不喜欢橙色。',promptAudio:'你喜欢橙色吗？',answerAudio:'我不喜欢橙色。'},
+ {avatar:'🎨',title:'What color do you like?',cn:'🔴 🟡 🔵 🟢 🟣 🟠',help:'Choose a color you like and answer aloud.',answer:'我喜欢___色。',promptAudio:'你喜欢什么颜色？',answerAudio:'我喜欢蓝色。'},
+ {avatar:'🐢',title:'Color + animal review',cn:'🟢🐢',help:'Describe the animal.',answer:'这是绿色的乌龟。',promptAudio:'这是什么动物？',answerAudio:'这是绿色的乌龟。'},
+ {avatar:'🐰🐰',title:'Counting review',cn:'🟣🐰 🟣🐰',help:'Count the purple rabbits.',answer:'有两个紫色的兔子。',promptAudio:'有几个紫色的兔子？',answerAudio:'有两个紫色的兔子。'},
+ {avatar:'🐟 🎂',title:'Age review',cn:'🔴🐟 ❓ 🎂',help:'Ask how old the red fish is.',answer:'红色的鱼几岁？',promptAudio:'红色的鱼几岁？',answerAudio:'红色的鱼六岁。'}
  ],
- storyTitle:'好多颜色！',story:[
- {pic:'🐢',zh:'这是什么动物？',py:'Zhè shì shénme dòngwù?',en:'What animal is this?'},
- {pic:'🟢🐢',zh:'这是绿色的乌龟。',py:'Zhè shì lǜsè de wūguī.',en:'This is a green turtle.'},
- {pic:'🟢🐢',zh:'它是什么颜色？',py:'Tā shì shénme yánsè?',en:'What color is it?'},
- {pic:'🟢',zh:'它是绿色的。',py:'Tā shì lǜsè de.',en:'It is green.'},
- {pic:'🟣🐰 🟣🐰',zh:'有几个紫色的兔子？',py:'Yǒu jǐ ge zǐsè de tùzi?',en:'How many purple rabbits are there?'},
- {pic:'🟣🐰 🟣🐰',zh:'有两个紫色的兔子。',py:'Yǒu liǎng ge zǐsè de tùzi.',en:'There are two purple rabbits.'},
- {pic:'🟠🐶',zh:'是不是橙色的猫？',py:'Shì bu shì chéngsè de māo?',en:'Is it an orange cat?'},
- {pic:'🟠🐶',zh:'不是。是橙色的狗。',py:'Bú shì. Shì chéngsè de gǒu.',en:'No. It is an orange dog.'},
- {pic:'🔴🐟',zh:'红色的鱼几岁？',py:'Hóngsè de yú jǐ suì?',en:'How old is the red fish?'},
+ storyTitle:'你喜欢什么颜色？',story:[
+ {pic:'🐰',zh:'你好！你喜欢什么颜色？',py:'Nǐ hǎo! Nǐ xǐhuan shénme yánsè?',en:'Hello! What color do you like?'},
+ {pic:'🟣🐰',zh:'我喜欢紫色。',py:'Wǒ xǐhuan zǐsè.',en:'I like purple.'},
+ {pic:'🐢',zh:'你喜欢绿色吗？',py:'Nǐ xǐhuan lǜsè ma?',en:'Do you like green?'},
+ {pic:'🟢🐢',zh:'我喜欢绿色。',py:'Wǒ xǐhuan lǜsè.',en:'I like green.'},
+ {pic:'🐶',zh:'你喜欢橙色吗？',py:'Nǐ xǐhuan chéngsè ma?',en:'Do you like orange?'},
+ {pic:'🟠🐶',zh:'我不喜欢橙色。',py:'Wǒ bù xǐhuan chéngsè.',en:"I don't like orange."},
+ {pic:'🔴🐟',zh:'这是红色的鱼。',py:'Zhè shì hóngsè de yú.',en:'This is a red fish.'},
+ {pic:'🔴🐟 🎂',zh:'红色的鱼几岁？',py:'Hóngsè de yú jǐ suì?',en:'How old is the red fish?'},
  {pic:'🔴🐟 6️⃣',zh:'红色的鱼六岁。',py:'Hóngsè de yú liù suì.',en:'The red fish is six years old.'},
- {pic:'🐢🐰🐶🐟 👋',zh:'再见！',py:'Zàijiàn!',en:'Goodbye!'}
+ {pic:'🎨 👋',zh:'你喜欢什么颜色？再见！',py:'Nǐ xǐhuan shénme yánsè? Zàijiàn!',en:'What color do you like? Goodbye!'}
+ ],
+7:{
+ hero:'你好吗？Ready for Week 7?',goal:"This week you'll ask how someone is doing and start talking about other people with 他, 她, and 也.",
+ step:['Learn 你好吗？、我很好、好不好 and meet 他、她、也.',"Practice this week's phrases and review 喜欢 / 不喜欢.",'Write 他 and 她, then try the optional sentence 她也喜欢红色。','Listen and answer questions about yourself and other people.','Try reading 《新朋友》 using greetings, names, ages, colors, likes, and 他 / 她 / 也.'],
+ videos:{title:'How Are You? 你好吗？',intro:'Practice this week’s conversation language with these two videos.',items:[['1 · Week 7 Video','Watch, listen, and say the Mandarin aloud.','1Sm0vp5ZBz0'],['2 · Week 7 Practice','Listen and practice along with the video.','2okDjDgL_ec']]},
+ writing:{title:'Write 他 and 她',note:'Practice 他 and 她. Notice that both characters share 也 on the right. Then try the optional sentence.',chars:[['ta-male','他','tā · he / him'],['ta-female','她','tā · she / her']],optional:'她也喜欢红色。',optionalPy:'Tā yě xǐhuan hóngsè.',optionalEn:'She also likes red.',pdf:'Mandarin_Quest_Week_7_Ta_Ta_Writing.pdf',pdfText:'Open writing sheet →'},
+ speaking:[
+ {avatar:'👋',title:'How are you?',cn:'🙂',help:'Listen, then answer.',answer:'我很好。',promptAudio:'你好吗？',answerAudio:'我很好。'},
+ {avatar:'🙂',title:'Is it good?',cn:'👍 ❓',help:'Answer 好 or 不好.',answer:'好。',promptAudio:'好不好？',answerAudio:'好。'},
+ {avatar:'👦',title:'Talk about him',cn:'👦 ❤️ 🔵',help:'Say that he likes blue.',answer:'他喜欢蓝色。',promptAudio:'他喜欢什么颜色？',answerAudio:'他喜欢蓝色。'},
+ {avatar:'👧',title:'Talk about her',cn:'👧 ❤️ 🟣',help:'Say that she likes purple.',answer:'她喜欢紫色。',promptAudio:'她喜欢什么颜色？',answerAudio:'她喜欢紫色。'},
+ {avatar:'👧👦',title:'Use 也',cn:'👦 ❤️ 🟢  +  👧 ❤️ 🟢',help:'Say that she also likes green.',answer:'她也喜欢绿色。',promptAudio:'他喜欢绿色。她呢？',answerAudio:'她也喜欢绿色。'},
+ {avatar:'🎂',title:'Age review',cn:'👧 7️⃣',help:'Say how old she is.',answer:'她七岁。',promptAudio:'她几岁？',answerAudio:'她七岁。'},
+ {avatar:'👋',title:'Meet someone',cn:'👦 ❓',help:'Ask his name.',answer:'你叫什么名字？',promptAudio:'你叫什么名字？',answerAudio:'我叫小明。'}
+ ],
+ storyTitle:'新朋友',story:[
+ {pic:'👧 👋 👦',zh:'你好！',py:'Nǐ hǎo!',en:'Hello!'},
+ {pic:'👧 🙂',zh:'你好吗？',py:'Nǐ hǎo ma?',en:'How are you?'},
+ {pic:'👦 😊',zh:'我很好。你呢？',py:'Wǒ hěn hǎo. Nǐ ne?',en:"I'm very well. And you?"},
+ {pic:'👧 😊',zh:'我也很好。',py:'Wǒ yě hěn hǎo.',en:"I'm also very well."},
+ {pic:'👦 ❓',zh:'你叫什么名字？',py:'Nǐ jiào shénme míngzi?',en:"What's your name?"},
+ {pic:'👧',zh:'我叫小美。',py:'Wǒ jiào Xiǎoměi.',en:"My name is Xiaomei."},
+ {pic:'👧 7️⃣',zh:'她七岁。',py:'Tā qī suì.',en:'She is seven years old.'},
+ {pic:'👧 ❤️ 🔴',zh:'她喜欢红色。',py:'Tā xǐhuan hóngsè.',en:'She likes red.'},
+ {pic:'👦 ❤️ 🔴',zh:'他也喜欢红色。',py:'Tā yě xǐhuan hóngsè.',en:'He also likes red.'},
+ {pic:'👧 👦 👋',zh:'再见！',py:'Zàijiàn!',en:'Goodbye!'}
  ]
+}
 }
 };
 
-const dict={"绿色":['lǜsè','green'],"紫色":['zǐsè','purple'],"橙色":['chéngsè','orange'],"粉色":['fěnsè','pink'],"黑色":['hēisè','black'],"白色":['báisè','white'],"灰色":['huīsè','gray'],"棕色":['zōngsè','brown'],"红色":['hóngsè','red'],"黄色":['huángsè','yellow'],"蓝色":['lánsè','blue'],"颜色":['yánsè','color'],"什么颜色":['shénme yánsè','what color?'],"的":['de','describing/possessive particle'],"你好":['nǐ hǎo','hello'],"我叫":['wǒ jiào','my name is'],"再见":['zàijiàn','goodbye'],"有几个":['yǒu jǐ ge','how many are there?'],"几个":['jǐ ge','how many?'],"这是什么动物":['zhè shì shénme dòngwù','what animal is this?'],"是不是":['shì bu shì','is it?'],"不是":['bú shì','is not / no'],"这是":['zhè shì','this is'],"动物":['dòngwù','animal'],"猫":['māo','cat'],"狗":['gǒu','dog'],"鸟":['niǎo','bird'],"兔子":['tùzi','rabbit'],"乌龟":['wūguī','turtle'],"鱼":['yú','fish'],"你几岁":['nǐ jǐ suì','how old are you?'],"几岁":['jǐ suì','how old?'],"岁":['suì','years old'],"六岁":['liù suì','six years old'],"七岁":['qī suì','seven years old'],"八岁":['bā suì','eight years old']};
+const dict={"你好吗":["nǐ hǎo ma","how are you?"],"我很好":["wǒ hěn hǎo","I am very well"],"好不好":["hǎo bù hǎo","good or not? / is it good?"],"他":["tā","he / him"],"她":["tā","she / her"],"也":["yě","also / too"],"你喜欢什么颜色":["nǐ xǐhuan shénme yánsè","what color do you like?"],"不喜欢":["bù xǐhuan","do not like"],"喜欢":["xǐhuan","to like"],"绿色":['lǜsè','green'],"紫色":['zǐsè','purple'],"橙色":['chéngsè','orange'],"粉色":['fěnsè','pink'],"黑色":['hēisè','black'],"白色":['báisè','white'],"灰色":['huīsè','gray'],"棕色":['zōngsè','brown'],"红色":['hóngsè','red'],"黄色":['huángsè','yellow'],"蓝色":['lánsè','blue'],"颜色":['yánsè','color'],"什么颜色":['shénme yánsè','what color?'],"的":['de','describing/possessive particle'],"你好":['nǐ hǎo','hello'],"我叫":['wǒ jiào','my name is'],"再见":['zàijiàn','goodbye'],"有几个":['yǒu jǐ ge','how many are there?'],"几个":['jǐ ge','how many?'],"这是什么动物":['zhè shì shénme dòngwù','what animal is this?'],"是不是":['shì bu shì','is it?'],"不是":['bú shì','is not / no'],"这是":['zhè shì','this is'],"动物":['dòngwù','animal'],"猫":['māo','cat'],"狗":['gǒu','dog'],"鸟":['niǎo','bird'],"兔子":['tùzi','rabbit'],"乌龟":['wūguī','turtle'],"鱼":['yú','fish'],"你几岁":['nǐ jǐ suì','how old are you?'],"几岁":['jǐ suì','how old?'],"岁":['suì','years old'],"六岁":['liù suì','six years old'],"七岁":['qī suì','seven years old'],"八岁":['bā suì','eight years old']};
 const dictKeys=Object.keys(dict).sort((a,b)=>b.length-a.length);
 const w=weeks[activeWeek];
 
