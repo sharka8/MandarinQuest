@@ -42,7 +42,11 @@
       position:absolute;top:20px;left:22px;font-size:.78rem;font-weight:700;
       letter-spacing:.08em;text-transform:uppercase;color:var(--muted)
     }
-    .visual{font-size:clamp(4rem,14vw,7rem);line-height:1;margin-bottom:20px}
+    .visual{font-size:clamp(3.5rem,12vw,6rem);line-height:1;margin:12px 0 14px;display:flex;align-items:center;justify-content:center;width:100%;min-height:90px}
+    .visual.has-image{min-height:0}
+    .visual img{display:block;width:min(100%,300px);max-height:290px;object-fit:contain;border-radius:16px}
+    .card:has(.visual.has-image){padding-top:75px;padding-bottom:28px}
+    .card:has(.visual.has-image) .hanzi{font-size:clamp(2.1rem,7vw,4.2rem)}
     .hanzi{font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;font-size:clamp(3rem,11vw,6rem);font-weight:750;line-height:1.15}
     .pinyin{font-size:1.35rem;color:var(--accent);margin-top:10px}
     .english{font-size:1.25rem;color:var(--muted);margin-top:8px}
@@ -100,6 +104,7 @@
       <button id="scriptBtn" title="Switch between Simplified and Traditional">简体</button>
       <button id="pinyinBtn">Pinyin: Off</button>
       <button id="englishBtn">English: Off</button>
+      <button id="pictureBtn" class="active" aria-pressed="true">Pictures: On</button>
     </div>
   </header>
 
@@ -148,12 +153,12 @@ const course = {
     title: "Week 1 · Names",
     goal: "Say hello, ask someone's name, and tell your name.",
     cards: [
-      {type:"Greeting", s:"你好", t:"你好", p:"nǐ hǎo", e:"hello", icon:"👋"},
-      {type:"Word", s:"我", t:"我", p:"wǒ", e:"I / me", icon:"🙋"},
-      {type:"Word", s:"你", t:"你", p:"nǐ", e:"you", icon:"👉"},
+      {type:"Greeting", s:"你好",img:"assets/vocabulary/week01/hello-girl.webp", t:"你好", p:"nǐ hǎo", e:"hello", icon:"👋"},
+      {type:"Word", s:"我",img:"assets/vocabulary/week01/me.webp", t:"我", p:"wǒ", e:"I / me", icon:"🙋"},
+      {type:"Word", s:"你",img:"assets/vocabulary/week01/you.webp", t:"你", p:"nǐ", e:"you", icon:"👉"},
       {type:"Word", s:"叫", t:"叫", p:"jiào", e:"to be called", icon:"💬"},
       {type:"Question", s:"你叫什么名字？", t:"你叫什麼名字？", p:"nǐ jiào shénme míngzi?", e:"What's your name?", icon:"❓"},
-      {type:"Answer", s:"我叫___。", t:"我叫___。", p:"wǒ jiào ___.", e:"My name is ___.", icon:"🙂"},
+      {type:"Answer", s:"我叫___。",img:"assets/vocabulary/week01/me.webp", t:"我叫___。", p:"wǒ jiào ___.", e:"My name is ___.", icon:"🙂"},
       {type:"Goodbye", s:"再见", t:"再見", p:"zàijiàn", e:"goodbye", icon:"👋"}
     ]
   },
@@ -161,16 +166,16 @@ const course = {
     title: "Week 2 · Numbers",
     goal: "Count from 1–10 and ask how many.",
     cards: [
-      {type:"Number",s:"一",t:"一",p:"yī",e:"one",icon:"1️⃣"},
-      {type:"Number",s:"二",t:"二",p:"èr",e:"two",icon:"2️⃣"},
-      {type:"Number",s:"三",t:"三",p:"sān",e:"three",icon:"3️⃣"},
-      {type:"Number",s:"四",t:"四",p:"sì",e:"four",icon:"4️⃣"},
-      {type:"Number",s:"五",t:"五",p:"wǔ",e:"five",icon:"5️⃣"},
-      {type:"Number",s:"六",t:"六",p:"liù",e:"six",icon:"6️⃣"},
-      {type:"Number",s:"七",t:"七",p:"qī",e:"seven",icon:"7️⃣"},
-      {type:"Number",s:"八",t:"八",p:"bā",e:"eight",icon:"8️⃣"},
+      {type:"Number",s:"一",img:"assets/vocabulary/numbers/number-01.webp",t:"一",p:"yī",e:"one",icon:"1️⃣"},
+      {type:"Number",s:"二",img:"assets/vocabulary/numbers/number-02.webp",t:"二",p:"èr",e:"two",icon:"2️⃣"},
+      {type:"Number",s:"三",img:"assets/vocabulary/numbers/number-03.webp",t:"三",p:"sān",e:"three",icon:"3️⃣"},
+      {type:"Number",s:"四",img:"assets/vocabulary/numbers/number-04.webp",t:"四",p:"sì",e:"four",icon:"4️⃣"},
+      {type:"Number",s:"五",img:"assets/vocabulary/numbers/number-05.webp",t:"五",p:"wǔ",e:"five",icon:"5️⃣"},
+      {type:"Number",s:"六",img:"assets/vocabulary/numbers/number-06.webp",t:"六",p:"liù",e:"six",icon:"6️⃣"},
+      {type:"Number",s:"七",img:"assets/vocabulary/numbers/number-07.webp",t:"七",p:"qī",e:"seven",icon:"7️⃣"},
+      {type:"Number",s:"八",img:"assets/vocabulary/numbers/number-08.webp",t:"八",p:"bā",e:"eight",icon:"8️⃣"},
       {type:"Number",s:"九",t:"九",p:"jiǔ",e:"nine",icon:"9️⃣"},
-      {type:"Number",s:"十",t:"十",p:"shí",e:"ten",icon:"🔟"},
+      {type:"Number",s:"十",img:"assets/vocabulary/numbers/number-10.webp",t:"十",p:"shí",e:"ten",icon:"🔟"},
       {type:"Question",s:"几个？",t:"幾個？",p:"jǐ ge?",e:"how many?",icon:"❓"},
       {type:"Question",s:"有几个？",t:"有幾個？",p:"yǒu jǐ ge?",e:"How many are there?",icon:"🔢"}
     ]
@@ -179,16 +184,16 @@ const course = {
     title: "Week 3 · Animals",
     goal: "Name animals and say what something is or isn't.",
     cards: [
-      {type:"Animal",s:"猫",t:"貓",p:"māo",e:"cat",icon:"🐱"},
-      {type:"Animal",s:"狗",t:"狗",p:"gǒu",e:"dog",icon:"🐶"},
-      {type:"Animal",s:"鸟",t:"鳥",p:"niǎo",e:"bird",icon:"🐦"},
-      {type:"Animal",s:"兔子",t:"兔子",p:"tùzi",e:"rabbit",icon:"🐰"},
-      {type:"Animal",s:"鱼",t:"魚",p:"yú",e:"fish",icon:"🐟"},
-      {type:"Animal",s:"乌龟",t:"烏龜",p:"wūguī",e:"turtle",icon:"🐢"},
+      {type:"Animal",s:"猫",img:"assets/vocabulary/week03/cat.webp",t:"貓",p:"māo",e:"cat",icon:"🐱"},
+      {type:"Animal",s:"狗",img:"assets/vocabulary/week03/dog.webp",t:"狗",p:"gǒu",e:"dog",icon:"🐶"},
+      {type:"Animal",s:"鸟",img:"assets/vocabulary/week03/bird.webp",t:"鳥",p:"niǎo",e:"bird",icon:"🐦"},
+      {type:"Animal",s:"兔子",img:"assets/vocabulary/week03/rabbit.webp",t:"兔子",p:"tùzi",e:"rabbit",icon:"🐰"},
+      {type:"Animal",s:"鱼",img:"assets/vocabulary/week03/fish.webp",t:"魚",p:"yú",e:"fish",icon:"🐟"},
+      {type:"Animal",s:"乌龟",img:"assets/vocabulary/week03/turtle.webp",t:"烏龜",p:"wūguī",e:"turtle",icon:"🐢"},
       {type:"Word",s:"是",t:"是",p:"shì",e:"is / am / are",icon:"✓"},
       {type:"Word",s:"不是",t:"不是",p:"bú shì",e:"is not / am not / are not",icon:"✗"},
       {type:"Question",s:"这是什么？",t:"這是什麼？",p:"zhè shì shénme?",e:"What is this?",icon:"❓"},
-      {type:"Sentence",s:"这是猫。",t:"這是貓。",p:"zhè shì māo.",e:"This is a cat.",icon:"🐱"}
+      {type:"Sentence",s:"这是猫。",img:"assets/vocabulary/week03/cat.webp",t:"這是貓。",p:"zhè shì māo.",e:"This is a cat.",icon:"🐱"}
     ]
   },
   4: {
@@ -198,10 +203,10 @@ const course = {
       {type:"Word",s:"岁",t:"歲",p:"suì",e:"years old",icon:"🎂"},
       {type:"Question",s:"几岁？",t:"幾歲？",p:"jǐ suì?",e:"how old?",icon:"🎈"},
       {type:"Question",s:"你几岁？",t:"你幾歲？",p:"nǐ jǐ suì?",e:"How old are you?",icon:"❓"},
-      {type:"Answer",s:"我五岁。",t:"我五歲。",p:"wǒ wǔ suì.",e:"I'm five years old.",icon:"5️⃣"},
+      {type:"Answer",s:"我五岁。",img:"assets/vocabulary/week04/young-boy.webp",t:"我五歲。",p:"wǒ wǔ suì.",e:"I'm five years old.",icon:"5️⃣"},
       {type:"Answer",s:"我六岁。",t:"我六歲。",p:"wǒ liù suì.",e:"I'm six years old.",icon:"6️⃣"},
       {type:"Answer",s:"我七岁。",t:"我七歲。",p:"wǒ qī suì.",e:"I'm seven years old.",icon:"7️⃣"},
-      {type:"Answer",s:"我八岁。",t:"我八歲。",p:"wǒ bā suì.",e:"I'm eight years old.",icon:"8️⃣"},
+      {type:"Answer",s:"我八岁。",img:"assets/vocabulary/week08/eight-years-old.webp",t:"我八歲。",p:"wǒ bā suì.",e:"I'm eight years old.",icon:"8️⃣"},
       {type:"Mini intro",s:"我叫___。我___岁。",t:"我叫___。我___歲。",p:"wǒ jiào ___. wǒ ___ suì.",e:"My name is ___. I'm ___ years old.",icon:"🙂"}
     ]
   },
@@ -209,22 +214,22 @@ const course = {
     title: "Week 5 · Colors",
     goal: "Name red, yellow, and blue and ask what color something is.",
     cards: [
-      {type:"Color",s:"红色",t:"紅色",p:"hóngsè",e:"red",icon:"🔴"},
-      {type:"Color",s:"黄色",t:"黃色",p:"huángsè",e:"yellow",icon:"🟡"},
-      {type:"Color",s:"蓝色",t:"藍色",p:"lánsè",e:"blue",icon:"🔵"},
+      {type:"Color",s:"红色",img:"assets/vocabulary/week05/red.webp",t:"紅色",p:"hóngsè",e:"red",icon:"🔴"},
+      {type:"Color",s:"黄色",img:"assets/vocabulary/week05/yellow.webp",t:"黃色",p:"huángsè",e:"yellow",icon:"🟡"},
+      {type:"Color",s:"蓝色",img:"assets/vocabulary/week05/blue.webp",t:"藍色",p:"lánsè",e:"blue",icon:"🔵"},
       {type:"Word",s:"颜色",t:"顏色",p:"yánsè",e:"color",icon:"🎨"},
       {type:"Question",s:"什么颜色？",t:"什麼顏色？",p:"shénme yánsè?",e:"What color?",icon:"❓"},
-      {type:"Sentence",s:"黄色的猫",t:"黃色的貓",p:"huángsè de māo",e:"a yellow cat",icon:"🐱"},
-      {type:"Sentence",s:"红色的鸟",t:"紅色的鳥",p:"hóngsè de niǎo",e:"a red bird",icon:"🐦"}
+      {type:"Sentence",s:"红色的猫",img:"assets/vocabulary/week05/red-cat.webp",t:"紅色的貓",p:"hóngsè de māo",e:"a red cat",icon:"🐱"},
+      {type:"Sentence",s:"蓝色的鸟",t:"藍色的鳥",p:"lánsè de niǎo",e:"a blue bird",icon:"🐦"}
     ]
   },
   6: {
     title: "Week 6 · More Colors",
     goal: "Add more colors and use them to describe familiar things.",
     cards: [
-      {type:"Color",s:"绿色",t:"綠色",p:"lǜsè",e:"green",icon:"🟢"},
-      {type:"Color",s:"紫色",t:"紫色",p:"zǐsè",e:"purple",icon:"🟣"},
-      {type:"Color",s:"橙色",t:"橙色",p:"chéngsè",e:"orange",icon:"🟠"},
+      {type:"Color",s:"绿色",img:"assets/vocabulary/week06/green.webp",t:"綠色",p:"lǜsè",e:"green",icon:"🟢"},
+      {type:"Color",s:"紫色",img:"assets/vocabulary/week06/purple.webp",t:"紫色",p:"zǐsè",e:"purple",icon:"🟣"},
+      {type:"Color",s:"橙色",img:"assets/vocabulary/week06/orange.webp",t:"橙色",p:"chéngsè",e:"orange",icon:"🟠"},
       {type:"Color",s:"粉色",t:"粉色",p:"fěnsè",e:"pink",icon:"🌸"},
       {type:"Color",s:"黑色",t:"黑色",p:"hēisè",e:"black",icon:"⚫"},
       {type:"Color",s:"白色",t:"白色",p:"báisè",e:"white",icon:"⚪"},
@@ -237,15 +242,15 @@ const course = {
     title: "Week 7 · How Are You? & Likes",
     goal: "Ask how someone is and talk about favorite colors.",
     cards: [
-      {type:"Question",s:"你好吗？",t:"你好嗎？",p:"nǐ hǎo ma?",e:"How are you?",icon:"🙂"},
+      {type:"Question",s:"你好吗？",img:"assets/vocabulary/week07/greeting.webp",t:"你好嗎？",p:"nǐ hǎo ma?",e:"How are you?",icon:"🙂"},
       {type:"Answer",s:"我很好。",t:"我很好。",p:"wǒ hěn hǎo.",e:"I'm very well.",icon:"😊"},
       {type:"Question",s:"好不好？",t:"好不好？",p:"hǎo bu hǎo?",e:"Is it good? / Okay?",icon:"👍"},
-      {type:"Word",s:"喜欢",t:"喜歡",p:"xǐhuan",e:"to like",icon:"❤️"},
-      {type:"Word",s:"不喜欢",t:"不喜歡",p:"bù xǐhuan",e:"don't like",icon:"💔"},
+      {type:"Word",s:"喜欢",img:"assets/vocabulary/week06/like.webp",t:"喜歡",p:"xǐhuan",e:"to like",icon:"❤️"},
+      {type:"Word",s:"不喜欢",img:"assets/vocabulary/week06/dislike.webp",t:"不喜歡",p:"bù xǐhuan",e:"don't like",icon:"💔"},
       {type:"Question",s:"你喜欢什么颜色？",t:"你喜歡什麼顏色？",p:"nǐ xǐhuan shénme yánsè?",e:"What color do you like?",icon:"🎨"},
-      {type:"Answer",s:"我喜欢蓝色。",t:"我喜歡藍色。",p:"wǒ xǐhuan lánsè.",e:"I like blue.",icon:"🔵"},
-      {type:"Word",s:"他",t:"他",p:"tā",e:"he / him",icon:"👦"},
-      {type:"Word",s:"她",t:"她",p:"tā",e:"she / her",icon:"👧"}
+      {type:"Answer",s:"我喜欢蓝色。",img:"assets/vocabulary/week08/like-blue.webp",t:"我喜歡藍色。",p:"wǒ xǐhuan lánsè.",e:"I like blue.",icon:"🔵"},
+      {type:"Word",s:"他",img:"assets/vocabulary/week07/he.webp",t:"他",p:"tā",e:"he / him",icon:"👦"},
+      {type:"Word",s:"她",img:"assets/vocabulary/week07/she.webp",t:"她",p:"tā",e:"she / her",icon:"👧"}
     ]
   },
   8: {
@@ -253,21 +258,56 @@ const course = {
     goal: "Put names, age, colors, animals, and likes together.",
     cards: [
       {type:"Question",s:"你叫什么名字？",t:"你叫什麼名字？",p:"nǐ jiào shénme míngzi?",e:"What's your name?",icon:"❓"},
-      {type:"Answer",s:"我叫___。",t:"我叫___。",p:"wǒ jiào ___.",e:"My name is ___.",icon:"🙂"},
+      {type:"Answer",s:"我叫___。",img:"assets/vocabulary/week01/me.webp",t:"我叫___。",p:"wǒ jiào ___.",e:"My name is ___.",icon:"🙂"},
       {type:"Question",s:"你几岁？",t:"你幾歲？",p:"nǐ jǐ suì?",e:"How old are you?",icon:"🎂"},
       {type:"Answer",s:"我___岁。",t:"我___歲。",p:"wǒ ___ suì.",e:"I'm ___ years old.",icon:"🎈"},
       {type:"Question",s:"你喜欢什么颜色？",t:"你喜歡什麼顏色？",p:"nǐ xǐhuan shénme yánsè?",e:"What color do you like?",icon:"🎨"},
       {type:"Answer",s:"我喜欢___色。",t:"我喜歡___色。",p:"wǒ xǐhuan ___ sè.",e:"I like ___.",icon:"❤️"},
       {type:"Question",s:"这是什么？",t:"這是什麼？",p:"zhè shì shénme?",e:"What is this?",icon:"❓"},
-      {type:"Sentence",s:"这是兔子。",t:"這是兔子。",p:"zhè shì tùzi.",e:"This is a rabbit.",icon:"🐰"},
+      {type:"Sentence",s:"这是兔子。",img:"assets/vocabulary/week03/rabbit.webp",t:"這是兔子。",p:"zhè shì tùzi.",e:"This is a rabbit.",icon:"🐰"},
       {type:"Question",s:"有几个？",t:"有幾個？",p:"yǒu jǐ ge?",e:"How many are there?",icon:"🔢"},
       {type:"Mini intro",s:"你好！我叫___。我___岁。",t:"你好！我叫___。我___歲。",p:"nǐ hǎo! wǒ jiào ___. wǒ ___ suì.",e:"Hello! My name is ___. I'm ___ years old.",icon:"👋"}
     ]
-  }
+  },
+  9: {title:"Week 9 · My Family",goal:"Name family members and talk about who is in your family.",cards:[
+    {type:"Family",s:"爸爸",img:"assets/vocabulary/week09/father.webp",t:"爸爸",p:"bàba",e:"dad",icon:"👨"},{type:"Family",s:"妈妈",img:"assets/vocabulary/week09/mother.webp",t:"媽媽",p:"māma",e:"mom",icon:"👩"},
+    {type:"Family",s:"哥哥",img:"assets/vocabulary/week09/older-brother.webp",t:"哥哥",p:"gēge",e:"older brother",icon:"👦"},{type:"Family",s:"姐姐",img:"assets/vocabulary/week09/older-sister.webp",t:"姐姐",p:"jiějie",e:"older sister",icon:"👧"},
+    {type:"Family",s:"弟弟",img:"assets/vocabulary/week09/younger-brother.webp",t:"弟弟",p:"dìdi",e:"younger brother",icon:"👦"},{type:"Family",s:"妹妹",img:"assets/vocabulary/week09/younger-sister.webp",t:"妹妹",p:"mèimei",e:"younger sister",icon:"👧"},
+    {type:"Word",s:"家",t:"家",p:"jiā",e:"family / home",icon:"🏠"},{type:"Word",s:"有",t:"有",p:"yǒu",e:"have",icon:"✓"},
+    {type:"Word",s:"没有",t:"沒有",p:"méiyǒu",e:"do not have",icon:"✗"},{type:"Question",s:"你有没有哥哥？",t:"你有沒有哥哥？",p:"nǐ yǒu méiyǒu gēge?",e:"Do you have an older brother?",icon:"❓"},
+    {type:"Sentence",s:"我有姐姐。",img:"assets/vocabulary/week09/older-sister.webp",t:"我有姐姐。",p:"wǒ yǒu jiějie.",e:"I have an older sister.",icon:"👧"}
+  ]},
+  10:{title:"Week 10 · Family Ages",goal:"Use bigger numbers to talk about family members' ages.",cards:[
+    {type:"Number",s:"十一",t:"十一",p:"shí yī",e:"eleven",icon:"🔢"},{type:"Number",s:"十二",t:"十二",p:"shí èr",e:"twelve",icon:"🔢"},
+    {type:"Number",s:"二十",t:"二十",p:"èr shí",e:"twenty",icon:"🔢"},{type:"Number",s:"三十",t:"三十",p:"sān shí",e:"thirty",icon:"🔢"},
+    {type:"Number",s:"一百",t:"一百",p:"yì bǎi",e:"one hundred",icon:"🔢"},{type:"Word",s:"你的",t:"你的",p:"nǐ de",e:"your",icon:"👉"},
+    {type:"Question",s:"他几岁？",t:"他幾歲？",p:"tā jǐ suì?",e:"How old is he?",icon:"❓"},
+    {type:"Question",s:"她几岁？",t:"她幾歲？",p:"tā jǐ suì?",e:"How old is she?",icon:"❓"},
+    {type:"Sentence",s:"我的爸爸三十五岁。",t:"我的爸爸三十五歲。",p:"wǒ de bàba sān shí wǔ suì.",e:"My dad is 35 years old.",icon:"👨"}
+  ]},
+  11:{title:"Week 11 · Hobbies & Abilities",goal:"Talk about activities you can and cannot do.",cards:[
+    {type:"Hobby",s:"唱歌",img:"assets/vocabulary/week11/singing.webp",t:"唱歌",p:"chàng gē",e:"sing",icon:"🎤"},{type:"Hobby",s:"跳舞",img:"assets/vocabulary/week11/dancing.webp",t:"跳舞",p:"tiào wǔ",e:"dance",icon:"💃"},
+    {type:"Hobby",s:"打球",img:"assets/vocabulary/week11/playing-ball.webp",t:"打球",p:"dǎ qiú",e:"play ball",icon:"⚽"},{type:"Hobby",s:"看书",img:"assets/vocabulary/week11/reading.webp",t:"看書",p:"kàn shū",e:"read",icon:"📖"},
+    {type:"Hobby",s:"画画",img:"assets/vocabulary/week11/drawing.webp",t:"畫畫",p:"huà huà",e:"draw",icon:"🎨"},{type:"Hobby",s:"游泳",img:"assets/vocabulary/week11/swimming.webp",t:"游泳",p:"yóu yǒng",e:"swim",icon:"🏊"},
+    {type:"Word",s:"会",t:"會",p:"huì",e:"can / know how to",icon:"✓"},{type:"Word",s:"不会",t:"不會",p:"bú huì",e:"cannot / don't know how",icon:"✗"},
+    {type:"Question",s:"你会不会游泳？",t:"你會不會游泳？",p:"nǐ huì bu huì yóu yǒng?",e:"Can you swim?",icon:"❓"},
+    {type:"Sentence",s:"我会画画。",img:"assets/vocabulary/week11/drawing.webp",t:"我會畫畫。",p:"wǒ huì huà huà.",e:"I can draw.",icon:"🎨"}
+  ]},
+  12:{title:"Week 12 · Meet My Family & Friends",goal:"Introduce yourself and someone else using 和 and 他们.",cards:[
+    {type:"Word",s:"和",t:"和",p:"hé",e:"and",icon:"➕"},{type:"Word",s:"他们",img:"assets/vocabulary/week12/friends-group.webp",t:"他們",p:"tāmen",e:"they / them",icon:"👫"},
+    {type:"Phrase",s:"爸爸和妈妈",img:"assets/vocabulary/week12/family-group.webp",t:"爸爸和媽媽",p:"bàba hé māma",e:"dad and mom",icon:"👨‍👩"},
+    {type:"Phrase",s:"猫和狗",t:"貓和狗",p:"māo hé gǒu",e:"cat and dog",icon:"🐱🐶"},
+    {type:"Phrase",s:"唱歌和跳舞",t:"唱歌和跳舞",p:"chàng gē hé tiào wǔ",e:"singing and dancing",icon:"🎤"},
+    {type:"Sentence",s:"他们也会画画。",img:"assets/vocabulary/week11/drawing.webp",t:"他們也會畫畫。",p:"tāmen yě huì huà huà.",e:"They can draw too.",icon:"🎨"},
+    {type:"Sentence",s:"你好！我叫安安。",img:"assets/vocabulary/week12/introducing-self.webp",t:"你好！我叫安安。",p:"nǐ hǎo! wǒ jiào ān ān.",e:"Hello! My name is An'an.",icon:"👋"},
+    {type:"Sentence",s:"这是我的姐姐。",img:"assets/vocabulary/week12/introducing-friend.webp",t:"這是我的姐姐。",p:"zhè shì wǒ de jiějie.",e:"This is my older sister.",icon:"👧"},
+    {type:"Sentence",s:"她喜欢唱歌。",img:"assets/vocabulary/week11/singing.webp",t:"她喜歡唱歌。",p:"tā xǐhuan chàng gē.",e:"She likes singing.",icon:"🎤"}
+  ]}
+
 };
 
-let week = Math.min(8, Math.max(1, Number(new URLSearchParams(location.search).get("week")) || 1)), index = 0, flipped = false;
-let traditional = false, showPinyin = false, showEnglish = false;
+let week = Math.min(12, Math.max(1, Number(new URLSearchParams(location.search).get("week")) || 1)), index = 0, flipped = false;
+let traditional = false, showPinyin = false, showEnglish = false, showPictures = true;
 let practiceAgain = [];
 let audioUnlocked = false;
 let mode = "week";
@@ -304,7 +344,14 @@ function render(){
   $("weekTitle").textContent = mode === "review" ? `Review Through ${set.title}` : set.title + " Flashcards";
   $("weekGoal").textContent = mode === "review" ? `Mixed review from Weeks 1–${week}.` : set.goal;
   $("type").textContent = c.type;
-  $("visual").textContent = c.icon || "";
+  const visual = $("visual");
+  visual.replaceChildren();
+  visual.classList.toggle("has-image", Boolean(showPictures && c.img));
+  if(showPictures && c.img){
+    const pic=document.createElement("img"); pic.src=c.img; pic.alt="Illustration for " + c.e;
+    pic.onerror=()=>{visual.classList.remove("has-image");visual.textContent=c.icon || "";};
+    visual.appendChild(pic);
+  } else {visual.textContent = c.icon || "";}
   $("hanzi").textContent = traditional ? c.t : c.s;
   $("pinyin").textContent = (showPinyin || flipped) ? c.p : "";
   $("english").textContent = (showEnglish || flipped) ? c.e : "";
@@ -316,6 +363,9 @@ function render(){
   $("englishBtn").textContent = `English: ${showEnglish ? "On" : "Off"}`;
   $("pinyinBtn").classList.toggle("active", showPinyin);
   $("englishBtn").classList.toggle("active", showEnglish);
+  $("pictureBtn").textContent = `Pictures: ${showPictures ? "On" : "Off"}`;
+  $("pictureBtn").classList.toggle("active", showPictures);
+  $("pictureBtn").setAttribute("aria-pressed",String(showPictures));
 }
 
 function speak(){
@@ -350,6 +400,7 @@ $("nextBtn").addEventListener("click", ()=>move(1));
 $("scriptBtn").addEventListener("click", ()=>{traditional=!traditional;render();});
 $("pinyinBtn").addEventListener("click", ()=>{showPinyin=!showPinyin;render();});
 $("englishBtn").addEventListener("click", ()=>{showEnglish=!showEnglish;render();});
+$("pictureBtn").addEventListener("click", ()=>{showPictures=!showPictures;render();});
 $("againBtn").addEventListener("click", ()=>{
   practiceAgain.push({...currentCard()}); move(1);
 });
